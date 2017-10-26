@@ -66,6 +66,10 @@
 * user_band
 	* user_id
 	* band_id
+	
+* user_venue
+	* user_id
+	* venue_id
 
 * band_route
 	* band_id
