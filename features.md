@@ -1,6 +1,6 @@
 # Planning of Route Your Tour features
 
-## The model rules and structure
+## The model rules and database structure
 
 * User
 	* name
