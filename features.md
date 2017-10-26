@@ -44,5 +44,5 @@
 ## Eloquent Structure I want
 
 * Example Using The Users Band
-	* Auth::user()->band[0]->all()  outputs the users band info
-	* Auth::user()->band[0]->route->all()  outputs all of the tours the users band has routed
+	* Auth::user()->band->where('id', $id)->first()  outputs the users band info
+	* Auth::user()->band->where('id', $id)->route->where('id', $routeId)->first() outputs all of the tours the users band has routed
