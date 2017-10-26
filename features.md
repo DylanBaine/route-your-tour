@@ -6,7 +6,8 @@
 	* name
 	* password
 	* number_of_active_profiles 
-	* Can have many Band, Venue, BookingAgent, or Promoter profiles
+	* Can have many Band and Venue profiles.
+	* Can have one Promoter or BookingAgent profile
 
 * Route
 	* band_id
@@ -24,21 +25,20 @@
 	* slug
 	* name
 	* soundcloud_url
-	* 
+	* number_of_routes_booked
 	* Can have many Routes
 
 * Venue
 	* user_id
 	* slug
+	* name
 	* address
 
 * Promoter
-	* user_id
 	* slug
 	* experience
 
 * BookingAgent
-	* user_id
 	* slug
 	* experience
 	* Can have many Routes
