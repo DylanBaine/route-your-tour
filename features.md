@@ -56,6 +56,9 @@
 	* Can have many SocialLinks
 
 * SocialLinks
+	* link
+	* name
+	* icon
 	* Can belong to Band, Venue, Promoter, and BookingAgent.
 
 ## Pivot Tables
