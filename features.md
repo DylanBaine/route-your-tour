@@ -29,7 +29,6 @@
 	* Can have many Routes
 
 * Venue
-	* user_id
 	* slug
 	* name
 	* address
