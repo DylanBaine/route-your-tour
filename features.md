@@ -66,7 +66,7 @@
 * user_band
 	* user_id
 	* band_id
-	
+
 * user_venue
 	* user_id
 	* venue_id
@@ -99,8 +99,7 @@
 ## Eloquent Structure I want
 
 * Example Using The Users Band
-	* Auth::user()->bands()->where('id', $id)->first()  outputs the users band info
-	* Auth::user()->bands()->where('id', $id)->routesAss()->where('id', $routeId)->first() outputs specific route the users band has routed
+	* Auth::user()->bands outputs the users bands
 
 # Tests To Run
 
