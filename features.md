@@ -44,5 +44,11 @@
 ## Eloquent Structure I want
 
 * Example Using The Users Band
-	* '''php Auth::user()->band[0]->all() ''' outputs the users band info
-	* '''php Auth::user()->band[0]->route->all() ''' outputs all of the tours the users band has routed
+	* '''php 
+		Auth::user()->band[0]->all() 
+		''' 
+		outputs the users band info
+	* '''
+		php Auth::user()->band[0]->route->all() 
+		''' 
+		outputs all of the tours the users band has routed
