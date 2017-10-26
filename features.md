@@ -6,20 +6,21 @@
 	* name
 	* password
 	* number_of_active_profiles 
-	* Can have many Band and Venue profiles.
+	* Can have many Band and Venue models.
 	* Can have one Promoter or BookingAgent profile
 
 * Route
-	* band_id
+	* band_id		
+		* Must belong to a Band
 	* promoter_id
-	* Must belong to a Profile
 	* Has many Locations
 
 * Location
+	* address
 	* venue_id
-	* Address
-	* If address matces a profile this has that profile
-	* Must belong to a Route
+		* If address matches a Venues address this has that Venue
+	* route_id
+		* Must belong to a Route	
 
 * Band
 	* slug
@@ -27,17 +28,23 @@
 	* soundcloud_url
 	* number_of_routes_booked
 	* Can have many Routes
+	* Can belong to many Users
 
 * Venue
 	* slug
 	* name
 	* address
+	* Can belong to many Users
 
 * Promoter
+	* user_id
+		* Must belong to only one User
 	* slug
 	* experience
 
 * BookingAgent
+	* user_id
+		* Must belong to only one User
 	* slug
 	* experience
 	* Can have many Routes
