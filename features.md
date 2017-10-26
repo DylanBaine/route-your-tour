@@ -19,6 +19,7 @@
 	* address
 	* venue_id
 		* If address matches a Venues address this has that Venue
+	* name
 	* route_id
 		* Must belong to a Route	
 
@@ -26,21 +27,25 @@
 	* slug
 	* name
 	* soundcloud_url
+	* bio
 	* number_of_routes_booked
 	* Can have many Routes
 	* Can belong to many Users
+	* Can have many SocialLinks
 
 * Venue
 	* slug
 	* name
 	* address
 	* Can belong to many Users
+	* Can have many SocialLinks
 
 * Promoter
 	* user_id
 		* Must belong to only one User
 	* slug
 	* experience
+	* Can have many SocialLinks
 
 * BookingAgent
 	* user_id
@@ -48,6 +53,41 @@
 	* slug
 	* experience
 	* Can have many Routes
+	* Can have many SocialLinks
+
+* SocialLinks
+	* Can belong to Band, Venue, Promoter, and BookingAgent.
+
+## Pivot Tables
+
+* user_band
+	* user_id
+	* band_id
+
+* band_route
+	* band_id
+	* route_id
+
+* route_location
+	* route_id
+	* location_id
+
+* band_social
+	* band_id
+	* social_link_id
+
+* venue_social
+	* venue_id
+	* social_link_id
+
+* promoter_social
+	* promoter_id
+	* social_link_id
+
+* bookingagent_socal
+	* booking_agent_id
+	* social_link_id
+
 
 ## Eloquent Structure I want
 
