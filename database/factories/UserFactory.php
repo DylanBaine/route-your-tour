@@ -32,7 +32,16 @@ $factory->define(App\Band::class, function (Faker $faker) {
 });
 
 $factory->define(App\Routes::class, function (Faker $faker) {
+    static $bandId;
     return [
-        'title' => $faker->firstName . ' route'
+        'title' => $faker->firstName . ' route',
+        'band_id' => $bandId ?: $bandId = 1,
+    ];
+});
+
+$factory->define(App\Locations::class, function (Faker $faker) {
+    return [
+        'venue' => $faker->firstName . ' location',
+        'address' => $faker->address
     ];
 });

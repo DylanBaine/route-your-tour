@@ -3,6 +3,8 @@
 ## The model rules and database structure
 
 * User
+	* email
+	* email_confimred_token
 	* name
 	* password
 	* number_of_active_profiles 
@@ -10,16 +12,17 @@
 	* Can have one Promoter or BookingAgent profile
 
 * Route
-	* band_id		
-		* Must belong to a Band
-	* promoter_id
+	* title
+	* band_id
+	* bookingagent_id
+	* Can belong to Band or Promoter
 	* Has many Locations
 
 * Location
 	* address
 	* venue_id
 		* If address matches a Venues address this has that Venue
-	* name
+	* venue_name
 	* route_id
 		* Must belong to a Route	
 
@@ -78,22 +81,6 @@
 * route_location
 	* route_id
 	* location_id
-
-* band_social
-	* band_id
-	* social_link_id
-
-* venue_social
-	* venue_id
-	* social_link_id
-
-* promoter_social
-	* promoter_id
-	* social_link_id
-
-* bookingagent_socal
-	* booking_agent_id
-	* social_link_id
 
 
 ## Eloquent Structure I want

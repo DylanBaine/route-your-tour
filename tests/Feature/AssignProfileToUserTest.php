@@ -29,24 +29,4 @@ class AssignProfileToUserTest extends TestCase
     		$this->assertNotNull($auth->bands);
     }
 
-    public function testAddingARoutToUsersBand()
-    {
-    	$users = factory(User::class, 1)->create();
-
-    	$user = User::first();
-
-    	$user->bands = factory(Band::class, 3)->create();
-
-    	$band = $user->bands->first();
-
-    	$band->routes = factory(Routes::class, 3)->create();
-
-    	$route = $band->routes->first()->title;
-
-    		$this->assertNotNull($user, $band, $route);  	
-
-
-    }
-
-
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoutesTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateRoutesTable extends Migration
      */
     public function up()
     {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('band_id')->nullable()->unsigned();
-            $table->string('title');
+            $table->string('address')->nullable();
+            $table->string('venue_name')->nullable();
+            $table->integer('venue_id')->nullable()->unsigned();
+            $table->integer('route_id')->unsigned();
+            $table->string('ticket_link')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateRoutesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('locations');
     }
 }

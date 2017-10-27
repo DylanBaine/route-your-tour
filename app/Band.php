@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Band extends Model
 {
     protected $fillable = [
-        'name'
+        'name', 'slug', 'bio', 'number_of_routes_booked', 'soundcloud_url'
     ];
 
     public function users()
@@ -18,5 +18,10 @@ class Band extends Model
     public function routes()
     {
     	return $this->hasMany(Routes::class);
+    }
+
+    public function sociallinks()
+    {
+        return $this->hasMany(SocialLinks::class);
     }
 }

@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'number_of_active_profiles', 'email_confirmed_token'
     ];
 
     /**
@@ -30,5 +30,20 @@ class User extends Authenticatable
     public function bands()
     {
         return $this->belongsToMany(Band::class);
+    }
+
+    public function venues()
+    {
+        return $this->belongsToMany(Venue::class);
+    }
+
+    public funciton promoter()
+    {
+        return $this->hasOne(Promoter::class);
+    }
+
+    public function bookingagent()
+    {
+        return $this->hasOne(BookingAgent::class);
     }
 }

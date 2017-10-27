@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoutesTable extends Migration
+class CreateBookingAgentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateRoutesTable extends Migration
      */
     public function up()
     {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::create('booking_agents', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('band_id')->nullable()->unsigned();
-            $table->string('title');
+            $table->integer('user_id')->unsigned();
+            $table->string('slug');
+            $table->text('experience')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateRoutesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('booking_agents');
     }
 }
