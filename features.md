@@ -78,10 +78,6 @@
 	* band_id
 	* route_id
 
-* route_location
-	* route_id
-	* location_id
-
 
 ## Eloquent Structure I want
 

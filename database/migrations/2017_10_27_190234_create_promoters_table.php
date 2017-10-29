@@ -18,7 +18,7 @@ class CreatePromotersTable extends Migration
             $table->string('slug')->unique();
             $table->string('name');
             $table->text('experience');
-            $table->integer('user_id')unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }

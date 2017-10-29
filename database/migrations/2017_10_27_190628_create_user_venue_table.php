@@ -14,8 +14,11 @@ class CreateUserVenueTable extends Migration
     public function up()
     {
         Schema::create('user_venue', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('venue_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+            $table->primary(['venue_id', 'user_id']);
         });
     }
 

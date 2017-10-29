@@ -37,7 +37,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Venue::class);
     }
 
-    public funciton promoter()
+    public function promoter()
     {
         return $this->hasOne(Promoter::class);
     }

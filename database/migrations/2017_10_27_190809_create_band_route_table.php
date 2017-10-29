@@ -14,8 +14,11 @@ class CreateBandRouteTable extends Migration
     public function up()
     {
         Schema::create('band_route', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('band_id')->unsigned();
+            $table->integer('route_id')->unsigned();
             $table->timestamps();
+
+            $table->primary(['route_id', 'band_id']);
         });
     }
 

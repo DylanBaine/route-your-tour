@@ -1,9 +1,39 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600|Material+Icons");
+
+// Vuetify
+@import "node_modules/vuetify/dist/vuetify";
 
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+[v-cloak]{
+	display: none;
+}
+
+::-webkit-scrollbar{
+	background-color: transparent;
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 90, .4);
+	border-radius: 10px;
+}
+html, body{
+	width: 100vw;
+}
+#app{
+	width: 100vw;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: all .5s;
+  position: absolute;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+

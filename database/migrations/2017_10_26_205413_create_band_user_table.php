@@ -14,8 +14,8 @@ class CreateBandUserTable extends Migration
     public function up()
     {
         Schema::create('band_user', function (Blueprint $table) {
-            $table->integer('band_id');
-            $table->integer('user_id');
+            $table->integer('band_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
 
             $table->primary(['band_id', 'user_id']);
