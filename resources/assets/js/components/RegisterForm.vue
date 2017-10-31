@@ -1,6 +1,6 @@
 <template>
       <v-card>
-        <v-card-title class="headline">Register <br> <small> Click on "Name" to get started</small> </v-card-title>
+        <v-card-title class="headline">Register</v-card-title>
 		<form action="/register" method="post">
 
 			<v-card-text>

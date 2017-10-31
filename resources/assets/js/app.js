@@ -17,14 +17,15 @@ Vue.use(VueGoogleMaps, {
 Vue.use(VueRouter);
 
 const routes = [
-	{path: '/home', component: require('./pages/Dashboard.vue')},
-	{path: '/home/tour', component: require('./pages/RouteBuilder.vue')},
-	{path: '/home/profiles', component: require('./pages/Profiles.vue')},
-	{path: '/home/profiles/add', component: require('./pages/AddProfile.vue')},
-	{path: '/home/profiles/add/band', component: require('./pages/AddBand.vue')},
-	{path: '/home/profiles/add/venue', component: require('./pages/AddVenue.vue')},
-	{path: '/home/profiles/add/promoter', component: require('./pages/AddPromoter.vue')},
-	{path: '/home/profiles/add/booking-agent', component: require('./pages/AddBookingAgent.vue')},
+  {path: '/', component: require('./pages/Dashboard.vue')},
+  {path: '/settings', component: require('./pages/settings.vue')},
+  {path: '/tour', component: require('./pages/RouteBuilder.vue')},
+  {path: '/profiles', component: require('./pages/Profiles.vue')},
+  {path: '/profile/add', component: require('./pages/AddProfile.vue')},
+  {path: '/profiles/add/band', component: require('./pages/AddBand.vue')},
+  {path: '/profiles/add/venue', component: require('./pages/AddVenue.vue')},
+  {path: '/profiles/add/promoter', component: require('./pages/AddPromoter.vue')},
+  {path: '/profiles/add/bookingagent', component: require('./pages/AddBookingAgent.vue')},
 
 ];
 
@@ -34,7 +35,6 @@ Vue.component('login-form', require('./components/LoginForm.vue'));
 Vue.component('application', require('./components/Layout.vue'));
 
 const router = new VueRouter({
-  mode: 'history',
   routes
 });
 
@@ -44,6 +44,7 @@ const app = new Vue({
     router,
     data: {
     	menu: false,
-    	loading: false
+    	loading: false,
+      errors: true
     }
 });

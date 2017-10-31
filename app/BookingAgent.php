@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BookingAgent extends Model
 {
 	protected $fillable = [
-		'slug', 'user_id', 'experience'
+		'name', 'slug', 'user_id', 'experience'
 	];
 
     public function sociallinks()

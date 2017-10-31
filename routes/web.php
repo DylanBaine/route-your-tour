@@ -26,9 +26,27 @@ route::get('/user', function(){
 
 Route::prefix('api')->group(function () {
 
+		/*----GET CURRENT USER THAT IS LOGGED IN----*/
 	Route::get('/user', function(){
 		return Auth::user();
-	});
+	});	
 
+	Route::put('/change-avatar', 'HomeController@changeAvatar');
+
+		/*----API BAND CONTROLLERS----*/
+	Route::get('/users-bands', 'BandController@see');
+	Route::post('/add-band', 'BandController@store');
+
+		/*----API VENUE CONTROLLERS----*/
+	Route::get('/users-venues', 'VenueController@see');
+	Route::post('/add-venue', 'VenueController@store');
+
+	/*----API PROMOTER CONTROLLERS----*/
+	Route::get('/users-promoter', 'PromoterController@see');
+	Route::post('/add-promoter', 'PromoterController@store');
+
+	/*----API BOOKING AGENT CONTROLLERS----*/
+	Route::get('/users-bookingagent', 'BookingAgentController@see');
+	Route::post('/add-bookingagent', 'BookingAgentController@store');
 
 });

@@ -1,8 +1,8 @@
 <template>
-  
+
   <v-app light v-cloak>
     <v-navigation-drawer app temporary enable-resize-watcher clipped v-model="menu">
-      
+
       <v-toolbar flat>
         <v-list>
           <v-list-tile>
@@ -16,7 +16,7 @@
 
       <v-list dense class="pt-0">
 
-        <v-list-tile to="/home">
+        <v-list-tile to="/">
 
           <v-list-tile-action>
             <v-icon>home</v-icon>
@@ -91,47 +91,64 @@
     </v-navigation-drawer>
     <v-toolbar app> 
 
-    <v-toolbar-side-icon title="Open the main menu." @click="showMenu"></v-toolbar-side-icon>
+      <v-toolbar-side-icon title="Open the main menu." @click="showMenu"></v-toolbar-side-icon>
 
-    <v-toolbar-title class="dark--text">Welcome, {{user}}!</v-toolbar-title>
+      <v-toolbar-title class="dark--text"><small>Hey, {{user.name}}!</small></v-toolbar-title>
 
-    <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-    <v-btn to="/home/profiles" icon title="See your pages.">
-      <v-icon>apps</v-icon>
-    </v-btn>
+      <v-btn to="/profile/add" icon title="See your pages.">
+        <v-icon>apps</v-icon>
+      </v-btn>
 
-    <v-avatar size="36px">
-      <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460" alt="">
-    </v-avatar>
+
 
       <v-menu>        
-      <v-btn icon title="More options" slot="activator">
-        <v-icon>more_vert</v-icon>
-      </v-btn>
-          <v-list>
+        <v-avatar v-if="!image" size="36px" slot="activator">
+          <img :src="'/storage/'+ user.avatar" :alt="user.name">
+        </v-avatar>
 
-            <v-list-tile>
-              <v-btn href="/" class="green--text" flat>Front Page</v-btn>
-            </v-list-tile>
+        <v-avatar v-if="image" size="36px" slot="activator">
+          <img :src="image" :alt="user.name">
+        </v-avatar>
 
-            <v-list-tile>
-              <v-btn @click="logout" class="red--text darken-2" flat>Logout</v-btn>
-            </v-list-tile>
+        <v-list>
 
-          </v-list>
+          <v-list-tile>
+            <form id="image-form" action="/change-avatar" method="PUT" enctype="multipart/form-data">
+              <input name="avatar" type="file" @change="onFileChange" id="image">
+            </form> 
+
+
+          </v-list-tile>
+
+        </v-list>
+      </v-menu>      
+
+      <v-menu>        
+        <v-btn icon title="More options" slot="activator">
+          <v-icon>more_vert</v-icon>
+        </v-btn>
+        <v-list>
+
+          <v-list-tile>
+            <v-btn href="/" class="green--text" flat>Front Page</v-btn>
+          </v-list-tile>
+
+          <v-list-tile>
+            <v-btn @click="logout" class="red--text darken-2" flat>Logout</v-btn>
+          </v-list-tile>
+
+        </v-list>
       </v-menu>
 
     </v-toolbar>
     <main>
       <v-content>
         <v-container fluid>   
-              <div v-show="loading" @loaded="loading = false" style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-                <v-progress-circular indeterminate color="primary"></v-progress-circular>
-              </div>
-              <transition name="fade">
-                <router-view></router-view>
-              </transition>
+          <transition name="fade">
+            <router-view></router-view>
+          </transition>
         </v-container>
       </v-content>
     </main>
@@ -142,35 +159,71 @@
 </template>
 
 <script>
-  export default{
-    data(){
-      return {
-        more: false,
-        user: '',
-        menu: false
-      }
-    },
-    methods: {
-      showMenu: function(){
-        this.menu = true;
-      },
-      logout: function(){
-        document.getElementById('log-out').submit()
-      }
-    },
-    mounted(){
-      axios.get('/api/user').then(response => this.user = response.data.name);
+export default{
+  data(){
+    return {
+      token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      more: false,
+      user: '',
+      menu: false,
+      avatarPreview: '',
+      image: ''
     }
+  },
+  computed: {
+    avatar: function(){
+      return 
+    }
+  },
+  methods: {
+    showMenu: function(){
+      this.menu = true;
+    },
+    logout: function(){
+      document.getElementById('log-out').submit()
+    },
+    onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+      this.createImage(files[0]);
+
+      var data = new FormData();
+      data.append('avatar', document.getElementById('image').files[0]);
+      data.append('_token', this.token);
+      data.append('_method', 'put');
+
+      var config = {
+        headers: {'Content-Type': 'multipart/FormData'}
+      };
+
+      axios.post('/api/change-avatar', data, config);
+
+    },
+    createImage(file) {
+      var image = new Image();
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = (e) => {
+        vm.image = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  },
+  mounted(){
+    axios.get('/api/user').then(response => this.user = response.data);
   }
+}
 </script>
 
 <style>
-  .list_tile{
-    background-color: grey;
-    cursor: pointer;
-  }
+.list_tile{
+  background-color: grey;
+  cursor: pointer;
+}
 
-  #log-out{
-    display: none;
-  }
+#log-out{
+  display: none;
+}
 </style>

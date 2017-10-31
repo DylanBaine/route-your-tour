@@ -1,0 +1,157 @@
+<template>
+	<v-container fluid grid-list-xl>
+		<header class="text-xs-center padded">
+			<h4 >Welcome to your profiles page.</h4>
+			<h6>This is where all of your pages are listed. You can also add new pages from here.</h6>
+		</header>
+
+		<hr>
+
+		<section id="profile-options" class="padded">
+			
+			<v-layout row wrap id="profiles">
+				<v-flex md3 xs6 v-for="item in items" :key="item.id" >
+					<v-card data-ripple="true" :to="'/profiles/add/' + item.name" :color="item.color" class="card text-xs-center flexed white--text">
+						<div>
+							<v-icon xl>{{item.icon}}</v-icon>
+							<br>
+							<v-flex hidden-xs-only>{{item.desc}}</v-flex>
+						</div>
+					</v-card>
+				</v-flex>
+			</v-layout>
+
+		</section>
+
+		<hr>
+
+		<section id="profiles" class="padded">
+
+			<header v-show="bands.length >= 1" class="padded">
+				<h3>Band profiles you run.</h3>
+			</header>
+			
+			<v-layout row wrap id="bands">
+				<v-flex md4 xs12 v-for="band in bands" :key="band.id" >
+					<v-card :to="'/band/' + band.slug" color="orange" class="card text-xs-center flexed white--text">
+						{{band.name}}
+					</v-card>
+				</v-flex>
+			</v-layout>
+
+			<header v-show="venues.length > 0" class="padded">
+				<h3>Venue profiles you run.</h3>
+			</header>
+			
+			<v-layout row wrap id="venues">
+				<v-flex md4 xs12 v-for="venue in venues" :key="venue.id" >
+					<v-card :to="'/venue/' + venue.slug" color="green" class="card text-xs-center flexed white--text">
+						{{venue.name}}
+					</v-card>
+				</v-flex>
+			</v-layout>
+
+			<v-layout row wrap id="promoter-booking-agent">				
+				<v-flex md6 v-show="promoter.name">
+					<header class="padded">
+						<h3>Your Promoter Profile.</h3>
+					</header>
+
+					<v-card :to="'/promoters/' + promoter.slug" color="blue" class="card text-xs-center flexed white--text">
+						{{promoter.name}}
+					</v-card>
+				</v-flex>
+
+				<v-flex md6 v-show="bookingAgent.name">
+					<header class="padded">
+						<h3>Your Booking Agent Profile.</h3>
+					</header>
+
+					<v-card :to="'/booking-agents/' + bookingAgent.slug" color="deep-purple" class="card text-xs-center flexed white--text">
+						{{bookingAgent.name}}
+					</v-card>
+				</v-flex>
+			</v-layout>
+
+		</section>
+
+
+	</v-container>
+</template>
+
+<script>
+export default{
+	data(){
+		return{
+			loading: true,
+			items: [
+				{
+					id: 1,
+					name: 'Band',
+					color: 'orange',
+					icon: 'music_note',
+					desc: 'Add a Band to your account.'
+				},
+				{
+					id: 2,
+					name: 'Venue',
+					color: 'green',
+					icon: 'store',
+					desc: 'Add a Venue to your accout.'
+				},
+				{
+					id: 3,
+					name: 'Promoter',
+					color: 'blue',
+					icon: 'business_center',
+					desc: 'Become a Route Your Tour Promoter.'
+				},
+				{
+					id:4,
+					name: 'BookingAgent',
+					color: 'deep-purple',
+					icon: 'library_books',
+					desc: 'Become a Route Your Tour Booking Agent.'
+				}
+			],
+			bands: [],
+			venues: [],	
+			promoter: '',
+			bookingAgent: '',
+		}
+
+	},
+	mounted(){
+		axios.get('api/users-bands/')
+			.then(response => this.bands = response.data);
+
+		axios.get('api/users-venues/')
+			.then(response => this.venues = response.data);
+
+		axios.get('api/users-promoter/')
+			.then(response => this.promoter = response.data);
+
+		axios.get('api/users-bookingagent/')
+			.then(response => this.bookingAgent = response.data);
+
+	}
+}
+		
+</script>
+
+<style scoped>
+	.card{
+		height: 220px !important;
+		padding: 10px;
+	}
+	.flexed{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}	
+	@media (max-width: 599px){
+		.card{
+			height: auto !important;
+		}
+	}
+</style>

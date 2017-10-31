@@ -2,22 +2,25 @@
       <v-card color="grey lighten-4" flat>
         <v-card-title class="headline">Login</v-card-title>
 		<form action="/login" method="post">
-	        <v-card-text>
 
-	            <v-text-field
-					name="email"
-					label="Email"
-					id="email-input"
-	            ></v-text-field>
+        	<input type="hidden" :value="csrf" name="_token">
 
-	            <v-text-field
-					name="password"
-					label="Password"
-					id="password-input"
-					type="password"
-	            ></v-text-field>
+				<div class="padded">
+					
+		            <v-text-field
+						name="email"
+						label="Email"
+						id="email-input"
+		            ></v-text-field>				
 
-	        </v-card-text>
+		            <v-text-field
+						name="password"
+						label="Password"
+						id="password-input"
+						type="password"
+		            ></v-text-field>
+
+		         </div>   
 	        <v-card-actions>
 	          <v-spacer></v-spacer>
 	          <v-btn type="submit" color="blue darken-1" flat>Login</v-btn>
@@ -32,10 +35,11 @@
 export default{
 	data(){
 		return{
-			csrf: document.head.getElementByQuerySelector('meta[name=csrf-token]')
+			csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 		}
 	},
 	mounted(){
+		console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 	}
 }
 	
@@ -45,7 +49,7 @@ export default{
 .card{
 	width: 50vw;
 	position: absolute;
-	top: 20vh;
+	top: 20px;
 	z-index: 999;
 	background-color: white;
 	left: 25vw;

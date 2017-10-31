@@ -2,13 +2,16 @@
 
 @section('content')
 @if ($errors->any())
-    <div>
+    <v-alert color='error' icon="warning" value="true" v-show="errors">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
-    </div>
+        <v-card-actions>
+        	<v-spacer></v-spacer><v-btn fab class="red darken-3" @click="errors = false"><v-icon>close</v-icon></v-btn>
+        </v-card-actions>
+    </v-alert>
 @endif
 
 <welcome-header>

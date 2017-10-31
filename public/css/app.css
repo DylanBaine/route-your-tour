@@ -16008,7 +16008,7 @@ table.table tfoot tr {
 
 ::-webkit-scrollbar {
   background-color: transparent;
-  width: 10px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -16018,6 +16018,11 @@ table.table tfoot tr {
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 90, 0.4);
   border-radius: 10px;
+}
+
+* {
+  -webkit-transition: all .2s;
+  transition: all .2s;
 }
 
 html,
@@ -16039,5 +16044,29 @@ body {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.padded {
+  padding: 20px;
+}
+
+.alert {
+  position: fixed;
+  z-index: 9;
+  top: 25vh;
+  left: 20vw;
+  width: 60vw;
+}
+
+.alert li {
+  border-bottom: solid 1px grey;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
 }
 

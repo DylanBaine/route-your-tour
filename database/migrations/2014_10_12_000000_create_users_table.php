@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email_confirmed_token')->nullable();
             $table->integer('number_of_acive_profiles')->default(0);
             $table->string('password');
-            $table->string('avatar')->dafault('default.jpg');
+            $table->string('avatar')->default('default.jpg');
             $table->rememberToken();
             $table->timestamps();
         });

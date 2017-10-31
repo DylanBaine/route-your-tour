@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use File;
+use Image;
 
 class HomeController extends Controller
 {
@@ -26,6 +29,27 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         return view('home')->with('user');
+    }
+
+    public function changeAvatar(Request $request)
+    {
+       $user = Auth::user();         
+
+            if($request->hasFile('avatar')){
+                File::delete('storage/'.$user->avatar);
+            }          
+
+            $image = $request->file('avatar');
+
+            $imageURL = time() . '.jpg';
+
+            Image::make($image)->save(public_path('storage/'. $imageURL));
+
+            $user->avatar = $imageURL;
+
+            $user->save();
+
+        return redirect()->back();
     }
 
 }

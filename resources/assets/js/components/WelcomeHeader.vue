@@ -16,8 +16,9 @@
 	<v-tabs dark centered>
 
 		<v-tabs-bar class="white--text">
-			<li><v-btn @click="showRegister" flat white--text>Register</v-btn></li>
-			<li><v-btn @click="showLogin" flat white--text>Login</v-btn></li>
+			<li><v-btn v-show="!user" @click="showRegister" flat class="white--text">Register</v-btn></li>
+			<li><v-btn v-show="!user" @click="showLogin" flat class="white--text">Login</v-btn></li>			
+			<li><v-btn v-show="user" href="/home#" flat class="white--text">Go To Dashboard</v-btn></li>
 		</v-tabs-bar>
 
 	</v-tabs>
@@ -37,6 +38,7 @@ export default{
 	data () {
 		return{
 			login: false,
+			register: false,
 			user: ''
 		}
 	},
