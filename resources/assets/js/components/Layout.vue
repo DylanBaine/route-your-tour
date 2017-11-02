@@ -75,7 +75,7 @@
         <v-list-tile href="/tours">
 
           <v-list-tile-action>
-            <v-icon>directions_car</v-icon>
+            <v-icon>airport_shuttle</v-icon>
           </v-list-tile-action>
 
           <v-list-tile-content>
@@ -85,68 +85,81 @@
           </v-list-tile-content>
 
         </v-list-tile>
+        
+        <hr>  
+
+        <v-list-tile href="/">
+
+          <v-list-tile-action>
+            <v-icon>undo</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+
+            <v-list-tile-title> Back to front page. </v-list-tile-title>
+
+          </v-list-tile-content>
+
+        </v-list-tile>
+
+        <v-list-tile @click="logout">
+
+          <v-list-tile-action>
+            <v-icon>cloud_off</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+
+            <v-list-tile-title> Logout </v-list-tile-title>
+
+          </v-list-tile-content>
+
+        </v-list-tile>
+
+
 
       </v-list>
 
     </v-navigation-drawer>
     <v-toolbar app> 
 
-      <v-toolbar-side-icon title="Open the main menu." @click="showMenu"></v-toolbar-side-icon>
-
-      <v-toolbar-title class="dark--text"><small>Hey, {{user.name}}!</small></v-toolbar-title>
-
       <v-spacer></v-spacer>
 
-      <v-btn to="/profile/add" icon title="See your pages.">
-        <v-icon>apps</v-icon>
-      </v-btn>
+      <v-toolbar-title class="dark--text"><small>Hello, {{user.name}}. </small></v-toolbar-title>
 
-
-
-      <v-menu>        
-        <v-avatar v-if="!image" size="36px" slot="activator">
-          <img :src="'/storage/'+ user.avatar" :alt="user.name">
+      <v-menu class="padded">        
+        <v-avatar v-if="!image" size="36px" slot="activator" title="Choose a profile image.">
+          <img :src="'/storage/'+ user.avatar" alt="Upload Avatar">
         </v-avatar>
 
-        <v-avatar v-if="image" size="36px" slot="activator">
+        <v-avatar v-if="image" size="36px" slot="activator" title="Choose a profile image.">
           <img :src="image" :alt="user.name">
         </v-avatar>
 
-        <v-list>
+        <v-list class="padded">
+
+          <h6>Choose your profile image.</h6>
 
           <v-list-tile>
             <form id="image-form" action="/change-avatar" method="PUT" enctype="multipart/form-data">
-              <input name="avatar" type="file" @change="onFileChange" id="image">
+              <label for="image" class="btn btn-raised white--text blue darken-2 btn--active" data-ripple="true">Choose an image</label>
+              <input name="avatar" type="file" @change="onFileChange" id="image" style="display: none">
             </form> 
-
-
           </v-list-tile>
 
         </v-list>
-      </v-menu>      
+      </v-menu>    
 
-      <v-menu>        
-        <v-btn icon title="More options" slot="activator">
-          <v-icon>more_vert</v-icon>
-        </v-btn>
-        <v-list>
+      <v-toolbar-side-icon title="Open the main menu." @click="showMenu"></v-toolbar-side-icon>
 
-          <v-list-tile>
-            <v-btn href="/" class="green--text" flat>Front Page</v-btn>
-          </v-list-tile>
-
-          <v-list-tile>
-            <v-btn @click="logout" class="red--text darken-2" flat>Logout</v-btn>
-          </v-list-tile>
-
-        </v-list>
-      </v-menu>
+      <span class="padded"> </span>  
 
     </v-toolbar>
     <main>
       <v-content>
         <v-container fluid>   
           <transition name="fade">
+            <loader v-if="loading" @loading="loading = true" @notLoading="loading = false"></loader>
             <router-view></router-view>
           </transition>
         </v-container>
@@ -167,7 +180,8 @@ export default{
       user: '',
       menu: false,
       avatarPreview: '',
-      image: ''
+      image: '',
+      loading: false
     }
   },
   computed: {
@@ -225,5 +239,10 @@ export default{
 
 #log-out{
   display: none;
+}
+
+.btn{
+  padding: 5px;
+  cursor: pointer;
 }
 </style>

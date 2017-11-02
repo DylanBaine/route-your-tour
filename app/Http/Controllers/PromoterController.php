@@ -29,6 +29,29 @@ class PromoterController extends Controller
 
 	public function see()
 	{
-		return Promoter::where('user_id', Auth::user()->id)->first();
+		return Auth::user()->promoter->first();
+	}
+
+	public function thisPromoter()
+	{
+		return Auth::user()->promoter->first();
+	}
+
+	public function edit($id, Request $request)
+	{
+		$promoter = Promoter::where('id', $id)->first();
+
+		$promoter->name = request('name');
+
+		$promoter->experience = request('experience');
+
+		$promoter->save();
+	}
+
+	public function delete($id)
+	{
+		$promoter = Promoter::find($id);
+
+		$promoter->delete();
 	}
 }

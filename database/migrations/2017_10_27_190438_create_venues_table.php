@@ -18,6 +18,20 @@ class CreateVenuesTable extends Migration
             $table->string('slug');
             $table->string('name');
             $table->string('address');
+            $table->integer('lat')->nullable();
+            $table->integer('long')->nullable();
+            $table->string('website')->nullable();
+            $table->string('age')->nullable();
+            $table->integer('capacity')->nullable();
+            $table->string('booking_number')->nullable();
+            $table->string('booking_email')->nullable();
+            $table->string('category_slug')->nullable();
+            $table->string('category')->nullable();
+            $table->string('country_slug')->nullable();
+            $table->string('country')->nullable();
+            $table->text('amenities')->nullable();
+            $table->string('profile_image')->nullable();
+            $table->string('banner_imgage')->nullable();
             $table->timestamps();
         });
     }

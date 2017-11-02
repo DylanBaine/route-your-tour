@@ -3,11 +3,13 @@
 		<header class="text-xs-center padded">
 			<h4 >Welcome to your profiles page.</h4>
 			<h6>This is where all of your pages are listed. You can also add new pages from here.</h6>
+			<small> You have {{activeBands}} bands, and {{activeVenues}} venues  active right now.</small>
 		</header>
 
 		<hr>
 
 		<section id="profile-options" class="padded">
+
 			
 			<v-layout row wrap id="profiles">
 				<v-flex md3 xs6 v-for="item in items" :key="item.id" >
@@ -24,6 +26,8 @@
 		</section>
 
 		<hr>
+		
+		</div>
 
 		<section id="profiles" class="padded">
 
@@ -57,7 +61,7 @@
 						<h3>Your Promoter Profile.</h3>
 					</header>
 
-					<v-card :to="'/promoters/' + promoter.slug" color="blue" class="card text-xs-center flexed white--text">
+					<v-card to="/promoter/" color="blue" class="card text-xs-center flexed white--text">
 						{{promoter.name}}
 					</v-card>
 				</v-flex>
@@ -67,7 +71,7 @@
 						<h3>Your Booking Agent Profile.</h3>
 					</header>
 
-					<v-card :to="'/booking-agents/' + bookingAgent.slug" color="deep-purple" class="card text-xs-center flexed white--text">
+					<v-card to="/booking-agent/" color="deep-purple" class="card text-xs-center flexed white--text">
 						{{bookingAgent.name}}
 					</v-card>
 				</v-flex>
@@ -134,6 +138,19 @@ export default{
 		axios.get('api/users-bookingagent/')
 			.then(response => this.bookingAgent = response.data);
 
+			this.$emit('notLoading')
+
+	},
+	computed: {
+		activeBands: function(){
+			return this.bands.length;
+		},
+		activeVenues: function(){
+			return this.venues.length;
+		}
+	},
+	beforeCreated(){
+		this.$emit('loading');
 	}
 }
 		
@@ -149,6 +166,9 @@ export default{
 		justify-content: center;
 		align-items: center;
 	}	
+	.oh-no{
+		padding: 80px;
+	}
 	@media (max-width: 599px){
 		.card{
 			height: auto !important;

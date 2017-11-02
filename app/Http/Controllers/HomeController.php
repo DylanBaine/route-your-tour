@@ -41,7 +41,7 @@ class HomeController extends Controller
 
             $image = $request->file('avatar');
 
-            $imageURL = time() . '.jpg';
+            $imageURL = Auth::user()->id . '-' . time() . '.jpg';
 
             Image::make($image)->save(public_path('storage/'. $imageURL));
 

@@ -59,3 +59,41 @@ html, body{
 	height: 100vh;
 	width: 100vw;
 }
+.fixed-bottom{
+	position: fixed;
+	bottom: 20px;
+}
+.right{		
+	right: 20px;
+}
+.left{
+	left: 20px;
+}
+
+#editor{
+	border: solid grey 1px;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.crazy-btn{
+	animation: seeme 4s infinite;
+}
+
+@keyframes seeme{
+	0%, 15%, 35%{
+		width: 85px;
+		height: 40px;
+		font-size: 15px;
+		bottom: 20px;
+		right: 20px;
+	}
+
+	10%, 30%{
+		width: 95px;
+		height: 50px;
+		font-size: 25px;
+		right: 15px;
+		bottom: 15px;
+	}
+}

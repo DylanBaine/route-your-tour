@@ -29,6 +29,29 @@ class BookingAgentController extends Controller
 
 	public function see()
 	{
-		return BookingAgent::where('user_id', Auth::user()->id)->first();
+		return Auth::user()->bookingAgent->first();
+	}	
+
+	public function thisBookingAgent()
+	{
+		return Auth::user()->bookingAgent->first();
+	}
+
+	public function edit($id, Request $request)
+	{
+		$BookingAgent = BookingAgent::where('id', $id)->first();
+
+		$BookingAgent->name = request('name');
+
+		$BookingAgent->experience = request('experience');
+
+		$BookingAgent->save();
+	}
+
+	public function delete($id)
+	{
+		$bookingAgent = BookingAgent::find($id);
+
+		$bookingAgent->delete();
 	}
 }
