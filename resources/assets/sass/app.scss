@@ -32,6 +32,9 @@ html, body{
 #app{
 	width: 100vw;
 }
+.container{
+	padding: 0;
+}
 .fade-enter-active, .fade-leave-active {
   transition: all .5s;
   position: absolute;

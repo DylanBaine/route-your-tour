@@ -157,7 +157,7 @@
     </v-toolbar>
     <main>
       <v-content>
-        <v-container fluid>   
+        <v-container fluid style="padding: 0;">   
           <transition name="fade">
             <loader v-if="loading" @loading="loading = true" @notLoading="loading = false"></loader>
             <router-view></router-view>

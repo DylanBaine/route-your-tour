@@ -1500,7 +1500,7 @@ window._ = __webpack_require__(16);
 
 window.axios = __webpack_require__(18);
 
-axios.defaults.baseURL = /*window.location.protocol + */'https://' + window.location.host;
+axios.defaults.baseURL = window.location.protocol + '//' + window.location.host;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -50102,6 +50102,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
+    { staticStyle: { padding: "0" }, attrs: { fluid: "" } },
     [
       _c(
         "v-card",
@@ -50375,6 +50376,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -50387,7 +50395,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			location: '',
 			locationRules: [function (v) {
 				return !!v || 'An address is required';
-			}]
+			}],
+			items: [{ text: 'Amphitheater' }, { text: 'Arena' }, { text: 'Auditorium' }, { text: 'Bar' }, { text: 'Casino' }, { text: 'Church' }, { text: 'Club' }, { text: 'Coffee House' }, { text: 'Event Center' }, { text: 'Music Hall' }, { text: 'Outdoor Festival' }, { text: 'Restaurant' }, { text: 'Stadium' }],
+			category: ''
+
+			/*Add "Music Hall", "Restaurant Venue", and "Event Venue" to venue categories. all categories are now "Amphitheater, Arena, Auditorium, Bar Venue, Casino Venue, Church Venue, Club, Coffee House, Event Venue, Music Hall, Restaurant Venue, Outdoor Festival, Stadium Venue"*/
+
 		};
 	},
 
@@ -50397,11 +50410,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				name: this.name,
 				location: this.location,
 				slug: this.slug,
+				category: this.category,
 				_token: this.token
 			}).then(function (response) {
 				window.location.href = '/home#/profile/add';
 			}).catch(function (error) {
-				alert(error + ': please fill all of the fields.');
+				alert(error + error.message);
 			});
 		}
 	},
@@ -50456,6 +50470,21 @@ var render = function() {
                 "div",
                 { staticClass: "padded" },
                 [
+                  _c("v-select", {
+                    attrs: {
+                      items: _vm.items,
+                      label: "Select your venue category",
+                      "item-value": "text"
+                    },
+                    model: {
+                      value: _vm.category,
+                      callback: function($$v) {
+                        _vm.category = $$v
+                      },
+                      expression: "category"
+                    }
+                  }),
+                  _vm._v(" "),
                   _c("v-text-field", {
                     attrs: {
                       name: "name",
@@ -52187,6 +52216,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = (_data$methods$mounted = {
 	data: function data() {
@@ -52195,7 +52234,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
 			errors: false,
-			image: ''
+			image: '',
+			items: [{ text: 'Amphitheater' }, { text: 'Arena' }, { text: 'Auditorium' }, { text: 'Bar' }, { text: 'Casino' }, { text: 'Church' }, { text: 'Club' }, { text: 'Coffee House' }, { text: 'Event Center' }, { text: 'Music Hall' }, { text: 'Outdoor Festival' }, { text: 'Restaurant' }, { text: 'Stadium' }]
+
 		};
 	},
 
@@ -52222,6 +52263,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 		data.append('address', this.venue.address);
 		data.append('country', this.venue.country);
 		data.append('booking_number', this.venue.booking_number);
+		data.append('category', this.venue.category);
 		data.append('banner', document.getElementById('banner').files[0]);
 
 		axios.post('/api/venue/' + this.venue.id + '/edit', data).then(function (response) {
@@ -52762,40 +52804,75 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("section", { attrs: { id: "body" } }, [
-            _c("header", [_c("h2", [_vm._v("Venues Amenities")])]),
-            _vm._v(" "),
-            _c(
-              "label",
-              { attrs: { for: "amenities" } },
-              [
-                _c("v-icon", [_vm._v("mode_edit")]),
-                _vm._v(" List all of your amenities separated by a comma.")
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.venue.amenities,
-                  expression: "venue.amenities"
-                }
-              ],
-              attrs: { id: "amenities", rows: "5" },
-              domProps: { value: _vm.venue.amenities },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+          _c("header", [_c("h2", [_vm._v("Venues Details")])]),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "", id: "body" } },
+            [
+              _c("v-flex", { attrs: { md6: "" } }, [
+                _c(
+                  "label",
+                  { attrs: { for: "amenities" } },
+                  [
+                    _c("v-icon", [_vm._v("mode_edit")]),
+                    _vm._v(" List all of your amenities separated by a comma.")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.venue.amenities,
+                      expression: "venue.amenities"
+                    }
+                  ],
+                  attrs: { id: "amenities", rows: "5" },
+                  domProps: { value: _vm.venue.amenities },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.venue, "amenities", $event.target.value)
+                    }
                   }
-                  _vm.$set(_vm.venue, "amenities", $event.target.value)
-                }
-              }
-            })
-          ]),
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { md6: "" } },
+                [
+                  _c(
+                    "label",
+                    { attrs: { for: "cat" } },
+                    [
+                      _c("v-icon", [_vm._v("mode_edit")]),
+                      _vm._v("Your current category.")
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-select", {
+                    attrs: { items: _vm.items, "item-value": "text" },
+                    model: {
+                      value: _vm.venue.category,
+                      callback: function($$v) {
+                        _vm.$set(_vm.venue, "category", $$v)
+                      },
+                      expression: "venue.category"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "v-btn",
@@ -55107,7 +55184,7 @@ var render = function() {
             [
               _c(
                 "v-container",
-                { attrs: { fluid: "" } },
+                { staticStyle: { padding: "0" }, attrs: { fluid: "" } },
                 [
                   _c(
                     "transition",

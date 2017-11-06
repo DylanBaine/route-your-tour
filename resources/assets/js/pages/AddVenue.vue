@@ -8,6 +8,13 @@
 
 				<div class="padded">	
 
+					<v-select
+					v-model="category"
+					:items="items"
+                	label="Select your venue category"
+					item-value="text"
+					></v-select>
+					
 					<v-text-field
 					name="name"
 					label="What do you call your venue?"
@@ -50,8 +57,27 @@ export default {
 			locationRules: [
 				(v) => !!v || 'An address is required',
 
-			]
+			],
+			items: [
+				{text: 'Amphitheater'},
+				{text: 'Arena'},
+				{text: 'Auditorium'},
+				{text: 'Bar'},
+				{text: 'Casino'},
+				{text: 'Church'},
+				{text: 'Club'},
+				{text: 'Coffee House'},
+				{text: 'Event Center'},
+				{text: 'Music Hall'},
+				{text: 'Outdoor Festival'},
+				{text: 'Restaurant'},
+				{text: 'Stadium'}
+			],
+			category: ''
 		}
+
+/*Add "Music Hall", "Restaurant Venue", and "Event Venue" to venue categories. all categories are now "Amphitheater, Arena, Auditorium, Bar Venue, Casino Venue, Church Venue, Club, Coffee House, Event Venue, Music Hall, Restaurant Venue, Outdoor Festival, Stadium Venue"*/
+
 	},
 	methods: {
 		saveVenue: function(){
@@ -59,13 +85,14 @@ export default {
 				name: this.name,
 				location: this.location,
 				slug: this.slug,
+				category: this.category,
 				_token: this.token
 			})
 			.then(function(response){
 				window.location.href='/home#/profile/add'
 			})
 			.catch(error => {
-				alert(error + ': please fill all of the fields.')
+				alert(error + error.message)
 			})
 		}
 	},

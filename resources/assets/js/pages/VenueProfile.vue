@@ -90,16 +90,26 @@
 				</v-layout>
 
 			</section>
-			<section id="body">
-
 				<header>
-					<h2>Venues Amenities</h2>
+					<h2>Venues Details</h2>
 				</header>
-				
-				<label for="amenities"><v-icon>mode_edit</v-icon> List all of your amenities separated by a comma.</label>
-				<textarea id="amenities" rows="5" v-model="venue.amenities"></textarea>		
+			<v-layout row id="body">
 
-			</section>
+				<v-flex md6>					
+					<label for="amenities"><v-icon>mode_edit</v-icon> List all of your amenities separated by a comma.</label>
+					<textarea id="amenities" rows="5" v-model="venue.amenities"></textarea>	
+				</v-flex>
+				
+				<v-flex md6>
+					<label for="cat"><v-icon>mode_edit</v-icon>Your current category.</label>
+					<v-select
+					v-model="venue.category"
+					:items="items"
+					item-value="text"
+					></v-select>
+				</v-flex>	
+
+			</v-layout>
 
 			<v-btn color="primary" @click="edit" class="fixed-bottom right">
 				Save
@@ -122,7 +132,23 @@ export default{
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
 			errors: false,
-			image: ''
+			image: '',
+			items: [
+				{text: 'Amphitheater'},
+				{text: 'Arena'},
+				{text: 'Auditorium'},
+				{text: 'Bar'},
+				{text: 'Casino'},
+				{text: 'Church'},
+				{text: 'Club'},
+				{text: 'Coffee House'},
+				{text: 'Event Center'},
+				{text: 'Music Hall'},
+				{text: 'Outdoor Festival'},
+				{text: 'Restaurant'},
+				{text: 'Stadium'}
+			],
+
 		}
 	},
 	methods: {
@@ -147,6 +173,7 @@ export default{
 				data.append('address', this.venue.address);
 				data.append('country', this.venue.country);
 				data.append('booking_number', this.venue.booking_number);
+				data.append('category', this.venue.category);
 				data.append('banner', document.getElementById('banner').files[0]);
 
 			axios.post('/api/venue/'+ this.venue.id +'/edit', data)

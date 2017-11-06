@@ -24,6 +24,10 @@ class VenueController extends Controller
 
     $venue->slug = request('slug');
 
+    $venue->category = request('category');
+
+    $venue->category_slug = str_slug(request('category'));
+
     $venue->save();
 
     $user->venues()->attach($venue->id);
@@ -58,6 +62,10 @@ class VenueController extends Controller
     $venue->website = request('website');
 
     $venue->amenities = request('amenities');
+
+    $venue->category = request('category');
+
+    $venue->category_slug = str_slug(request('category'));
 
         if($request->hasFile('banner')){
             
