@@ -87,7 +87,7 @@
 export default{
 	data(){
 		return{
-			url: window.location.protocol + '//' + window.location.host,
+			url: window.location.protocol + '//' + window.location.host + ':' + window.location.port,
 			loading: true,
 			items: [
 				{

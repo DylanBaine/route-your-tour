@@ -49459,7 +49459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			url: window.location.protocol + '//' + window.location.host,
+			url: window.location.protocol + '//' + window.location.host + ':' + window.location.port,
 			loading: true,
 			items: [{
 				id: 1,
