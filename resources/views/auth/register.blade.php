@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
-<register-form>
-</register-form>
+<section class="flex-center register-page">
+	<register-form>
+	</register-form>
+</section>
 @endsection

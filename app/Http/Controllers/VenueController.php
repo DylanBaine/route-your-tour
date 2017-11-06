@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Venue;
 use App\User;
 use Auth;
+use File;
+use Image;
 
 class VenueController extends Controller
 {
@@ -39,7 +41,7 @@ class VenueController extends Controller
     return Venue::where('slug', $slug)->first();
   }
 
-  public function edit($id)
+  public function edit($id, Request $request)
   {
     $venue = Venue::find($id);
 
@@ -56,6 +58,19 @@ class VenueController extends Controller
     $venue->website = request('website');
 
     $venue->amenities = request('amenities');
+
+        if($request->hasFile('banner')){
+            
+            File::delete('storage/' . $venue->banner_image);
+
+            $image = $request->file('banner');
+            $imageUrl = Auth::user()->id . '-' . $venue->slug . '-' . time() . '.jpg';
+
+            Image::make($image)->save(public_path('storage/' . $imageUrl));
+
+            $venue->banner_image = $imageUrl;
+
+        }    
 
     $venue->save();
   }

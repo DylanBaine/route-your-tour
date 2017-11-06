@@ -44,7 +44,7 @@
 
         </v-list-tile>
 
-        <v-list-tile href="/bands">
+        <v-list-tile to="/bands">
 
           <v-list-tile-action>
             <v-icon>music_note</v-icon>
@@ -58,7 +58,7 @@
 
         </v-list-tile>
 
-        <v-list-tile href="/venues">
+        <v-list-tile to="/venues">
 
           <v-list-tile-action>
             <v-icon>store</v-icon>
@@ -72,7 +72,7 @@
 
         </v-list-tile>
 
-        <v-list-tile href="/tours">
+        <v-list-tile to="/tours">
 
           <v-list-tile-action>
             <v-icon>airport_shuttle</v-icon>

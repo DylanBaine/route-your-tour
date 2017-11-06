@@ -23,7 +23,6 @@ route::get('/user', function(){
 	return Auth::user();
 });
 
-
 Route::prefix('api')->group(function () {
 
 		/*----GET CURRENT USER THAT IS LOGGED IN----*/
@@ -47,18 +46,24 @@ Route::prefix('api')->group(function () {
 	Route::put('/venue/{id}/edit', 'VenueController@edit');
 	Route::delete('/venue/{id}/delete', 'VenueController@delete');
 
-	/*----API PROMOTER CONTROLLERS----*/
+		/*----API PROMOTER CONTROLLERS----*/
 	Route::get('/users-promoter', 'PromoterController@see');
 	Route::post('/add-promoter', 'PromoterController@store');
 	Route::get('/promoter', 'PromoterController@thisPromoter');
 	Route::put('/promoter/{id}/edit', 'PromoterController@edit');
 	Route::delete('/promoter/{id}/delete', 'PromoterController@delete');
 
-	/*----API BOOKING AGENT CONTROLLERS----*/
+		/*----API BOOKING AGENT CONTROLLERS----*/
 	Route::get('/users-bookingagent', 'BookingAgentController@see');
 	Route::post('/add-bookingagent', 'BookingAgentController@store');
 	Route::get('/booking-agent', 'BookingAgentController@thisBookingAgent');
 	Route::put('/booking-agent/{id}/edit', 'BookingAgentController@edit');
 	Route::delete('/booking-agent/{id}/delete', 'BookingAgentController@delete');
+
+		/*---API ROUTE CONTROLLERS---*/
+	Route::post('/{band_id}/add-route', 'RouteController@create');
+	Route::put('/{route_id}/edit', 'RouteController@edit');
+	Route::delete('/{route_id}/delete', 'RouteController@delete');
+	Route::post('/{route_id}/add-location', 'RouteController@addLocation');
 
 });

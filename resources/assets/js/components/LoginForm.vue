@@ -1,5 +1,5 @@
 <template>
-      <v-card color="grey lighten-4" flat>
+      <v-card>
         <v-card-title class="headline">Login</v-card-title>
 		<form action="/login" method="post">
 
@@ -48,8 +48,6 @@ export default{
 <style scoped>
 .card{
 	width: 50vw;
-	position: absolute;
-	top: 20px;
 	z-index: 999;
 	background-color: white;
 	left: 25vw;

@@ -31,7 +31,7 @@ class CreateVenuesTable extends Migration
             $table->string('country')->nullable();
             $table->text('amenities')->nullable();
             $table->string('profile_image')->nullable();
-            $table->string('banner_imgage')->nullable();
+            $table->string('banner_image')->nullable();
             $table->timestamps();
         });
     }

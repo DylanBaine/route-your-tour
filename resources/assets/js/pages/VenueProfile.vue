@@ -18,7 +18,7 @@
 
 		<section id="editor">
 			
-			<header class="padded">
+			<header id="mast-head" v-if="!image" :style="bannerImage">
 				<label for="name"><v-icon>mode_edit</v-icon>Title</label>
 				<h1><textarea id="name" class="text-xs-center" v-model="venue.name"></textarea></h1>
 				<v-layout row>
@@ -31,9 +31,29 @@
 						<h4><input id="country" v-model="venue.country" type="text"></h4>
 					</v-flex>
 				</v-layout>
+				<label for="banner" id="banner-button" class="btn btn-raised white--text blue darken-3 btn--active">Change Banner Image</label>
+				<input type="file" @change="onFileChange" id="banner" style="display: none;">
 			</header>
+
+			<header id="mast-head" v-if="image" :style="banner">
+				<label for="name"><v-icon>mode_edit</v-icon>Title</label>
+				<h1><textarea id="name" class="text-xs-center" v-model="venue.name"></textarea></h1>
+				<v-layout row>
+					<v-flex md6>
+						<label for="address"><v-icon>mode_edit</v-icon> Address</label>
+						<h4><input id="address" v-model="venue.address" type="text"></h4>
+					</v-flex>
+					<v-flex md6>
+						<label for="country"><v-icon>mode_edit</v-icon> Country</label>
+						<h4><input id="country" v-model="venue.country" type="text"></h4>
+					</v-flex>
+				</v-layout>
+				<label for="banner" id="banner-button" class="btn btn-raised white--text blue darken-3 btn--active">Change Banner Image</label>
+				<input type="file" @change="onFileChange" id="banner" style="display: none;">
+			</header>
+
 			<hr>
-			<section id="contacts" class="padded">
+			<section id="contacts">
 				<header>
 					<h2>Contact Info.</h2>
 				</header>
@@ -70,9 +90,9 @@
 				</v-layout>
 
 			</section>
-			<section id="body" class="padded">
+			<section id="body">
 
-				<header class="padded">
+				<header>
 					<h2>Venues Amenities</h2>
 				</header>
 				
@@ -101,7 +121,8 @@ export default{
 			venue: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
-			errors: false
+			errors: false,
+			image: ''
 		}
 	},
 	methods: {
@@ -125,7 +146,8 @@ export default{
 				data.append('website', this.venue.website);
 				data.append('address', this.venue.address);
 				data.append('country', this.venue.country);
-				data.append('booking_number', this.venue.booking_number)
+				data.append('booking_number', this.venue.booking_number);
+				data.append('banner', document.getElementById('banner').files[0]);
 
 			axios.post('/api/venue/'+ this.venue.id +'/edit', data)
 				.then(response => {
@@ -143,6 +165,31 @@ export default{
 
 			axios.post('/api/venue/' + this.venue.id + '/delete', data)
 				.then(window.location.href="/home#/profile/add");
+		},
+	    onFileChange(e) {
+	      var files = e.target.files || e.dataTransfer.files;
+	      if (!files.length)
+	        return;
+	      this.createImage(files[0]);
+
+	    },	
+	    createImage(file) {
+	      var image = new Image();
+	      var reader = new FileReader();
+	      var vm = this;
+
+	      reader.onload = (e) => {
+	        vm.image = e.target.result;
+	      };
+	      reader.readAsDataURL(file);
+	    }
+	},
+	computed: {
+		bannerImage: function(){
+			return 'background-image: url(/storage/' + this.venue.banner_image +' );'
+		},
+		banner: function(){
+			return 'background-image: url(' + this.image +' );'
 		}
 	}
 }
@@ -150,24 +197,34 @@ export default{
 </script>
 
 <style scoped>
-	input, textarea{
-		width: 100%;
-		padding: 5px;
-	}
-	input:focus, textarea:focus{
-		background-color: rgba(0,0,0, .05);
-	}
-	.fixed-bottom{
-		position: fixed;
-		bottom: 20px;
-		right: 20px;
-	}
-	label{
-		cursor: pointer;
-	}
-	.alert-btn{
-		position: absolute;
-		right: 10px;
-		top: 0;
-	}
+input, textarea{
+	width: 100%;
+	padding: 5px;
+}
+input:focus, textarea:focus{
+	background-color: rgba(0,0,0, .05);
+}
+.fixed-bottom{
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}
+label{
+	cursor: pointer;
+}
+.alert-btn{
+	position: absolute;
+	right: 10px;
+	top: 0;
+}
+#mast-head{
+	position: relative;
+	background-position: center;
+	background-size: cover;
+}
+#banner-button{
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
 </style>

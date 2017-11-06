@@ -2,17 +2,9 @@ require('./bootstrap');
 
 import Vue from 'vue';
 import Vuetify from 'vuetify';
-import * as VueGoogleMaps from 'vue2-google-maps';
 import VueRouter from 'vue-router';
 
 Vue.use(Vuetify);
-
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: 'AIzaSyBvWE_sIwKbWkiuJQOf8gSk9qzpO96fhfY',
-    libraries: 'places',
-  },
-});
 
 Vue.use(VueRouter);
 
@@ -40,7 +32,7 @@ const routes = [
 
 ];
 
-Vue.component('welcome-header', require('./components/WelcomeHeader.vue'));
+Vue.component('auth-header', require('./components/AuthHeader.vue'));
 Vue.component('register-form', require('./components/RegisterForm.vue'));
 Vue.component('login-form', require('./components/LoginForm.vue'));
 Vue.component('application', require('./components/Layout.vue'));
@@ -57,6 +49,12 @@ const app = new Vue({
   data: {
    menu: false,
    loading: false,
-   errors: true
+   errors: true,
+ },
+ created() {
+    window.onscroll = function (e) {
+        document.getElementById('title').style.top = window.scrollY/3 + 'px';
+        document.getElementById('inner').style.backgroundColor = 'rgba(0,0,0,' + Math.max(window.scrollY/700, .3) + ')';
+    }
  }
 });

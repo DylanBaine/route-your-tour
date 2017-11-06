@@ -50,8 +50,6 @@
 <style scoped>
 .card{
 	width: 50vw;
-	position: absolute;
-	top: 2px;
 	z-index: 999;
 	background-color: white;
 	left: 25vw;

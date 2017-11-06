@@ -7,6 +7,11 @@
         <meta name="csrf-token" content="{{csrf_token()}}">
 
         <title>{{env('app_name')}}</title>
+
+
+        <link rel="icon"
+            type="image/png" 
+            href="storage/defaults/logo-black.png">
         
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
@@ -16,7 +21,11 @@
                 @yield('content')
             </v-app>
         </div>
-
+        <footer class="layout row grey darken-4 padded text-xs-center white--text">
+            <div class="flex md4">footer</div>
+            <div class="flex md4">footer</div>
+            <div class="flex md4">footer</div>
+        </footer>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
-<login-form>
-</login-form>
+	<section class="login-page flex-center">		
+		<login-form>
+		</login-form>
+	</section>
 @endsection

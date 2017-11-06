@@ -79,7 +79,16 @@ html, body{
 .crazy-btn{
 	animation: seeme 4s infinite;
 }
-
+.flex-center{
+	display: flex;
+	align-items: center;
+}
+.relative{
+	position: relative;
+}
+.neg-top{
+	top: -30px;
+}
 @keyframes seeme{
 	0%, 15%, 35%{
 		width: 85px;
@@ -96,4 +105,43 @@ html, body{
 		right: 15px;
 		bottom: 15px;
 	}
+}
+
+/* === WELCOME PAGE === */
+#hero{
+	background-image: url(https://cdn.pixabay.com/photo/2017/08/25/06/54/street-map-2679271_960_720.jpg);
+	position: relative;
+	overflow: hidden;
+	height: 85vh;
+	z-index: 5;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+#inner{
+	background-color: rgba(0,0,0,.3);
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color 0s;
+}
+#title{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	transition: top 0s;
+}
+
+/* === REGISTER AND LOGIN PAGE === */
+
+.register-page, .login-page{
+	background-image: url(https://cdn.pixabay.com/photo/2017/08/25/06/54/street-map-2679271_960_720.jpg);
+	height: 100vh;
+	width: 100vw;
+	background-size: cover;
 }
