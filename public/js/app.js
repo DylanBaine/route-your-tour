@@ -1500,7 +1500,7 @@ window._ = __webpack_require__(16);
 
 window.axios = __webpack_require__(18);
 
-axios.defaults.baseURL = window.location.protocol + '//' + window.location.host;
+axios.defaults.baseURL = /*window.location.protocol + */'https://' + window.location.host;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

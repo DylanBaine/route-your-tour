@@ -3,7 +3,7 @@ window._ = require('lodash');
 
 window.axios = require('axios');
 
-axios.defaults.baseURL = window.location.protocol + '//' + window.location.host;
+axios.defaults.baseURL = /*window.location.protocol + */ 'https://' + window.location.host;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
