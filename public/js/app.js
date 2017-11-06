@@ -54162,7 +54162,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-f3182788]{\r\n\twidth: 50vw;\r\n\tz-index: 999;\r\n\tbackground-color: white;\r\n\tleft: 25vw;\n}\t\r\n\t\r\n", ""]);
+exports.push([module.i, "\n.card[data-v-f3182788]{\r\n\tz-index: 999;\r\n\tbackground-color: white;\r\n\tmargin: 0 auto;\n}\t\r\n\t\r\n", ""]);
 
 // exports
 
@@ -54396,7 +54396,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-ff2b7430]{\r\n\twidth: 50vw;\r\n\tz-index: 999;\r\n\tbackground-color: white;\r\n\tleft: 25vw;\n}\r\n", ""]);
+exports.push([module.i, "\n.card[data-v-ff2b7430]{\r\n\tz-index: 999;\r\n\tbackground-color: white;\r\n\tmargin: 0 auto;\n}\r\n", ""]);
 
 // exports
 

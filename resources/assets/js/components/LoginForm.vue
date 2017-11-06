@@ -47,9 +47,8 @@ export default{
 
 <style scoped>
 .card{
-	width: 50vw;
 	z-index: 999;
 	background-color: white;
-	left: 25vw;
+	margin: 0 auto;
 }
 </style>
