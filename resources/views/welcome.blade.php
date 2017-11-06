@@ -35,7 +35,7 @@
         </div>
     </div> 
     <div class="padded flex md6">
-        <img src="defaults/logo-black.png" alt="Route Your Tour" width="100%">
+        <img src="/Defaults/logo-black.png" alt="Route Your Tour" width="100%">
     </div> 
 </section>
 
