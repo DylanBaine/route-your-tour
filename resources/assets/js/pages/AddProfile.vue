@@ -87,7 +87,6 @@
 export default{
 	data(){
 		return{
-			url: window.location.protocol + '//' + window.location.host + ':' + window.location.port,
 			loading: true,
 			items: [
 				{
@@ -127,16 +126,16 @@ export default{
 
 	},
 	mounted(){
-		axios.get( this.url + '/api/users-bands/')
+		axios.get('/api/users-bands/')
 			.then(response => this.bands = response.data);
 
-		axios.get( this.url + '/api/users-venues/')
+		axios.get('/api/users-venues/')
 			.then(response => this.venues = response.data);
 
-		axios.get( this.url + '/api/users-promoter/')
+		axios.get('/api/users-promoter/')
 			.then(response => this.promoter = response.data);
 
-		axios.get( this.url + '/api/users-bookingagent/')
+		axios.get('/api/users-bookingagent/')
 			.then(response => this.bookingAgent = response.data);
 
 			this.$emit('notLoading')

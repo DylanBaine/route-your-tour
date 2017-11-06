@@ -118,7 +118,6 @@
 export default{
 	data(){
 		return {
-			url: window.location.protocol + '//' + window.location.host,
 			venue: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
@@ -131,7 +130,7 @@ export default{
 	},
 	mounted(){
 
-		axios.get(this.url + '/api/venue/' + this.$route.params.slug)
+		axios.get('/api/venue/' + this.$route.params.slug)
 			.then(({data}) => this.venue = data);
 
 	},
