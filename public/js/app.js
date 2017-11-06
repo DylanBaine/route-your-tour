@@ -49496,19 +49496,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	mounted: function mounted() {
 		var _this = this;
 
-		axios.get('/api/users-bands/').then(function (response) {
+		axios.get('/api/users-bands').then(function (response) {
 			return _this.bands = response.data;
 		});
 
-		axios.get('/api/users-venues/').then(function (response) {
+		axios.get('/api/users-venues').then(function (response) {
 			return _this.venues = response.data;
 		});
 
-		axios.get('/api/users-promoter/').then(function (response) {
+		axios.get('/api/users-promoter').then(function (response) {
 			return _this.promoter = response.data;
 		});
 
-		axios.get('/api/users-bookingagent/').then(function (response) {
+		axios.get('/api/users-bookingagent').then(function (response) {
 			return _this.bookingAgent = response.data;
 		});
 
