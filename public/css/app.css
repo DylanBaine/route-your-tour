@@ -16198,6 +16198,13 @@ body {
   transition: top 0s;
 }
 
+.hero-text {
+  width: 100%;
+  position: relative;
+  left: 0;
+  padding: 20px;
+}
+
 /* === REGISTER AND LOGIN PAGE === */
 
 .register-page,

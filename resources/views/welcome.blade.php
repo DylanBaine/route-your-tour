@@ -19,7 +19,7 @@
 <header id="hero">
     <div id="inner">        
         <div id="title">
-            <div>
+            <div class="hero-text">
                 <h1 class="white--text">Welcome to Route Your Tour</h1>
                 <h3 class="white--text">The visual route builder for bands.</h3>
             </div>
