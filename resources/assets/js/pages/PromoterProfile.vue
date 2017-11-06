@@ -51,6 +51,7 @@
 export default{
 	data(){
 		return {
+			url: window.location.protocol + '//' + window.location.host,
 			promoter: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
@@ -62,7 +63,7 @@ export default{
 	},
 	mounted(){
 
-		axios.get('/api/promoter')
+		axios.get(this.url + '/api/promoter')
 			.then(({data}) => this.promoter = data);
 
 	},

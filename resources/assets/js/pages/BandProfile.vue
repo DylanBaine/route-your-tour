@@ -131,6 +131,7 @@ export default{
 
 	data(){
 		return {
+			url: window.location.protocol + '//' + window.location.host,
 			band: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
@@ -146,7 +147,7 @@ export default{
 			document.head.appendChild(scScripts);
 
 
-		axios.get('/api/band/' + this.$route.params.slug)
+		axios.get( this.url + '/api/band/' + this.$route.params.slug)
 		.then(response => this.band = response.data);
 
 		console.log(this.band)

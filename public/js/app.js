@@ -49459,6 +49459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
+			url: window.location.protocol + '//' + window.location.host,
 			loading: true,
 			items: [{
 				id: 1,
@@ -49494,23 +49495,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	mounted: function mounted() {
 		var _this = this;
 
-		axios.get('/api/users-bands/').then(function (response) {
+		axios.get(this.url + '/api/users-bands/').then(function (response) {
 			return _this.bands = response.data;
 		});
 
-		axios.get('/api/users-venues/').then(function (response) {
+		axios.get(this.url + '/api/users-venues/').then(function (response) {
 			return _this.venues = response.data;
 		});
 
-		axios.get('/api/users-promoter/').then(function (response) {
+		axios.get(this.url + '/api/users-promoter/').then(function (response) {
 			return _this.promoter = response.data;
 		});
 
-		axios.get('/api/users-bookingagent/').then(function (response) {
+		axios.get(this.url + '/api/users-bookingagent/').then(function (response) {
 			return _this.bookingAgent = response.data;
 		});
 
 		this.$emit('notLoading');
+
+		console.log(this.url);
 	},
 
 	computed: {
@@ -51391,6 +51394,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
+			url: window.location.protocol + '//' + window.location.host,
 			band: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
@@ -51407,7 +51411,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		scScripts.setAttribute('type', 'text/javascript');
 		document.head.appendChild(scScripts);
 
-		axios.get('/api/band/' + this.$route.params.slug).then(function (response) {
+		axios.get(this.url + '/api/band/' + this.$route.params.slug).then(function (response) {
 			return _this.band = response.data;
 		});
 
@@ -52187,6 +52191,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = (_data$methods$mounted = {
 	data: function data() {
 		return {
+			url: window.location.protocol + '//' + window.location.host,
 			venue: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
@@ -52199,7 +52204,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 	mounted: function mounted() {
 		var _this = this;
 
-		axios.get('/api/venue/' + this.$route.params.slug).then(function (_ref) {
+		axios.get(this.url + '/api/venue/' + this.$route.params.slug).then(function (_ref) {
 			var data = _ref.data;
 			return _this.venue = data;
 		});
@@ -52982,6 +52987,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
 	data: function data() {
 		return {
+			url: window.location.protocol + '//' + window.location.host,
 			bookingAgent: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
@@ -52993,7 +52999,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 	mounted: function mounted() {
 		var _this = this;
 
-		axios.get('/api/booking-agent').then(function (_ref) {
+		axios.get(this.url + '/api/booking-agent').then(function (_ref) {
 			var data = _ref.data;
 			return _this.bookingAgent = data;
 		});
@@ -53374,6 +53380,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
 	data: function data() {
 		return {
+			url: window.location.protocol + '//' + window.location.host,
 			promoter: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
@@ -53385,7 +53392,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 	mounted: function mounted() {
 		var _this = this;
 
-		axios.get('/api/promoter').then(function (_ref) {
+		axios.get(this.url + '/api/promoter').then(function (_ref) {
 			var data = _ref.data;
 			return _this.promoter = data;
 		});

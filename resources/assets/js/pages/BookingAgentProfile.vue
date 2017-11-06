@@ -51,6 +51,7 @@
 export default{
 	data(){
 		return {
+			url: window.location.protocol + '//' + window.location.host,
 			bookingAgent: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
@@ -62,7 +63,7 @@ export default{
 	},
 	mounted(){
 
-		axios.get('/api/booking-agent')
+		axios.get(this.url + '/api/booking-agent')
 			.then(({data}) => this.bookingAgent = data);
 
 	},
