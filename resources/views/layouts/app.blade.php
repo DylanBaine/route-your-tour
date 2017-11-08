@@ -6,11 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{csrf_token()}}">
 
-        <title>{{env('app_name')}}</title>
+        <title>Route Your Tour</title>
 
         <link rel="icon"
             type="image/png" 
-            href="storage/defaults/logo-black.png">
+            href="Defaults/logo-black.png">
                     
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
