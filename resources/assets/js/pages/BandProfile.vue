@@ -247,11 +247,7 @@ input, textarea{
 input:focus, textarea:focus{
 	background-color: rgba(0,0,0, .05);
 }
-.fixed-bottom{
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-}
+
 label{
 	cursor: pointer;
 }
