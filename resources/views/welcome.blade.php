@@ -14,8 +14,6 @@
     </v-alert>
 @endif
 
-<auth-header></auth-header>
-
 <header id="hero">
     <div id="inner">        
         <div id="title">

@@ -24,12 +24,13 @@
 
 					<div class="slug grey--text"><label>Your url will be: </label>www.routeyourtour.com/venues/<span class="yellow lighten-3">{{slug}}</span><input type="hidden" :value="slug" name="slug"></div>
 
-					<v-text-field
-					name="location"
-					label="What is your venue's address?"
-					v-model="location"
-					:rules="locationRules"
-					></v-text-field>					
+					<vue-google-autocomplete
+					    id="location"
+					    classname="location-input"
+					    placeholder="Your venues address."
+					    @placechanged="getAddressData"
+					>
+					</vue-google-autocomplete>						
 
 				</div>			
 
@@ -73,11 +74,9 @@ export default {
 				{text: 'Restaurant'},
 				{text: 'Stadium'}
 			],
-			category: ''
+			category: '',
+			country: ''
 		}
-
-/*Add "Music Hall", "Restaurant Venue", and "Event Venue" to venue categories. all categories are now "Amphitheater, Arena, Auditorium, Bar Venue, Casino Venue, Church Venue, Club, Coffee House, Event Venue, Music Hall, Restaurant Venue, Outdoor Festival, Stadium Venue"*/
-
 	},
 	methods: {
 		saveVenue: function(){
@@ -86,15 +85,21 @@ export default {
 				location: this.location,
 				slug: this.slug,
 				category: this.category,
+				country: this.country,
 				_token: this.token
 			})
-			.then(function(response){
-				window.location.href='/home#/profile/add'
-			})
+			.then(response => 
+				window.location.href = '/home#/venue/' + this.slug
+			)
 			.catch(error => {
 				alert(error + error.message)
 			})
-		}
+		},
+	    getAddressData: function (addressData, placeResultData) {
+            this.location = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
+            this.country = addressData.country;
+
+	    }
 	},
 	computed: {
 		slug: function(){

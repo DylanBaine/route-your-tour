@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Band extends Model
 {
     protected $fillable = [
-        'name', 'slug', 'bio', 'number_of_routes_booked', 'soundcloud_url'
+        'name', 'slug', 'bio', 'number_of_routes_booked', 'soundcloud_url', 'location'
     ];
 
     public function users()

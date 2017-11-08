@@ -19,9 +19,9 @@ class BandController extends Controller
 
     	$band->name = request('name');
 
-    	$band->location = request('location');
-
     	$band->soundcloud_url = request('soundcloud_url');
+
+        $band->location = 'null';
 
         $band->slug = request('slug');
 

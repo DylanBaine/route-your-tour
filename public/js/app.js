@@ -274,7 +274,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(46)
+var listToStyles = __webpack_require__(50)
 
 /*
 type StyleObject = {
@@ -1377,13 +1377,13 @@ module.exports = Cancel;
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(44)
+  __webpack_require__(48)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(47)
+var __vue_script__ = __webpack_require__(51)
 /* template */
-var __vue_template__ = __webpack_require__(48)
+var __vue_template__ = __webpack_require__(52)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -1427,7 +1427,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(120);
+module.exports = __webpack_require__(129);
 
 
 /***/ }),
@@ -1436,12 +1436,17 @@ module.exports = __webpack_require__(120);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_router__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_router__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_google_autocomplete__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_google_autocomplete___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_google_autocomplete__);
 __webpack_require__(15);
+
+__webpack_require__(39);
+
 
 
 
@@ -1451,44 +1456,110 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuet
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
 
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_google_autocomplete___default.a);
+
 var routes = [
 
 /*---BASE ROUTES---*/
-{ path: '/', component: __webpack_require__(12) }, { path: '/settings', component: __webpack_require__(49) },
+{ path: '/', component: __webpack_require__(12) }, { path: '/settings', component: __webpack_require__(53) },
 
 /*---ADD PROFILES---*/
-{ path: '/profile/add', component: __webpack_require__(12) }, { path: '/profiles/add/band', component: __webpack_require__(54) }, { path: '/profiles/add/venue', component: __webpack_require__(59) }, { path: '/profiles/add/promoter', component: __webpack_require__(64) }, { path: '/profiles/add/bookingagent', component: __webpack_require__(69) },
+{ path: '/profile/add', component: __webpack_require__(12) }, { path: '/profiles/add/band', component: __webpack_require__(58) }, { path: '/profiles/add/venue', component: __webpack_require__(63) }, { path: '/profiles/add/promoter', component: __webpack_require__(68) }, { path: '/profiles/add/bookingagent', component: __webpack_require__(73) },
 
 /*---SEE PROFILES---*/
-{ path: '/band/:slug', component: __webpack_require__(74) }, { path: '/venue/:slug', component: __webpack_require__(79) }, { path: '/booking-agent/', component: __webpack_require__(84) }, { path: '/promoter/', component: __webpack_require__(89) },
+{ path: '/band/:slug', component: __webpack_require__(78) }, { path: '/venue/:slug', component: __webpack_require__(83) }, { path: '/booking-agent/', component: __webpack_require__(88) }, { path: '/promoter/', component: __webpack_require__(93) },
 
 /*---ADD A TOUR TO A BAND---*/
-{ path: '/band/:slug/tour', component: __webpack_require__(94) }];
+{ path: '/band/:slug/tour', component: __webpack_require__(136) }, { path: '/band/:bandSlug/:routeSlug', component: __webpack_require__(144) }];
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('auth-header', __webpack_require__(96));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('register-form', __webpack_require__(101));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('login-form', __webpack_require__(106));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('application', __webpack_require__(111));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('loader', __webpack_require__(116));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('auth-header', __webpack_require__(100));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('register-form', __webpack_require__(105));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('login-form', __webpack_require__(110));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('application', __webpack_require__(115));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('loader', __webpack_require__(120));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('get-venues', __webpack_require__(124));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-google-autocomplete', __webpack_require__(133));
 
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
-      routes: routes
+  routes: routes
 });
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-      el: '#app',
-      router: router,
-      data: {
-            menu: false,
-            loading: false,
-            errors: true
-      },
-      created: function created() {
-            window.onscroll = function (e) {
-                  document.getElementById('title').style.top = window.scrollY / 3 + 'px';
-                  document.getElementById('inner').style.backgroundColor = 'rgba(0,0,0,' + Math.max(window.scrollY / 700, .3) + ')';
-            };
+  el: '#app',
+  router: router,
+  data: {
+    menu: false,
+    loading: false,
+    errors: true,
+    dialog: false,
+    dialogTarget: {},
+    e1: '',
+    e2: '',
+    bands: [],
+    routes: [],
+    pickedBand: '',
+    pickedTour: '',
+    nextStep: false,
+    token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    geocoder: new google.maps.Geocoder()
+  },
+  created: function created() {
+    if (window.location.pathname == "/") {
+      window.onscroll = function (e) {
+        document.getElementById('title').style.top = window.scrollY / 3 + 'px';
+        document.getElementById('inner').style.backgroundColor = 'rgba(0,0,0,' + Math.max(window.scrollY / 500, .3) + ')';
+      };
+    }
+  },
+
+  methods: {
+    addThisToTour: function addThisToTour(address, venue) {
+      var _this = this;
+
+      this.dialog = true;
+      this.dialogTarget.address = address;
+      this.dialogTarget.venue = venue;
+
+      axios.get('/api/users-bands').then(function (response) {
+        return _this.bands = response.data;
+      });
+    },
+    pickTour: function pickTour() {
+      var _this2 = this;
+
+      this.nextStep = true;
+      axios.get('/api/' + this.pickedBand + '/routes').then(function (response) {
+        return _this2.routes = response.data;
+      });
+    },
+    reset: function reset() {
+      this.nextStep = false;
+    },
+    addLocation: function addLocation() {
+      axios.post('/api/' + this.pickedTour + '/add-location', {
+        _token: this.token,
+        route_id: this.pickedTour,
+        venue: this.dialogTarget.venue,
+        address: this.dialogTarget.address
+      }).then(function (response) {
+        return console.log(response);
+      });
+
+      this.dialog = false;
+    },
+    geocode: function geocode() {
+      this.geocoder.geocode({ 'address': this.dialogTarget.address }, function (results, status) {});
+    }
+  },
+  computed: {
+    noVenues: function noVenues() {
+      if (this.routes.length == 0) {
+        return true;
+      } else {
+        return false;
       }
+    }
+  }
 });
 
 /***/ }),
@@ -19736,6 +19807,12 @@ module.exports={166:{"value":"00A6","name":"BROKEN BAR","category":"So","class":
 
 /***/ }),
 /* 39 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30301,10 +30378,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(40).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(41).setImmediate))
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -30357,13 +30434,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(41);
+__webpack_require__(42);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -30556,7 +30633,7 @@ exports.clearImmediate = clearImmediate;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(7)))
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -46664,7 +46741,7 @@ function unbind(el, binding) {
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49294,13 +49371,343 @@ if (inBrowser && window.Vue) {
 
 
 /***/ }),
-/* 44 */
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(46)
+/* template */
+var __vue_template__ = __webpack_require__(47)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "node_modules\\vue-google-autocomplete\\src\\VueGoogleAutocomplete.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d91b0a66", Component.options)
+  } else {
+    hotAPI.reload("data-v-d91b0a66", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'VueGoogleAutocomplete',
+
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+
+    classname: String,
+
+    placeholder: {
+      type: String,
+      default: 'Start typing'
+    },
+
+    types: {
+      type: String,
+      default: 'address'
+    },
+
+    country: {
+      type: [String, Array],
+      default: null
+    },
+
+    enableGeolocation: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  data: function data() {
+    return {
+      /**
+       * The Autocomplete object.
+       *
+       * @type {Autocomplete}
+       * @link https://developers.google.com/maps/documentation/javascript/reference#Autocomplete
+       */
+      autocomplete: null,
+
+      /**
+       * Autocomplete input text
+       * @type {String}
+       */
+      autocompleteText: ''
+    };
+  },
+
+  watch: {
+    autocompleteText: function autocompleteText(newVal, oldVal) {
+      this.$emit('inputChange', { newVal: newVal, oldVal: oldVal });
+    }
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    var options = {};
+
+    if (this.types) {
+      options.types = [this.types];
+    }
+
+    if (this.country) {
+      options.componentRestrictions = {
+        country: this.country
+      };
+    }
+
+    this.autocomplete = new google.maps.places.Autocomplete(document.getElementById(this.id), options);
+
+    this.autocomplete.addListener('place_changed', function () {
+
+      var place = _this.autocomplete.getPlace();
+
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        _this.$emit('no-results-found', place);
+        return;
+      }
+
+      var addressComponents = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
+      var returnData = {};
+
+      if (place.address_components !== undefined) {
+        // Get each component of the address from the place details
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+
+          if (addressComponents[addressType]) {
+            var val = place.address_components[i][addressComponents[addressType]];
+            returnData[addressType] = val;
+          }
+        }
+
+        returnData['latitude'] = place.geometry.location.lat();
+        returnData['longitude'] = place.geometry.location.lng();
+
+        // return returnData object and PlaceResult object
+        _this.$emit('placechanged', returnData, place, _this.id);
+
+        // update autocompleteText then emit change event
+        _this.autocompleteText = document.getElementById(_this.id).value;
+        _this.onChange();
+      }
+    });
+  },
+
+  methods: {
+    /**
+     * When the input gets focus
+     */
+    onFocus: function onFocus() {
+      this.geolocate();
+      this.$emit('focus');
+    },
+
+
+    /**
+     * When the input loses focus
+     */
+    onBlur: function onBlur() {
+      this.$emit('blur');
+    },
+
+
+    /**
+     * When the input got changed
+     */
+    onChange: function onChange() {
+      this.$emit('change', this.autocompleteText);
+    },
+
+
+    /**
+     * When a key gets pressed
+     * @param  {Event} event A keypress event
+     */
+    onKeyPress: function onKeyPress(event) {
+      this.$emit('keypress', event);
+    },
+
+
+    /**
+     * Clear the input
+     */
+    clear: function clear() {
+      this.autocompleteText = '';
+    },
+
+
+    /**
+     * Focus the input
+     */
+    focus: function focus() {
+      this.$refs.autocomplete.focus();
+    },
+
+
+    /**
+     * Blur the input
+     */
+    blur: function blur() {
+      this.$refs.autocomplete.blur();
+    },
+
+
+    /**
+     * Update the value of the input
+     * @param  {String} value
+     */
+    update: function update(value) {
+      this.autocompleteText = value;
+    },
+
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    geolocate: function geolocate() {
+      var _this2 = this;
+
+      if (this.enableGeolocation) {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            _this2.autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("input", {
+    directives: [
+      {
+        name: "model",
+        rawName: "v-model",
+        value: _vm.autocompleteText,
+        expression: "autocompleteText"
+      }
+    ],
+    ref: "autocomplete",
+    class: _vm.classname,
+    attrs: { type: "text", id: _vm.id, placeholder: _vm.placeholder },
+    domProps: { value: _vm.autocompleteText },
+    on: {
+      focus: function($event) {
+        _vm.onFocus()
+      },
+      blur: function($event) {
+        _vm.onBlur()
+      },
+      change: _vm.onChange,
+      keypress: _vm.onKeyPress,
+      input: function($event) {
+        if ($event.target.composing) {
+          return
+        }
+        _vm.autocompleteText = $event.target.value
+      }
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d91b0a66", module.exports)
+  }
+}
+
+/***/ }),
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(49);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49320,7 +49727,7 @@ if(false) {
 }
 
 /***/ }),
-/* 45 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -49334,7 +49741,7 @@ exports.push([module.i, "\n.card[data-v-b5d41cf2]{\n\theight: 220px !important;\
 
 
 /***/ }),
-/* 46 */
+/* 50 */
 /***/ (function(module, exports) {
 
 /**
@@ -49367,11 +49774,12 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 47 */
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -49461,7 +49869,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
 		return {
-			loading: true,
 			items: [{
 				id: 1,
 				name: 'Band',
@@ -49511,10 +49918,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		axios.get('/api/users-bookingagent').then(function (response) {
 			return _this.bookingAgent = response.data;
 		});
-
-		this.$emit('notLoading');
-
-		console.log(this.url);
 	},
 
 	computed: {
@@ -49523,255 +49926,278 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		activeVenues: function activeVenues() {
 			return this.venues.length;
+		},
+		queryLength: function queryLength() {
+			return this.venues.length + this.bands.length;
+		},
+		loading: function loading() {
+			if (this.queryLength < 0) {
+				return true;
+			} else {
+				return false;
+			}
 		}
-	},
-	beforeCreated: function beforeCreated() {
-		this.$emit('loading');
 	}
+
 });
 
 /***/ }),
-/* 48 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-container", { attrs: { fluid: "", "grid-list-xl": "" } }, [
-    _c("header", { staticClass: "text-xs-center padded" }, [
-      _c("h4", [_vm._v("Welcome to your profiles page.")]),
+  return _c(
+    "v-container",
+    { attrs: { fluid: "", "grid-list-xl": "" } },
+    [
+      _vm.loading
+        ? _c("loader", [_vm._v("Finding all of your stuff")])
+        : _vm._e(),
       _vm._v(" "),
-      _c("h6", [
-        _vm._v(
-          "This is where all of your pages are listed. You can also add new pages from here."
-        )
+      _c("header", { staticClass: "text-xs-center padded" }, [
+        _c("h4", [_vm._v("Welcome to your profiles page.")]),
+        _vm._v(" "),
+        _c("h6", [
+          _vm._v(
+            "This is where all of your pages are listed. You can also add new pages from here."
+          )
+        ]),
+        _vm._v(" "),
+        _c("small", [
+          _vm._v(
+            " You have " +
+              _vm._s(_vm.activeBands) +
+              " bands, and " +
+              _vm._s(_vm.activeVenues) +
+              " venues  active right now."
+          )
+        ])
       ]),
       _vm._v(" "),
-      _c("small", [
-        _vm._v(
-          " You have " +
-            _vm._s(_vm.activeBands) +
-            " bands, and " +
-            _vm._s(_vm.activeVenues) +
-            " venues  active right now."
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c(
-      "section",
-      { staticClass: "padded", attrs: { id: "profile-options" } },
-      [
-        _c(
-          "v-layout",
-          { attrs: { row: "", wrap: "", id: "profiles" } },
-          _vm._l(_vm.items, function(item) {
-            return _c(
-              "v-flex",
-              { key: item.id, attrs: { md3: "", xs6: "" } },
-              [
-                _c(
-                  "v-card",
-                  {
-                    staticClass: "card text-xs-center flexed white--text",
-                    attrs: {
-                      "data-ripple": "true",
-                      to: "/profiles/add/" + item.name,
-                      color: item.color
+      _c("hr"),
+      _vm._v(" "),
+      !_vm.loading
+        ? _c(
+            "section",
+            { staticClass: "padded", attrs: { id: "profile-options" } },
+            [
+              _c(
+                "v-layout",
+                { attrs: { row: "", wrap: "", id: "profiles" } },
+                _vm._l(_vm.items, function(item) {
+                  return _c(
+                    "v-flex",
+                    { key: item.id, attrs: { md3: "", xs6: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "card text-xs-center flexed white--text",
+                          attrs: {
+                            "data-ripple": "true",
+                            to: "/profiles/add/" + item.name,
+                            color: item.color
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            [
+                              _c("v-icon", { attrs: { xl: "" } }, [
+                                _vm._v(_vm._s(item.icon))
+                              ]),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { "hidden-xs-only": "" } },
+                                [_vm._v(_vm._s(item.desc))]
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                })
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "padded", attrs: { id: "profiles" } },
+        [
+          _c(
+            "header",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.bands.length >= 1,
+                  expression: "bands.length >= 1"
+                }
+              ],
+              staticClass: "padded"
+            },
+            [_c("h3", [_vm._v("Band profiles you run.")])]
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "", id: "bands" } },
+            _vm._l(_vm.bands, function(band) {
+              return _c(
+                "v-flex",
+                { key: band.id, attrs: { md4: "", xs12: "" } },
+                [
+                  _c(
+                    "v-card",
+                    {
+                      staticClass: "card text-xs-center flexed white--text",
+                      attrs: { to: "/band/" + band.slug, color: "orange" }
+                    },
+                    [_vm._v("\n\t\t\t\t\t" + _vm._s(band.name) + "\n\t\t\t\t")]
+                  )
+                ],
+                1
+              )
+            })
+          ),
+          _vm._v(" "),
+          _c(
+            "header",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.venues.length > 0,
+                  expression: "venues.length > 0"
+                }
+              ],
+              staticClass: "padded"
+            },
+            [_c("h3", [_vm._v("Venue profiles you run.")])]
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "", id: "venues" } },
+            _vm._l(_vm.venues, function(venue) {
+              return _c(
+                "v-flex",
+                { key: venue.id, attrs: { md4: "", xs12: "" } },
+                [
+                  _c(
+                    "v-card",
+                    {
+                      staticClass: "card text-xs-center flexed white--text",
+                      attrs: { to: "/venue/" + venue.slug, color: "green" }
+                    },
+                    [_vm._v("\n\t\t\t\t\t" + _vm._s(venue.name) + "\n\t\t\t\t")]
+                  )
+                ],
+                1
+              )
+            })
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "", id: "promoter-booking-agent" } },
+            [
+              _c(
+                "v-flex",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.promoter.name,
+                      expression: "promoter.name"
                     }
-                  },
-                  [
-                    _c(
-                      "div",
-                      [
-                        _c("v-icon", { attrs: { xl: "" } }, [
-                          _vm._v(_vm._s(item.icon))
-                        ]),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("v-flex", { attrs: { "hidden-xs-only": "" } }, [
-                          _vm._v(_vm._s(item.desc))
-                        ])
-                      ],
-                      1
-                    )
-                  ]
-                )
-              ],
-              1
-            )
-          })
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c(
-      "section",
-      { staticClass: "padded", attrs: { id: "profiles" } },
-      [
-        _c(
-          "header",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.bands.length >= 1,
-                expression: "bands.length >= 1"
-              }
-            ],
-            staticClass: "padded"
-          },
-          [_c("h3", [_vm._v("Band profiles you run.")])]
-        ),
-        _vm._v(" "),
-        _c(
-          "v-layout",
-          { attrs: { row: "", wrap: "", id: "bands" } },
-          _vm._l(_vm.bands, function(band) {
-            return _c(
-              "v-flex",
-              { key: band.id, attrs: { md4: "", xs12: "" } },
-              [
-                _c(
-                  "v-card",
-                  {
-                    staticClass: "card text-xs-center flexed white--text",
-                    attrs: { to: "/band/" + band.slug, color: "orange" }
-                  },
-                  [_vm._v("\n\t\t\t\t\t" + _vm._s(band.name) + "\n\t\t\t\t")]
-                )
-              ],
-              1
-            )
-          })
-        ),
-        _vm._v(" "),
-        _c(
-          "header",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.venues.length > 0,
-                expression: "venues.length > 0"
-              }
-            ],
-            staticClass: "padded"
-          },
-          [_c("h3", [_vm._v("Venue profiles you run.")])]
-        ),
-        _vm._v(" "),
-        _c(
-          "v-layout",
-          { attrs: { row: "", wrap: "", id: "venues" } },
-          _vm._l(_vm.venues, function(venue) {
-            return _c(
-              "v-flex",
-              { key: venue.id, attrs: { md4: "", xs12: "" } },
-              [
-                _c(
-                  "v-card",
-                  {
-                    staticClass: "card text-xs-center flexed white--text",
-                    attrs: { to: "/venue/" + venue.slug, color: "green" }
-                  },
-                  [_vm._v("\n\t\t\t\t\t" + _vm._s(venue.name) + "\n\t\t\t\t")]
-                )
-              ],
-              1
-            )
-          })
-        ),
-        _vm._v(" "),
-        _c(
-          "v-layout",
-          { attrs: { row: "", wrap: "", id: "promoter-booking-agent" } },
-          [
-            _c(
-              "v-flex",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.promoter.name,
-                    expression: "promoter.name"
-                  }
+                  ],
+                  attrs: { md6: "" }
+                },
+                [
+                  _c("header", { staticClass: "padded" }, [
+                    _c("h3", [_vm._v("Your Promoter Profile.")])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    {
+                      staticClass: "card text-xs-center flexed white--text",
+                      attrs: { to: "/promoter/", color: "blue" }
+                    },
+                    [
+                      _vm._v(
+                        "\n\t\t\t\t\t" +
+                          _vm._s(_vm.promoter.name) +
+                          "\n\t\t\t\t"
+                      )
+                    ]
+                  )
                 ],
-                attrs: { md6: "" }
-              },
-              [
-                _c("header", { staticClass: "padded" }, [
-                  _c("h3", [_vm._v("Your Promoter Profile.")])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "v-card",
-                  {
-                    staticClass: "card text-xs-center flexed white--text",
-                    attrs: { to: "/promoter/", color: "blue" }
-                  },
-                  [
-                    _vm._v(
-                      "\n\t\t\t\t\t" + _vm._s(_vm.promoter.name) + "\n\t\t\t\t"
-                    )
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "v-flex",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.bookingAgent.name,
-                    expression: "bookingAgent.name"
-                  }
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.bookingAgent.name,
+                      expression: "bookingAgent.name"
+                    }
+                  ],
+                  attrs: { md6: "" }
+                },
+                [
+                  _c("header", { staticClass: "padded" }, [
+                    _c("h3", [_vm._v("Your Booking Agent Profile.")])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "v-card",
+                    {
+                      staticClass: "card text-xs-center flexed white--text",
+                      attrs: { to: "/booking-agent/", color: "deep-purple" }
+                    },
+                    [
+                      _vm._v(
+                        "\n\t\t\t\t\t" +
+                          _vm._s(_vm.bookingAgent.name) +
+                          "\n\t\t\t\t"
+                      )
+                    ]
+                  )
                 ],
-                attrs: { md6: "" }
-              },
-              [
-                _c("header", { staticClass: "padded" }, [
-                  _c("h3", [_vm._v("Your Booking Agent Profile.")])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "v-card",
-                  {
-                    staticClass: "card text-xs-center flexed white--text",
-                    attrs: { to: "/booking-agent/", color: "deep-purple" }
-                  },
-                  [
-                    _vm._v(
-                      "\n\t\t\t\t\t" +
-                        _vm._s(_vm.bookingAgent.name) +
-                        "\n\t\t\t\t"
-                    )
-                  ]
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
-  ])
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49784,19 +50210,19 @@ if (false) {
 }
 
 /***/ }),
-/* 49 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(50)
+  __webpack_require__(54)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(52)
+var __vue_script__ = __webpack_require__(56)
 /* template */
-var __vue_template__ = __webpack_require__(53)
+var __vue_template__ = __webpack_require__(57)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -49836,13 +50262,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 50 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(51);
+var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49862,7 +50288,7 @@ if(false) {
 }
 
 /***/ }),
-/* 51 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -49876,7 +50302,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 52 */
+/* 56 */
 /***/ (function(module, exports) {
 
 //
@@ -49885,7 +50311,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n", ""]);
 //
 
 /***/ }),
-/* 53 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49905,19 +50331,19 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(55)
+  __webpack_require__(59)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(57)
+var __vue_script__ = __webpack_require__(61)
 /* template */
-var __vue_template__ = __webpack_require__(58)
+var __vue_template__ = __webpack_require__(62)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -49957,13 +50383,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(56);
+var content = __webpack_require__(60);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49983,7 +50409,7 @@ if(false) {
 }
 
 /***/ }),
-/* 56 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -49997,16 +50423,11 @@ exports.push([module.i, "\n.slug label[data-v-2dbcab72]{\n\tfont-weight: bold;\n
 
 
 /***/ }),
-/* 57 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -50058,10 +50479,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			nameRules: [function (v) {
 				return !!v || 'Name is required.';
 			}],
-			location: '',
-			locationRules: [function (v) {
-				return !!v || 'An address is required.';
-			}],
 			soundcloud: '',
 			soundcloudRules: [function (v) {
 				return (/(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/.test(v) || 'Must enter a valid url. Make sure it contains "https://"'
@@ -50072,14 +50489,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	methods: {
 		saveBand: function saveBand() {
+			var _this = this;
+
 			axios.post('/api/add-band', {
 				name: this.name,
-				location: this.location,
 				soundcloud_url: this.soundcloud,
 				slug: this.slug,
 				_token: this.token
 			}).then(function (response) {
-				window.location.href = '/home#/profile/add';
+				return window.location.href = '/home#/band/' + _this.slug;
 			}).catch(function (error) {
 				alert(error + ': please fill in all of the fields.');
 			});
@@ -50089,11 +50507,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		slug: function slug() {
 			return Slug(this.name + '-') + Math.floor(Math.random() * 500);
 		}
+	},
+	mounted: function mounted() {
+
+		var input = document.getElementById('location');
+
+		var autocomplete = new google.maps.places.Autocomplete(input);
+		autocomplete.addListener('place_changed', function () {
+			infowindow.close();
+			marker.setVisible(false);
+			var place = autocomplete.getPlace();
+			if (!place.geometry) {
+				window.alert("No details available for input: '" + place.name + "'");
+				return;
+			}
+		});
 	}
 });
 
 /***/ }),
-/* 58 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50164,20 +50597,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("v-text-field", {
-                    attrs: {
-                      name: "location",
-                      label: "Where are you from?",
-                      rules: _vm.locationRules
-                    },
-                    model: {
-                      value: _vm.location,
-                      callback: function($$v) {
-                        _vm.location = $$v
-                      },
-                      expression: "location"
-                    }
-                  }),
+                  _c("br"),
                   _vm._v(" "),
                   _c("v-text-field", {
                     attrs: {
@@ -50240,19 +50660,19 @@ if (false) {
 }
 
 /***/ }),
-/* 59 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(60)
+  __webpack_require__(64)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(62)
+var __vue_script__ = __webpack_require__(66)
 /* template */
-var __vue_template__ = __webpack_require__(63)
+var __vue_template__ = __webpack_require__(67)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -50292,13 +50712,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 60 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(61);
+var content = __webpack_require__(65);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50318,7 +50738,7 @@ if(false) {
 }
 
 /***/ }),
-/* 61 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -50332,11 +50752,12 @@ exports.push([module.i, "\n.slug label[data-v-e04c8e66]{\n\tfont-weight: bold;\n
 
 
 /***/ }),
-/* 62 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -50397,26 +50818,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				return !!v || 'An address is required';
 			}],
 			items: [{ text: 'Amphitheater' }, { text: 'Arena' }, { text: 'Auditorium' }, { text: 'Bar' }, { text: 'Casino' }, { text: 'Church' }, { text: 'Club' }, { text: 'Coffee House' }, { text: 'Event Center' }, { text: 'Music Hall' }, { text: 'Outdoor Festival' }, { text: 'Restaurant' }, { text: 'Stadium' }],
-			category: ''
-
-			/*Add "Music Hall", "Restaurant Venue", and "Event Venue" to venue categories. all categories are now "Amphitheater, Arena, Auditorium, Bar Venue, Casino Venue, Church Venue, Club, Coffee House, Event Venue, Music Hall, Restaurant Venue, Outdoor Festival, Stadium Venue"*/
-
+			category: '',
+			country: ''
 		};
 	},
 
 	methods: {
 		saveVenue: function saveVenue() {
+			var _this = this;
+
 			axios.post('/api/add-venue', {
 				name: this.name,
 				location: this.location,
 				slug: this.slug,
 				category: this.category,
+				country: this.country,
 				_token: this.token
 			}).then(function (response) {
-				window.location.href = '/home#/profile/add';
+				return window.location.href = '/home#/venue/' + _this.slug;
 			}).catch(function (error) {
 				alert(error + error.message);
 			});
+		},
+		getAddressData: function getAddressData(addressData, placeResultData) {
+			this.location = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
+			this.country = addressData.country;
 		}
 	},
 	computed: {
@@ -50427,7 +50853,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 63 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50512,19 +50938,13 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("v-text-field", {
+                  _c("vue-google-autocomplete", {
                     attrs: {
-                      name: "location",
-                      label: "What is your venue's address?",
-                      rules: _vm.locationRules
+                      id: "location",
+                      classname: "location-input",
+                      placeholder: "Your venues address."
                     },
-                    model: {
-                      value: _vm.location,
-                      callback: function($$v) {
-                        _vm.location = $$v
-                      },
-                      expression: "location"
-                    }
+                    on: { placechanged: _vm.getAddressData }
                   })
                 ],
                 1
@@ -50571,19 +50991,19 @@ if (false) {
 }
 
 /***/ }),
-/* 64 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(65)
+  __webpack_require__(69)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(67)
+var __vue_script__ = __webpack_require__(71)
 /* template */
-var __vue_template__ = __webpack_require__(68)
+var __vue_template__ = __webpack_require__(72)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -50623,13 +51043,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 65 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(66);
+var content = __webpack_require__(70);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50649,7 +51069,7 @@ if(false) {
 }
 
 /***/ }),
-/* 66 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -50663,7 +51083,7 @@ exports.push([module.i, "\n.slug label[data-v-259db944]{\n\tfont-weight: bold;\n
 
 
 /***/ }),
-/* 67 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -50735,7 +51155,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				experience: this.experience,
 				_token: this.token
 			}).then(function (response) {
-				window.location.href = '/home#/profile/add';
+				window.location.href = '/home#/promoter';
 			}).catch(function (error) {
 				alert(error + ': please fill in all of the fields.');
 			});
@@ -50749,7 +51169,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 68 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -50883,19 +51303,19 @@ if (false) {
 }
 
 /***/ }),
-/* 69 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(70)
+  __webpack_require__(74)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(72)
+var __vue_script__ = __webpack_require__(76)
 /* template */
-var __vue_template__ = __webpack_require__(73)
+var __vue_template__ = __webpack_require__(77)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -50935,13 +51355,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 70 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(71);
+var content = __webpack_require__(75);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -50961,7 +51381,7 @@ if(false) {
 }
 
 /***/ }),
-/* 71 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -50975,7 +51395,7 @@ exports.push([module.i, "\n.slug label[data-v-7009d0be]{\n\tfont-weight: bold;\n
 
 
 /***/ }),
-/* 72 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -51047,7 +51467,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				experience: this.experience,
 				_token: this.token
 			}).then(function (response) {
-				window.location.href = '/home#/profile/add';
+				window.location.href = '/home#/booking-agent';
 			}).catch(function (error) {
 				alert(error + ': please fill in all of the fields.');
 			});
@@ -51061,7 +51481,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 73 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51195,19 +51615,19 @@ if (false) {
 }
 
 /***/ }),
-/* 74 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(75)
+  __webpack_require__(79)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(77)
+var __vue_script__ = __webpack_require__(81)
 /* template */
-var __vue_template__ = __webpack_require__(78)
+var __vue_template__ = __webpack_require__(82)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -51247,13 +51667,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 75 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(76);
+var content = __webpack_require__(80);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -51273,7 +51693,7 @@ if(false) {
 }
 
 /***/ }),
-/* 76 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -51287,11 +51707,33 @@ exports.push([module.i, "\ninput[data-v-22500205], textarea[data-v-22500205]{\r\
 
 
 /***/ }),
-/* 77 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -51428,23 +51870,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
 			errors: false,
-			tours: '',
+			routes: '',
 			image: ''
 		};
 	},
 	mounted: function mounted() {
 		var _this = this;
 
-		var scScripts = document.createElement('script');
-		scScripts.setAttribute('src', 'https://w.soundcloud.com/player/api.js');
-		scScripts.setAttribute('type', 'text/javascript');
-		document.head.appendChild(scScripts);
-
 		axios.get('/api/band/' + this.$route.params.slug).then(function (response) {
 			return _this.band = response.data;
 		});
 
-		console.log(this.band);
+		axios.get('api/' + this.$route.params.slug + '/routes').then(function (response) {
+			return _this.routes = response.data;
+		});
 	},
 
 	methods: {
@@ -51495,6 +51934,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				vm.image = e.target.result;
 			};
 			reader.readAsDataURL(file);
+		},
+
+		getAddressData: function getAddressData(addressData, placeResultData) {
+			this.band.location = addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ' + addressData.country;
 		}
 	},
 	computed: {
@@ -51511,7 +51954,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 78 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -51520,6 +51963,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
+    { attrs: { "grid-list-md": "" } },
     [
       _c(
         "v-alert",
@@ -51637,44 +52081,32 @@ var render = function() {
                     "v-layout",
                     { attrs: { row: "" } },
                     [
-                      _c("v-flex", { attrs: { md6: "" } }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "location" } },
-                          [
-                            _c("v-icon", [_vm._v("mode_edit")]),
-                            _vm._v(" Location")
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("h4", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.band.location,
-                                expression: "band.location"
-                              }
+                      _c(
+                        "v-flex",
+                        { attrs: { md6: "" } },
+                        [
+                          _c(
+                            "label",
+                            { attrs: { for: "location" } },
+                            [
+                              _c("v-icon", [_vm._v("mode_edit")]),
+                              _vm._v(" Location")
                             ],
-                            attrs: { id: "location", type: "text" },
-                            domProps: { value: _vm.band.location },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.band,
-                                  "location",
-                                  $event.target.value
-                                )
-                              }
-                            }
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("h4", [_vm._v(_vm._s(_vm.band.location))]),
+                          _vm._v(" "),
+                          _c("vue-google-autocomplete", {
+                            attrs: {
+                              id: "location",
+                              placeholder: "Change Location?"
+                            },
+                            on: { placechanged: _vm.getAddressData }
                           })
-                        ])
-                      ])
+                        ],
+                        1
+                      )
                     ],
                     1
                   ),
@@ -51739,44 +52171,33 @@ var render = function() {
                     "v-layout",
                     { attrs: { row: "" } },
                     [
-                      _c("v-flex", { attrs: { md6: "" } }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "location" } },
-                          [
-                            _c("v-icon", [_vm._v("mode_edit")]),
-                            _vm._v(" Location")
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("h4", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.band.location,
-                                expression: "band.location"
-                              }
+                      _c(
+                        "v-flex",
+                        { attrs: { md6: "" } },
+                        [
+                          _c(
+                            "label",
+                            { attrs: { for: "location" } },
+                            [
+                              _c("v-icon", [_vm._v("mode_edit")]),
+                              _vm._v(" Location")
                             ],
-                            attrs: { id: "location", type: "text" },
-                            domProps: { value: _vm.band.location },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.band,
-                                  "location",
-                                  $event.target.value
-                                )
-                              }
-                            }
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("h4", [_vm._v(_vm._s(_vm.band.location))]),
+                          _vm._v(" "),
+                          _c("vue-google-autocomplete", {
+                            attrs: {
+                              id: "location",
+                              classname: "place-input",
+                              placeholder: "Change Location?"
+                            },
+                            on: { placechanged: _vm.getAddressData }
                           })
-                        ])
-                      ])
+                        ],
+                        1
+                      )
                     ],
                     1
                   ),
@@ -51917,50 +52338,87 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c("section", { attrs: { id: "tours" } }, [
-            _c("header", [_c("h2", [_vm._v("Booked Tours")])]),
-            _vm._v(" "),
-            _c(
-              "aside",
-              { attrs: { row: "" } },
-              [
-                _c(
-                  "v-flex",
-                  { attrs: { xs6: "", md3: "" } },
-                  [
-                    _c(
-                      "v-card",
-                      {
-                        staticClass: "card white--text",
-                        attrs: {
-                          to: "/router",
-                          color: "primary",
-                          "data-ripple": "true"
-                        }
-                      },
+          _c(
+            "section",
+            { attrs: { id: "tours" } },
+            [
+              _c("header", [_c("h2", [_vm._v("Booked Tours")])]),
+              _vm._v(" "),
+              _c(
+                "v-layout",
+                { attrs: { row: "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs6: "", md3: "" } },
+                    [
+                      _c(
+                        "v-card",
+                        {
+                          staticClass: "card white--text",
+                          attrs: {
+                            to: "/band/" + _vm.band.slug + "/tour",
+                            color: "success",
+                            "data-ripple": "true"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "text-xs-center" },
+                            [
+                              _c("v-icon", { attrs: { color: "white" } }, [
+                                _vm._v("add")
+                              ]),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\tAdd a Route.\n\t\t\t\t\t\t"
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.routes, function(route) {
+                    return _c(
+                      "v-flex",
+                      { key: route.id, attrs: { xs6: "", md3: "" } },
                       [
                         _c(
-                          "div",
-                          { staticClass: "text-xs-center" },
+                          "v-card",
+                          {
+                            staticClass: "card white--text",
+                            attrs: {
+                              to: "/band/" + _vm.band.slug + "/" + route.slug,
+                              color: "primary",
+                              "data-ripple": "true"
+                            }
+                          },
                           [
-                            _c("v-icon", { attrs: { color: "white" } }, [
-                              _vm._v("add")
-                            ]),
-                            _vm._v(" "),
-                            _c("br"),
-                            _vm._v("\n\t\t\t\t\t\t\tAdd a Route.\n\t\t\t\t\t\t")
-                          ],
-                          1
+                            _c("div", { staticClass: "text-xs-center" }, [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t" +
+                                  _vm._s(route.title) +
+                                  "\n\t\t\t\t\t\t"
+                              )
+                            ])
+                          ]
                         )
-                      ]
+                      ],
+                      1
                     )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ]),
+                  })
+                ],
+                2
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "v-btn",
@@ -51999,19 +52457,19 @@ if (false) {
 }
 
 /***/ }),
-/* 79 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(80)
+  __webpack_require__(84)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(82)
+var __vue_script__ = __webpack_require__(86)
 /* template */
-var __vue_template__ = __webpack_require__(83)
+var __vue_template__ = __webpack_require__(87)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -52051,13 +52509,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 80 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(81);
+var content = __webpack_require__(85);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -52077,7 +52535,7 @@ if(false) {
 }
 
 /***/ }),
-/* 81 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -52091,7 +52549,7 @@ exports.push([module.i, "\ninput[data-v-2c2fc539], textarea[data-v-2c2fc539]{\r\
 
 
 /***/ }),
-/* 82 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -52308,7 +52766,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _data$methods$mounted);
 
 /***/ }),
-/* 83 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -52911,19 +53369,19 @@ if (false) {
 }
 
 /***/ }),
-/* 84 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(85)
+  __webpack_require__(89)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(87)
+var __vue_script__ = __webpack_require__(91)
 /* template */
-var __vue_template__ = __webpack_require__(88)
+var __vue_template__ = __webpack_require__(92)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -52963,13 +53421,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 85 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(86);
+var content = __webpack_require__(90);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -52989,7 +53447,7 @@ if(false) {
 }
 
 /***/ }),
-/* 86 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -53003,7 +53461,7 @@ exports.push([module.i, "\ninput[data-v-262e54ae], textarea[data-v-262e54ae]{\n\
 
 
 /***/ }),
-/* 87 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53111,7 +53569,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }));
 
 /***/ }),
-/* 88 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53303,19 +53761,19 @@ if (false) {
 }
 
 /***/ }),
-/* 89 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(90)
+  __webpack_require__(94)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(92)
+var __vue_script__ = __webpack_require__(96)
 /* template */
-var __vue_template__ = __webpack_require__(93)
+var __vue_template__ = __webpack_require__(97)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -53355,13 +53813,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 90 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(91);
+var content = __webpack_require__(95);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -53381,7 +53839,7 @@ if(false) {
 }
 
 /***/ }),
-/* 91 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -53395,7 +53853,7 @@ exports.push([module.i, "\ninput[data-v-71204a30], textarea[data-v-71204a30]{\n\
 
 
 /***/ }),
-/* 92 */
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53502,7 +53960,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }));
 
 /***/ }),
-/* 93 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53694,87 +54152,21 @@ if (false) {
 }
 
 /***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = null
-/* template */
-var __vue_template__ = __webpack_require__(95)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\pages\\RouteBuilder.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-01550e11", Component.options)
-  } else {
-    hotAPI.reload("data-v-01550e11", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Route Your Tour")])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-01550e11", module.exports)
-  }
-}
-
-/***/ }),
-/* 96 */
+/* 98 */,
+/* 99 */,
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(97)
+  __webpack_require__(101)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(99)
+var __vue_script__ = __webpack_require__(103)
 /* template */
-var __vue_template__ = __webpack_require__(100)
+var __vue_template__ = __webpack_require__(104)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -53814,13 +54206,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 97 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(98);
+var content = __webpack_require__(102);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -53840,7 +54232,7 @@ if(false) {
 }
 
 /***/ }),
-/* 98 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -53854,11 +54246,15 @@ exports.push([module.i, "\nheader[data-v-52fb60ca]{\r\n\tz-index: 9;\r\n\tpositi
 
 
 /***/ }),
-/* 99 */
+/* 103 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -53925,7 +54321,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 100 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53945,6 +54341,70 @@ var render = function() {
               { staticClass: "white--text" },
               [
                 _c("v-spacer"),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        staticClass: "white--text hidden-sm-and-up",
+                        attrs: { flat: "" }
+                      },
+                      [
+                        _c("small", [
+                          _vm._v("Swipe this to the left to see more pages.")
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        staticClass: "white--text",
+                        attrs: { href: "/", flat: "" }
+                      },
+                      [_vm._v("Front Page")]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        staticClass: "white--text",
+                        attrs: { href: "/bands", flat: "" }
+                      },
+                      [_vm._v("All Bands")]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        staticClass: "white--text",
+                        attrs: { href: "/venues", flat: "" }
+                      },
+                      [_vm._v("All Venues")]
+                    )
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c(
                   "li",
@@ -54076,19 +54536,19 @@ if (false) {
 }
 
 /***/ }),
-/* 101 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(102)
+  __webpack_require__(106)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(104)
+var __vue_script__ = __webpack_require__(108)
 /* template */
-var __vue_template__ = __webpack_require__(105)
+var __vue_template__ = __webpack_require__(109)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -54128,13 +54588,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 102 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(103);
+var content = __webpack_require__(107);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54154,7 +54614,7 @@ if(false) {
 }
 
 /***/ }),
-/* 103 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -54168,7 +54628,7 @@ exports.push([module.i, "\n.card[data-v-f3182788]{\r\n\tz-index: 999;\r\n\tbackg
 
 
 /***/ }),
-/* 104 */
+/* 108 */
 /***/ (function(module, exports) {
 
 //
@@ -54218,7 +54678,7 @@ exports.push([module.i, "\n.card[data-v-f3182788]{\r\n\tz-index: 999;\r\n\tbackg
 //
 
 /***/ }),
-/* 105 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54310,19 +54770,19 @@ if (false) {
 }
 
 /***/ }),
-/* 106 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(107)
+  __webpack_require__(111)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(109)
+var __vue_script__ = __webpack_require__(113)
 /* template */
-var __vue_template__ = __webpack_require__(110)
+var __vue_template__ = __webpack_require__(114)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -54362,13 +54822,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 107 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(108);
+var content = __webpack_require__(112);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54388,7 +54848,7 @@ if(false) {
 }
 
 /***/ }),
-/* 108 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -54402,7 +54862,7 @@ exports.push([module.i, "\n.card[data-v-ff2b7430]{\r\n\tz-index: 999;\r\n\tbackg
 
 
 /***/ }),
-/* 109 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54453,7 +54913,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 110 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54538,19 +54998,19 @@ if (false) {
 }
 
 /***/ }),
-/* 111 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(112)
+  __webpack_require__(116)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(114)
+var __vue_script__ = __webpack_require__(118)
 /* template */
-var __vue_template__ = __webpack_require__(115)
+var __vue_template__ = __webpack_require__(119)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -54590,13 +55050,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 112 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(113);
+var content = __webpack_require__(117);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54616,7 +55076,7 @@ if(false) {
 }
 
 /***/ }),
-/* 113 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -54630,7 +55090,7 @@ exports.push([module.i, "\n.list_tile{\r\n  background-color: grey;\r\n  cursor:
 
 
 /***/ }),
-/* 114 */
+/* 118 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54871,7 +55331,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 115 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54984,7 +55444,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-tile",
-                { attrs: { to: "/venues" } },
+                { attrs: { href: "/venues" } },
                 [
                   _c(
                     "v-list-tile-action",
@@ -55003,7 +55463,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-tile",
-                { attrs: { to: "/tours" } },
+                { attrs: { href: "/tours" } },
                 [
                   _c(
                     "v-list-tile-action",
@@ -55237,19 +55697,19 @@ if (false) {
 }
 
 /***/ }),
-/* 116 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(117)
+  __webpack_require__(121)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(119)
+var __vue_template__ = __webpack_require__(123)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -55289,13 +55749,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 117 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(118);
+var content = __webpack_require__(122);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -55315,7 +55775,7 @@ if(false) {
 }
 
 /***/ }),
-/* 118 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -55329,23 +55789,27 @@ exports.push([module.i, "\n.cont[data-v-2bbb2bf0]{\n\theight: 100vh;\n\twidth: 1
 
 
 /***/ }),
-/* 119 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "cont" },
-    [
-      _c("v-progress-circular", {
-        attrs: { indeterminate: "", size: 70, width: 7, color: "purple" }
-      })
-    ],
-    1
-  )
+  return _c("div", { staticClass: "cont" }, [
+    _c(
+      "div",
+      { staticClass: "text-xs-center" },
+      [
+        _c("v-progress-circular", {
+          attrs: { indeterminate: "", size: 70, width: 7, color: "purple" }
+        }),
+        _vm._v(" "),
+        _c("h5", [_vm._t("default")], 2)
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -55358,10 +55822,1183 @@ if (false) {
 }
 
 /***/ }),
-/* 120 */
+/* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(125)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(127)
+/* template */
+var __vue_template__ = __webpack_require__(128)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-25666a75"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\GetVenues.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-25666a75", Component.options)
+  } else {
+    hotAPI.reload("data-v-25666a75", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(126);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("24833e36", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25666a75\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./GetVenues.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-25666a75\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./GetVenues.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 126 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 127 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			venues: '',
+			resource_url: 'http://localhost:8000/api/all-venues'
+		};
+	},
+
+	beforeMount: function beforeMount() {},
+	mounted: function mounted() {
+		//this.getVenues();	
+		console.log(this.venueLength + ' ' + this.loading);
+	},
+
+	methods: {
+		getVenues: function getVenues() {
+			var _this = this;
+
+			axios.get('/api/all-venues').then(function (response) {
+				return _this.venues = response.data;
+			});
+		},
+		updateResource: function updateResource(data) {
+			this.venues = data;
+		}
+	},
+	computed: {
+		venueLength: function venueLength() {
+			return this.venues.length;
+		},
+		loading: function loading() {
+			if (this.venueLength > 0) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+});
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { fluid: "", "grid-list-xl": "" } },
+    [
+      _vm.loading
+        ? _c("loader", [
+            _vm._v("Loading over 10,000 venues. Patience is a virtue.")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("v-paginator", {
+        attrs: { resource_url: _vm.resource_url },
+        on: { update: _vm.getVenues }
+      }),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        _vm._l(_vm.venues, function(venue) {
+          return _c(
+            "v-flex",
+            { key: venue.id, attrs: { md4: "", xs12: "" } },
+            [
+              _c(
+                "v-card",
+                {
+                  staticClass: "card text-xs-center flexed white--text padded",
+                  attrs: {
+                    href: "venues/" + venue.slug,
+                    color: "blue",
+                    "data-ripple": "true"
+                  }
+                },
+                [
+                  _c("h3", [_vm._v(_vm._s(venue.name))]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("h4", [_vm._v(_vm._s(venue.address))])
+                ]
+              )
+            ],
+            1
+          )
+        })
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-25666a75", module.exports)
+  }
+}
+
+/***/ }),
+/* 129 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(134)
+/* template */
+var __vue_template__ = __webpack_require__(135)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\AutoFill.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e5dd51f2", Component.options)
+  } else {
+    hotAPI.reload("data-v-e5dd51f2", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 134 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'VueGoogleAutocomplete',
+
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+
+    classname: String,
+
+    placeholder: {
+      type: String,
+      default: 'Start typing'
+    },
+
+    types: {
+      type: String,
+      default: 'address'
+    },
+
+    country: {
+      type: [String, Array],
+      default: null
+    },
+
+    enableGeolocation: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  data: function data() {
+    return {
+      /**
+       * The Autocomplete object.
+       *
+       * @type {Autocomplete}
+       * @link https://developers.google.com/maps/documentation/javascript/reference#Autocomplete
+       */
+      autocomplete: null,
+
+      /**
+       * Autocomplete input text
+       * @type {String}
+       */
+      autocompleteText: ''
+    };
+  },
+
+  watch: {
+    autocompleteText: function autocompleteText(newVal, oldVal) {
+      this.$emit('inputChange', { newVal: newVal, oldVal: oldVal });
+    }
+  },
+
+  mounted: function mounted() {
+    var _this = this;
+
+    var options = {};
+
+    if (this.types) {
+      options.types = [this.types];
+    }
+
+    if (this.country) {
+      options.componentRestrictions = {
+        country: this.country
+      };
+    }
+
+    this.autocomplete = new google.maps.places.Autocomplete(document.getElementById(this.id), options);
+
+    this.autocomplete.addListener('place_changed', function () {
+
+      var place = _this.autocomplete.getPlace();
+
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        _this.$emit('no-results-found', place);
+        return;
+      }
+
+      var addressComponents = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
+      var returnData = {};
+
+      if (place.address_components !== undefined) {
+        // Get each component of the address from the place details
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+
+          if (addressComponents[addressType]) {
+            var val = place.address_components[i][addressComponents[addressType]];
+            returnData[addressType] = val;
+          }
+        }
+
+        returnData['latitude'] = place.geometry.location.lat();
+        returnData['longitude'] = place.geometry.location.lng();
+
+        // return returnData object and PlaceResult object
+        _this.$emit('placechanged', returnData, place, _this.id);
+
+        // update autocompleteText then emit change event
+        _this.autocompleteText = document.getElementById(_this.id).value;
+        _this.onChange();
+      }
+    });
+  },
+
+  methods: {
+    /**
+     * When the input gets focus
+     */
+    onFocus: function onFocus() {
+      this.geolocate();
+      this.$emit('focus');
+    },
+
+
+    /**
+     * When the input loses focus
+     */
+    onBlur: function onBlur() {
+      this.$emit('blur');
+    },
+
+
+    /**
+     * When the input got changed
+     */
+    onChange: function onChange() {
+      this.$emit('change', this.autocompleteText);
+    },
+
+
+    /**
+     * When a key gets pressed
+     * @param  {Event} event A keypress event
+     */
+    onKeyPress: function onKeyPress(event) {
+      this.$emit('keypress', event);
+    },
+
+
+    /**
+     * Clear the input
+     */
+    clear: function clear() {
+      this.autocompleteText = '';
+    },
+
+
+    /**
+     * Focus the input
+     */
+    focus: function focus() {
+      this.$refs.autocomplete.focus();
+    },
+
+
+    /**
+     * Blur the input
+     */
+    blur: function blur() {
+      this.$refs.autocomplete.blur();
+    },
+
+
+    /**
+     * Update the value of the input
+     * @param  {String} value
+     */
+    update: function update(value) {
+      this.autocompleteText = value;
+    },
+
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    geolocate: function geolocate() {
+      var _this2 = this;
+
+      if (this.enableGeolocation) {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            _this2.autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+    }
+  }
+});
+
+/***/ }),
+/* 135 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("input", {
+    directives: [
+      {
+        name: "model",
+        rawName: "v-model",
+        value: _vm.autocompleteText,
+        expression: "autocompleteText"
+      }
+    ],
+    ref: "autocomplete",
+    class: _vm.classname,
+    attrs: { type: "text", id: _vm.id, placeholder: _vm.placeholder },
+    domProps: { value: _vm.autocompleteText },
+    on: {
+      focus: function($event) {
+        _vm.onFocus()
+      },
+      blur: function($event) {
+        _vm.onBlur()
+      },
+      change: _vm.onChange,
+      keypress: _vm.onKeyPress,
+      input: function($event) {
+        if ($event.target.composing) {
+          return
+        }
+        _vm.autocompleteText = $event.target.value
+      }
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e5dd51f2", module.exports)
+  }
+}
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(141)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(139)
+/* template */
+var __vue_template__ = __webpack_require__(143)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-83aaf8b2"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\pages\\AddRoute.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83aaf8b2", Component.options)
+  } else {
+    hotAPI.reload("data-v-83aaf8b2", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 137 */,
+/* 138 */,
+/* 139 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			band: '',
+			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+			created: false,
+			title: ''
+		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		axios.get('/api/band/' + this.$route.params.slug).then(function (response) {
+			return _this.band = response.data;
+		});
+	},
+
+	methods: {
+		newRoute: function newRoute() {
+			var _this2 = this;
+
+			axios.post('api/band/add-route', {
+				title: this.title,
+				slug: this.slug,
+				band_id: this.band.id,
+				_token: this.token
+			}).then(function (response) {
+				return window.location.href = '/home#/band/' + _this2.band.slug + '/' + _this2.slug;
+			});
+		}
+
+	},
+	computed: {
+		slug: function slug() {
+			return Slug(this.title);
+		}
+	}
+});
+
+/***/ }),
+/* 140 */,
+/* 141 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(142);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("84cebd84", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-83aaf8b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddRoute.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-83aaf8b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddRoute.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 142 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.height[data-v-83aaf8b2]{\r\n\theight: 50vh;\n}\n.half-w[data-v-83aaf8b2]{\r\n\twidth: 500px;\r\n\tmargin: 0 auto;\r\n\tmax-width: 90vw;\n}\r\n\t\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 143 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-container", [
+    _c("header", { staticClass: "padded text-xs-center" }, [
+      _c("img", {
+        attrs: {
+          src: "Defaults/logo-black.png",
+          alt: "Route Your Tour",
+          width: "300px"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "flex-center height" }, [
+      _c(
+        "div",
+        { staticClass: "half-w text-xs-center" },
+        [
+          _c("v-text-field", {
+            attrs: { label: "Name this tour" },
+            model: {
+              value: _vm.title,
+              callback: function($$v) {
+                _vm.title = $$v
+              },
+              expression: "title"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "slug grey--text" }, [
+            _c("label", [_vm._v("Your url will be: "), _c("br")]),
+            _vm._v("www.routeyourtour.com/" + _vm._s(_vm.band.slug) + "/"),
+            _c("span", { staticClass: "yellow lighten-3" }, [
+              _vm._v(_vm._s(_vm.slug))
+            ]),
+            _c("input", {
+              attrs: { type: "hidden", name: "slug" },
+              domProps: { value: _vm.slug }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: { flat: "", color: "blue lighten-1" },
+              on: { click: _vm.newRoute }
+            },
+            [_vm._v("\n\t\t\t\tNext Step\n\t\t\t")]
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-83aaf8b2", module.exports)
+  }
+}
+
+/***/ }),
+/* 144 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(145)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(147)
+/* template */
+var __vue_template__ = __webpack_require__(148)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-98481272"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\pages\\AddLocation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-98481272", Component.options)
+  } else {
+    hotAPI.reload("data-v-98481272", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(146);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("4933bcd4", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98481272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddLocation.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98481272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddLocation.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.adder[data-v-98481272]{\r\n\theight: 100vh;\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\toverflow: auto;\r\n\tz-index: 1;\r\n\twidth: 25vw;\r\n\tborder-right: solid 1px black;\n}\n#map[data-v-98481272]{\r\n\tposition: absolute;\r\n\tright: 0;\r\n\ttop: 0;\r\n\twidth: 75vw;\r\n\theight: 100vh;\r\n\tz-index: 1;\n}\n#brand[data-v-98481272]{\r\n\tposition: fixed; \r\n\tbottom: 10px;\r\n\tright: 10px;\r\n\topacity:.7;\r\n\tz-index: 99;\n}\nhr[data-v-98481272]{\r\n\tborder: solid 1px white;\n}\n.location[data-v-98481272]:first-of-type{\r\n\tmargin-top: 30px;\r\n\tborder-top: solid 1px black;\n}\n.location[data-v-98481272]{\r\n\tborder-bottom: solid 1px black;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 147 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+			address: '',
+			venue: '',
+			route: '',
+			band: '',
+			search: '',
+			manuallyAdding: false,
+			locations: '',
+			map: ''
+		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug).then(function (response) {
+			return _this.route = response.data;
+		});
+
+		axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+			return _this.locations = response.data;
+		});
+
+		this.initMap();
+	},
+
+	methods: {
+		addLocation: function addLocation() {
+
+			axios.post('api/', {});
+		},
+		showManually: function showManually() {
+			if (!this.manuallyAdding) {
+				this.manuallyAdding = true;
+			} else {
+				this.manuallyAdding = false;
+			}
+		},
+
+		initMap: function initMap() {
+			this.map = new google.maps.Map(document.getElementById('map'), {
+				center: { lat: -34.397, lng: 150.644 },
+				zoom: 8
+			});
+		}
+
+	},
+	computed: {}
+	/*
+       function initMap() {
+ 
+ */
+
+});
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-container", [
+    _c("aside", { staticClass: "adder cyan lighten-2" }, [
+      _c(
+        "div",
+        {
+          staticClass: "inner text-xs-center black--text",
+          attrs: { color: "white" }
+        },
+        [
+          _c("header", { staticClass: "padded text-xs-center" }, [
+            _c("h4", [
+              _vm._v('Adding stops to "' + _vm._s(_vm.route.title) + '."')
+            ]),
+            _vm._v(" "),
+            _c("hr")
+          ]),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { href: "/venues" } }, [_vm._v("Search")]),
+          _vm._v(" "),
+          _c("v-btn", { on: { click: _vm.showManually } }, [
+            !_vm.manuallyAdding
+              ? _c("span", [_vm._v("Mannually Add")])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.manuallyAdding ? _c("span", [_vm._v("Cancel")]) : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm.manuallyAdding
+            ? _c(
+                "section",
+                { staticClass: "padded", attrs: { id: "manually-add" } },
+                [
+                  _c("header", { staticClass: "padded" }, [
+                    _c("h6", [_vm._v("Manually add stops")])
+                  ]),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: { label: "Address" },
+                    model: {
+                      value: _vm.address,
+                      callback: function($$v) {
+                        _vm.address = $$v
+                      },
+                      expression: "address"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: { label: "Venues Name" },
+                    model: {
+                      value: _vm.venue_name,
+                      callback: function($$v) {
+                        _vm.venue_name = $$v
+                      },
+                      expression: "venue_name"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: { label: "Tickets Link" },
+                    model: {
+                      value: _vm.ticketLink,
+                      callback: function($$v) {
+                        _vm.ticketLink = $$v
+                      },
+                      expression: "ticketLink"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { flat: "", color: "white darken-1" },
+                      on: { click: _vm.addLocation }
+                    },
+                    [_vm._v("\n\t\t\t\t\t\tAdd to tour.\n\t\t\t\t\t")]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "section",
+            { attrs: { id: "locations" } },
+            _vm._l(_vm.locations, function(location) {
+              return _c(
+                "article",
+                { key: location.id, staticClass: "location padded" },
+                [
+                  _c("header", [
+                    _c("h5", [
+                      _vm._v(
+                        "\n\t\t\t\t\t\t\t\t" +
+                          _vm._s(location.venue) +
+                          "\n\t\t\t\t\t\t\t"
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v(
+                      "\n\t\t\t\t\t\t\t" +
+                        _vm._s(location.address) +
+                        "\n\t\t\t\t\t\t"
+                    )
+                  ])
+                ]
+              )
+            })
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("main", { staticClass: "white", attrs: { id: "map" } }),
+    _vm._v(" "),
+    _c("img", {
+      attrs: {
+        id: "brand",
+        src: "/Defaults/logo-black.png",
+        alt: "RYT",
+        width: "100px"
+      }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-98481272", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

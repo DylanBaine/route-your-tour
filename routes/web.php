@@ -19,9 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/venues', 'VenueController@allVenuesPage');
+Route::get('venues/{slug}', 'VenueController@guestView');
+
+
 route::get('/user', function(){
 	return Auth::user();
 });
+
+
 
 Route::prefix('api')->group(function () {
 
@@ -40,6 +46,7 @@ Route::prefix('api')->group(function () {
 	Route::delete('/band/{id}/delete', 'BandController@delete');
 
 		/*----API VENUE CONTROLLERS----*/
+	Route::get('all-venues', 'VenueController@allVenues');
 	Route::get('/users-venues', 'VenueController@see');
 	Route::post('/add-venue', 'VenueController@store');
 	Route::get('/venue/{slug}', 'VenueController@thisVenue');
@@ -61,9 +68,12 @@ Route::prefix('api')->group(function () {
 	Route::delete('/booking-agent/{id}/delete', 'BookingAgentController@delete');
 
 		/*---API ROUTE CONTROLLERS---*/
-	Route::post('/{band_id}/add-route', 'RouteController@create');
-	Route::put('/{route_id}/edit', 'RouteController@edit');
+	Route::post('/band/add-route', 'RouteController@create');
+	Route::get('/band/{band_slug}/{route_slug}', 'RouteController@edit');
+	Route::put('/{id}/edit', 'RouteController@update');
 	Route::delete('/{route_id}/delete', 'RouteController@delete');
 	Route::post('/{route_id}/add-location', 'RouteController@addLocation');
+	Route::get('/{band_slug}/routes', 'RouteController@index');
+	Route::get('/{band_slug}/{route_slug}/locations', 'RouteController@locations');
 
 });

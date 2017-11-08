@@ -1,5 +1,6 @@
 <template>
 	<v-container fluid grid-list-xl>
+		<loader v-if="loading">Finding all of your stuff</loader>
 		<header class="text-xs-center padded">
 			<h4 >Welcome to your profiles page.</h4>
 			<h6>This is where all of your pages are listed. You can also add new pages from here.</h6>
@@ -8,7 +9,7 @@
 
 		<hr>
 
-		<section id="profile-options" class="padded">
+		<section v-if="!loading" id="profile-options" class="padded">
 
 			
 			<v-layout row wrap id="profiles">
@@ -87,7 +88,6 @@
 export default{
 	data(){
 		return{
-			loading: true,
 			items: [
 				{
 					id: 1,
@@ -138,10 +138,6 @@ export default{
 		axios.get('/api/users-bookingagent')
 			.then(response => this.bookingAgent = response.data);
 
-			this.$emit('notLoading')
-
-			console.log(this.url)
-
 	},
 	computed: {
 		activeBands: function(){
@@ -149,11 +145,19 @@ export default{
 		},
 		activeVenues: function(){
 			return this.venues.length;
-		}
+		},
+		queryLength: function(){
+			return this.venues.length + this.bands.length
+		},
+		loading: function(){	
+			if(this.queryLength < 0){
+				return true
+			}else{
+				return false
+			}
+		}			
 	},
-	beforeCreated(){
-		this.$emit('loading');
-	}
+
 }
 		
 </script>

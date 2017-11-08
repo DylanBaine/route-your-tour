@@ -11,6 +11,24 @@ use Image;
 
 class VenueController extends Controller
 {
+
+  public function allVenuesPage()
+  {
+    $venues = Venue::orderBy('created_at', 'desc')->paginate(12);
+    return view('venues', compact('venues'));
+  }
+
+  public function guestView($slug)
+  {
+    $page = Venue::where('slug', $slug)->first();
+    return view('profile', compact('page'));
+  }
+
+  public function allVenues()
+  {
+    return Venue::orderBy('created_at', 'desc')->get();
+  }
+
   public function store(Request $request)
   {
 
@@ -27,6 +45,10 @@ class VenueController extends Controller
     $venue->category = request('category');
 
     $venue->category_slug = str_slug(request('category'));
+
+    $venue->country = request('country');
+
+    $venue->country_slug = str_slug(request('country'));
 
     $venue->save();
 

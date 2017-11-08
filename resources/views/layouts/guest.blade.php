@@ -18,7 +18,8 @@
     <body>
         <div id="app" v-cloak>
             <v-app>
-                @yield('content')
+                <auth-header></auth-header>
+                <div style="margin-top: 48px;">@yield('content')</div>
             </v-app>
         </div>
         <footer class="layout row grey darken-4 padded text-xs-center white--text">
@@ -26,6 +27,7 @@
             <div class="flex md4">footer</div>
             <div class="flex md4">footer</div>
         </footer>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmUmk8fp4yEZW6tVkLBJJpBrCMwrk1tag&libraries=places"></script>        
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

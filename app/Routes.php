@@ -13,7 +13,7 @@ class Routes extends Model
     	return $this->belongsTo(Band::class);
     }
 
-    public funciton promoters()
+    public function promoters()
     {
     	return $this->belongsTo(Promoter::class);
     }

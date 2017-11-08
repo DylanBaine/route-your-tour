@@ -19,7 +19,9 @@
     },
     "dependencies": {
         "slug": "^0.9.1",
+        "vue-google-autocomplete": "^1.0.13",
         "vue-router": "^3.0.1",
+        "vuejs-paginator": "^2.0.2",
         "vuetify": "^0.16.9"
     }
 }

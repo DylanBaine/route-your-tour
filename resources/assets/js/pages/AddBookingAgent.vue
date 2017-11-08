@@ -64,7 +64,7 @@ export default {
 				_token: this.token
 			})
 			.then(function(response){
-				window.location.href='/home#/profile/add'
+				window.location.href='/home#/booking-agent'
 			})
 			.catch(error => {
 				alert(error + ': please fill in all of the fields.')

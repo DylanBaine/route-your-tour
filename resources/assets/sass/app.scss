@@ -29,6 +29,9 @@
 html, body{
 	width: 100vw;
 }
+a{
+	text-decoration: none;
+}
 #app{
 	width: 100vw;
 }
@@ -38,6 +41,9 @@ html, body{
 .fade-enter-active, .fade-leave-active {
   transition: all .5s;
   position: absolute;
+}
+.toolbar__side-icon{
+	z-index: 2;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
@@ -89,6 +95,13 @@ html, body{
 .relative{
 	position: relative;
 }
+.absolute{
+	position: absolute;
+}
+.bottom-right{
+	bottom: 10px;
+	right: 10px;
+}
 .neg-top{
 	top: -30px;
 }
@@ -109,7 +122,36 @@ html, body{
 		bottom: 15px;
 	}
 }
+.pagination{
+	margin: 0 auto;
+	height: 55px;
+}
+.pagination > li{
+	margin:0;
+}
+.pagination > li a{
+	padding: 10px 20px;
+	text-decoration: none;
+	font-size: 20px;
+	transition: all .2s;
+}
+.pagination > li a:hover{
+	padding: 30px 20px;
+	font-size: 60px;
+	font-weight: bold;
+}
+input, textarea{
+	outline: none;
+}
 
+.location-input{
+    border-bottom: solid 2px #948e8e;
+    width: 100%;
+    padding: 7px 1px;
+    margin: 10px 0;
+    color: #948e8e;
+    cursor: #948e8e;
+}
 /* === WELCOME PAGE === */
 #hero{
 	background-image: url('/Defaults/map-bg.jpg');
@@ -129,6 +171,9 @@ html, body{
 	display: flex;
 	align-items: center;
 	transition: background-color 0s;
+}
+.inner{
+	width: 100%;
 }
 #title{
 	height: 100%;
@@ -152,4 +197,18 @@ html, body{
 	height: 100vh;
 	width: 100vw;
 	background-size: cover;
+}
+.register-page .card, .login-page .card{
+	width: 450px;
+}
+
+/* === PROFILE VIEW PAGE === */
+#page-hero{
+	background-color: lightgrey;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 50vh;
+	display: flex;
+	align-items: center;
 }

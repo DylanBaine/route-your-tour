@@ -21,6 +21,7 @@
             </v-app>
         </div>
 
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmUmk8fp4yEZW6tVkLBJJpBrCMwrk1tag&libraries=places"></script>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

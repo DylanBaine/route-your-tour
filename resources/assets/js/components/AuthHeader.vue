@@ -6,6 +6,10 @@
 
 			<v-tabs-bar class="white--text">
 				<v-spacer></v-spacer>
+				<li><v-btn flat class="white--text hidden-sm-and-up"><small>Swipe this to the left to see more pages.</small></v-btn></li>
+				<li><v-btn href="/" flat class="white--text">Front Page</v-btn></li>
+				<li><v-btn href="/bands" flat class="white--text">All Bands</v-btn></li>				
+				<li><v-btn href="/venues" flat class="white--text">All Venues</v-btn></li>
 				<li><v-btn v-show="!user" @click="showRegister" flat class="white--text">Register</v-btn></li>
 				<li><v-btn v-show="!user" @click="showLogin" flat class="white--text">Login</v-btn></li>			
 				<li><v-btn v-show="user" href="/home#" flat class="white--text">Go To Dashboard</v-btn></li>

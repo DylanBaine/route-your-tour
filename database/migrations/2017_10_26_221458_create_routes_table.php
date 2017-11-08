@@ -17,6 +17,7 @@ class CreateRoutesTable extends Migration
             $table->increments('id');
             $table->integer('band_id')->nullable()->unsigned();
             $table->string('title');
+            $table->string('slug');
             $table->timestamps();
         });
     }

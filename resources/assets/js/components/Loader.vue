@@ -1,6 +1,9 @@
 <template>
 	<div class="cont">
-		<v-progress-circular indeterminate v-bind:size="70" v-bind:width="7" color="purple"></v-progress-circular>		
+		<div class="text-xs-center">
+			<v-progress-circular indeterminate v-bind:size="70" v-bind:width="7" color="purple"></v-progress-circular>	
+			<h5><slot/></h5>
+		</div>	
 	</div>
 </template>
 

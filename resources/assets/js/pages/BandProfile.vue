@@ -1,5 +1,5 @@
 <template>
-	<v-container>
+	<v-container grid-list-md>
 
 		<v-alert v-show="edited" color="success">
 			<div>Successfully edited.</div>
@@ -24,7 +24,13 @@
 			<v-layout row>
 				<v-flex md6>
 					<label for="location"><v-icon>mode_edit</v-icon> Location</label>
-					<h4><input id="location" v-model="band.location" type="text"></h4>
+					<h4>{{band.location}}</h4>
+						<vue-google-autocomplete
+							id="location"
+						    placeholder="Change Location?"
+						    @placechanged="getAddressData"
+						>
+						</vue-google-autocomplete>		
 				</v-flex>
 			</v-layout>
 			<label for="banner" id="banner-button" class="btn btn-raised white--text blue darken-3 btn--active">Change Banner Image</label>
@@ -37,7 +43,14 @@
 			<v-layout row>
 				<v-flex md6>
 					<label for="location"><v-icon>mode_edit</v-icon> Location</label>
-					<h4><input id="location" v-model="band.location" type="text"></h4>
+					<h4>{{band.location}}</h4>
+						<vue-google-autocomplete
+						    id="location"
+						    classname="place-input"
+						    placeholder="Change Location?"
+						    @placechanged="getAddressData"
+						></vue-google-autocomplete>						
+					
 				</v-flex>
 			</v-layout>
 			<label for="banner" id="banner-button" class="btn btn-raised white--text blue darken-3 btn--active">Change Banner Image</label>
@@ -98,9 +111,9 @@
 			<header>
 				<h2>Booked Tours</h2>
 			</header>
-			<aside row>
+			<v-layout row>
 				<v-flex xs6 md3>
-					<v-card to="/router" color="primary" class="card white--text" data-ripple="true">
+					<v-card :to=" '/band/' + band.slug + '/tour' " color="success" class="card white--text" data-ripple="true">
 						<div class="text-xs-center">
 							<v-icon color="white">add</v-icon>
 							<br>
@@ -108,7 +121,16 @@
 						</div>
 					</v-card>
 				</v-flex>
-			</aside>
+
+				<v-flex xs6 md3 v-for="route in routes" :key="route.id">
+					<v-card :to="'/band/' + band.slug + '/' +route.slug" color="primary" class="card white--text" data-ripple="true">
+						<div class="text-xs-center">
+							{{route.title}}
+						</div>
+					</v-card>
+				</v-flex>
+
+			</v-layout>
 		</section>
 
 		<v-btn color="primary" @click="edit" class="fixed-bottom right crazy-btn">
@@ -135,21 +157,16 @@ export default{
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
 			errors: false,
-			tours: '',
+			routes: '',
 			image: ''
 		}
 	},
 	mounted(){
-		let scScripts = document.createElement('script');
-			scScripts.setAttribute('src', 'https://w.soundcloud.com/player/api.js');
-			scScripts.setAttribute('type', 'text/javascript')
-			document.head.appendChild(scScripts);
-
-
 		axios.get('/api/band/' + this.$route.params.slug)
-		.then(response => this.band = response.data);
+			.then(response => this.band = response.data);
 
-		console.log(this.band)
+		axios.get('api/' + this.$route.params.slug + '/routes')
+			.then(response => this.routes = response.data);
 
 	},
 	methods: {
@@ -201,7 +218,11 @@ export default{
 	        vm.image = e.target.result;
 	      };
 	      reader.readAsDataURL(file);
-	    }	
+	    },
+	    getAddressData: function (addressData, placeResultData) {
+            this.band.location = addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ' + addressData.country;
+
+	    }
 	},
 	computed: {
 		soundCloud: function(){
