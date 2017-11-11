@@ -54733,13 +54733,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				venue: name,
 				address: address,
 				slug: link
-			}).then(this.address = '', this.venue = '', this.manuallyAdding = false, document.getElementById('location_input').value = '', this.getLocations(), this.getRoute());
+			});
+			this.address = '';
+			this.venue = '';
+			this.manuallyAdding = false;
+			document.getElementById('location_input').value = '';
+			setTimeout(this.getLocations(), 100);
 		},
 		deleteLocation: function deleteLocation(location_id) {
 			axios.post('/api/' + location_id + '/delete-location', {
 				_token: this.token,
 				_method: 'delete'
-			}).then(this.getLocations(), this.getRoute());
+			});
+			setTimeout(this.getLocations(), 100);
 		},
 		getAddressData: function getAddressData(addressData, placeResultData) {
 			this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
@@ -54748,16 +54754,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.post('/api/' + location_id + '/confirm-location', {
 				_token: this.token,
 				_method: 'put'
-			}).then(this.getLocations(), this.getRoute());
+			});
+			setTimeout(this.getLocations(), 100);
 		}
 
 	},
 	computed: {
 		totalResults: function totalResults() {
 			return this.searchResults.length;
-		},
-		addeds: function addeds() {
-			return this.locations;
 		}
 	}
 });
@@ -55137,15 +55141,15 @@ var render = function() {
             _c(
               "section",
               { attrs: { id: "locations" } },
-              _vm._l(_vm.addeds, function(added) {
+              _vm._l(_vm.locations, function(location) {
                 return _c("article", { key: _vm.id, staticClass: "location" }, [
-                  !added.confirmed
+                  !location.confirmed
                     ? _c("div", { staticClass: "yellow darken-1 padded" }, [
                         _c("header", [
                           _c("h5", [
                             _vm._v(
                               "\n\t\t\t\t\t\t\t\t" +
-                                _vm._s(added.venue) +
+                                _vm._s(location.venue) +
                                 "\n\t\t\t\t\t\t\t"
                             )
                           ])
@@ -55154,7 +55158,7 @@ var render = function() {
                         _c("p", [
                           _vm._v(
                             "\n\t\t\t\t\t\t\t" +
-                              _vm._s(added.address) +
+                              _vm._s(location.address) +
                               "\n\t\t\t\t\t\t"
                           )
                         ]),
@@ -55173,11 +55177,11 @@ var render = function() {
                                 attrs: {
                                   fab: "",
                                   small: "",
-                                  title: "Delete this added."
+                                  title: "Delete this location."
                                 },
                                 on: {
                                   click: function($event) {
-                                    _vm.deleteLocation(added.id)
+                                    _vm.deleteLocation(location.id)
                                   }
                                 }
                               },
@@ -55192,11 +55196,11 @@ var render = function() {
                                 attrs: {
                                   fab: "",
                                   small: "",
-                                  title: "Confirm this added."
+                                  title: "Confirm this location."
                                 },
                                 on: {
                                   click: function($event) {
-                                    _vm.confirmLocation(added.id)
+                                    _vm.confirmLocation(location.id)
                                   }
                                 }
                               },
@@ -55204,7 +55208,7 @@ var render = function() {
                               1
                             ),
                             _vm._v(" "),
-                            added.slug
+                            location.slug
                               ? _c(
                                   "v-btn",
                                   {
@@ -55212,7 +55216,7 @@ var render = function() {
                                     attrs: {
                                       fab: "",
                                       small: "",
-                                      href: "venues/" + added.slug,
+                                      href: "venues/" + location.slug,
                                       target: "_blank",
                                       title: "Visit this venues RYT page."
                                     }
@@ -55227,13 +55231,13 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  added.confirmed
+                  location.confirmed
                     ? _c("div", { staticClass: "green lighten-1 padded" }, [
                         _c("header", [
                           _c("h5", [
                             _vm._v(
                               "\n\t\t\t\t\t\t\t\t" +
-                                _vm._s(added.venue) +
+                                _vm._s(location.venue) +
                                 "\n\t\t\t\t\t\t\t"
                             )
                           ])
@@ -55242,7 +55246,7 @@ var render = function() {
                         _c("p", [
                           _vm._v(
                             "\n\t\t\t\t\t\t\t" +
-                              _vm._s(added.address) +
+                              _vm._s(location.address) +
                               "\n\t\t\t\t\t\t"
                           )
                         ]),
@@ -55261,11 +55265,11 @@ var render = function() {
                                 attrs: {
                                   fab: "",
                                   small: "",
-                                  title: "Delete this added."
+                                  title: "Delete this location."
                                 },
                                 on: {
                                   click: function($event) {
-                                    _vm.deleteLocation(added.id)
+                                    _vm.deleteLocation(location.id)
                                   }
                                 }
                               },
@@ -55273,7 +55277,7 @@ var render = function() {
                               1
                             ),
                             _vm._v(" "),
-                            added.slug
+                            location.slug
                               ? _c(
                                   "v-btn",
                                   {
@@ -55281,7 +55285,7 @@ var render = function() {
                                     attrs: {
                                       fab: "",
                                       small: "",
-                                      href: "venues/" + added.slug,
+                                      href: "venues/" + location.slug,
                                       target: "_blank",
                                       title: "Visit this venues RYT page."
                                     }
