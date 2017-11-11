@@ -105,35 +105,35 @@
 
 				<section id="locations">
 					
-					<article class="location" v-for="location in locations" :key="id">
-						<div v-if="!location.confirmed" class="yellow darken-1 padded">							
+					<article class="location" v-for="added in addeds" :key="id">
+						<div v-if="!added.confirmed" class="yellow darken-1 padded">							
 							<header>
 								<h5>
-									{{location.venue}}
+									{{added.venue}}
 								</h5>
 							</header>
 							<p>
-								{{location.address}}
+								{{added.address}}
 							</p>
 							<div class="relative bottom right" style="top:-10px;">
-								<v-btn fab small class="red darken-1 white--text" @click="deleteLocation(location.id)" title="Delete this location."><v-icon>delete_forever</v-icon></v-btn>
-								<v-btn fab small class="green darken-1 white--text" @click="confirmLocation(location.id)" title="Confirm this location."><v-icon>thumb_up</v-icon></v-btn>
-								<v-btn v-if="location.slug" fab small class="blue darken-1 white--text" :href=" 'venues/' + location.slug " target="_blank" title="Visit this venues RYT page."><v-icon>link</v-icon></v-btn>
+								<v-btn fab small class="red darken-1 white--text" @click="deleteLocation(added.id)" title="Delete this added."><v-icon>delete_forever</v-icon></v-btn>
+								<v-btn fab small class="green darken-1 white--text" @click="confirmLocation(added.id)" title="Confirm this added."><v-icon>thumb_up</v-icon></v-btn>
+								<v-btn v-if="added.slug" fab small class="blue darken-1 white--text" :href=" 'venues/' + added.slug " target="_blank" title="Visit this venues RYT page."><v-icon>link</v-icon></v-btn>
 							</div>
 						</div>
 
-						<div v-if="location.confirmed" class="green lighten-1 padded">							
+						<div v-if="added.confirmed" class="green lighten-1 padded">							
 							<header>
 								<h5>
-									{{location.venue}}
+									{{added.venue}}
 								</h5>
 							</header>
 							<p>
-								{{location.address}}
+								{{added.address}}
 							</p>
 							<div class="relative bottom right" style="top:-10px;">
-								<v-btn fab small class="red darken-1 white--text" @click="deleteLocation(location.id)" title="Delete this location."><v-icon>delete_forever</v-icon></v-btn>
-								<v-btn v-if="location.slug"  fab small class="blue darken-1 white--text" :href=" 'venues/' + location.slug " target="_blank" title="Visit this venues RYT page."><v-icon>link</v-icon></v-btn>
+								<v-btn fab small class="red darken-1 white--text" @click="deleteLocation(added.id)" title="Delete this added."><v-icon>delete_forever</v-icon></v-btn>
+								<v-btn v-if="added.slug"  fab small class="blue darken-1 white--text" :href=" 'venues/' + added.slug " target="_blank" title="Visit this venues RYT page."><v-icon>link</v-icon></v-btn>
 							</div>
 						</div>
 
@@ -276,6 +276,9 @@ export default{
 	computed: {
 		totalResults: function(){
 			return this.searchResults.length;
+		},
+		addeds: function(){
+			return this.locations;
 		}
 	}
 }

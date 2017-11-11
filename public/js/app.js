@@ -54755,6 +54755,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		totalResults: function totalResults() {
 			return this.searchResults.length;
+		},
+		addeds: function addeds() {
+			return this.locations;
 		}
 	}
 });
@@ -55134,15 +55137,15 @@ var render = function() {
             _c(
               "section",
               { attrs: { id: "locations" } },
-              _vm._l(_vm.locations, function(location) {
+              _vm._l(_vm.addeds, function(added) {
                 return _c("article", { key: _vm.id, staticClass: "location" }, [
-                  !location.confirmed
+                  !added.confirmed
                     ? _c("div", { staticClass: "yellow darken-1 padded" }, [
                         _c("header", [
                           _c("h5", [
                             _vm._v(
                               "\n\t\t\t\t\t\t\t\t" +
-                                _vm._s(location.venue) +
+                                _vm._s(added.venue) +
                                 "\n\t\t\t\t\t\t\t"
                             )
                           ])
@@ -55151,7 +55154,7 @@ var render = function() {
                         _c("p", [
                           _vm._v(
                             "\n\t\t\t\t\t\t\t" +
-                              _vm._s(location.address) +
+                              _vm._s(added.address) +
                               "\n\t\t\t\t\t\t"
                           )
                         ]),
@@ -55170,11 +55173,11 @@ var render = function() {
                                 attrs: {
                                   fab: "",
                                   small: "",
-                                  title: "Delete this location."
+                                  title: "Delete this added."
                                 },
                                 on: {
                                   click: function($event) {
-                                    _vm.deleteLocation(location.id)
+                                    _vm.deleteLocation(added.id)
                                   }
                                 }
                               },
@@ -55189,11 +55192,11 @@ var render = function() {
                                 attrs: {
                                   fab: "",
                                   small: "",
-                                  title: "Confirm this location."
+                                  title: "Confirm this added."
                                 },
                                 on: {
                                   click: function($event) {
-                                    _vm.confirmLocation(location.id)
+                                    _vm.confirmLocation(added.id)
                                   }
                                 }
                               },
@@ -55201,7 +55204,7 @@ var render = function() {
                               1
                             ),
                             _vm._v(" "),
-                            location.slug
+                            added.slug
                               ? _c(
                                   "v-btn",
                                   {
@@ -55209,7 +55212,7 @@ var render = function() {
                                     attrs: {
                                       fab: "",
                                       small: "",
-                                      href: "venues/" + location.slug,
+                                      href: "venues/" + added.slug,
                                       target: "_blank",
                                       title: "Visit this venues RYT page."
                                     }
@@ -55224,13 +55227,13 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  location.confirmed
+                  added.confirmed
                     ? _c("div", { staticClass: "green lighten-1 padded" }, [
                         _c("header", [
                           _c("h5", [
                             _vm._v(
                               "\n\t\t\t\t\t\t\t\t" +
-                                _vm._s(location.venue) +
+                                _vm._s(added.venue) +
                                 "\n\t\t\t\t\t\t\t"
                             )
                           ])
@@ -55239,7 +55242,7 @@ var render = function() {
                         _c("p", [
                           _vm._v(
                             "\n\t\t\t\t\t\t\t" +
-                              _vm._s(location.address) +
+                              _vm._s(added.address) +
                               "\n\t\t\t\t\t\t"
                           )
                         ]),
@@ -55258,11 +55261,11 @@ var render = function() {
                                 attrs: {
                                   fab: "",
                                   small: "",
-                                  title: "Delete this location."
+                                  title: "Delete this added."
                                 },
                                 on: {
                                   click: function($event) {
-                                    _vm.deleteLocation(location.id)
+                                    _vm.deleteLocation(added.id)
                                   }
                                 }
                               },
@@ -55270,7 +55273,7 @@ var render = function() {
                               1
                             ),
                             _vm._v(" "),
-                            location.slug
+                            added.slug
                               ? _c(
                                   "v-btn",
                                   {
@@ -55278,7 +55281,7 @@ var render = function() {
                                     attrs: {
                                       fab: "",
                                       small: "",
-                                      href: "venues/" + location.slug,
+                                      href: "venues/" + added.slug,
                                       target: "_blank",
                                       title: "Visit this venues RYT page."
                                     }
