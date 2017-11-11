@@ -35,8 +35,13 @@ const routes = [
 /*---ADD A TOUR TO A BAND---*/
 {path: '/band/:slug/tour', component: require('./pages/AddRoute.vue')},
 {path: '/band/:bandSlug/:routeSlug', component: require('./pages/AddLocation.vue')},
+//{path: '/:routeId/search', component: require('./pages/searchLocation.vue')},
 
 ];
+
+const router = new VueRouter({
+  routes
+});
 
 Vue.component('auth-header', require('./components/AuthHeader.vue'));
 Vue.component('register-form', require('./components/RegisterForm.vue'));
@@ -45,10 +50,6 @@ Vue.component('application', require('./components/Layout.vue'));
 Vue.component('loader', require('./components/Loader.vue'));
 Vue.component('get-venues', require('./components/GetVenues.vue'));
 Vue.component('vue-google-autocomplete', require('./components/AutoFill.vue'));
-
-const router = new VueRouter({
-  routes
-});
 
 
 const app = new Vue({

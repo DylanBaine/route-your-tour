@@ -109,4 +109,12 @@ class VenueController extends Controller
   {
     Venue::find($id)->delete();
   }
+
+  public function search($param)
+  {
+    return Venue::where('name', 'like', '%'. $param . '%')
+      ->orwhere('address', 'like',  '%'. $param . '%')
+      ->orwhere('category', 'like',  '%'. $param . '%')
+      ->get();
+  }
 }

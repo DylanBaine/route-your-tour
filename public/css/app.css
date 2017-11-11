@@ -16042,20 +16042,8 @@ a {
   padding: 0;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  -webkit-transition: all .5s;
-  transition: all .5s;
-  position: absolute;
-}
-
 .toolbar__side-icon {
   z-index: 2;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 
 .padded {
@@ -16099,6 +16087,10 @@ a {
   border: solid grey 1px;
   border-radius: 5px;
   padding: 10px;
+}
+
+.margin-auto {
+  margin: 0 auto;
 }
 
 .crazy-btn {
@@ -16259,6 +16251,33 @@ textarea {
   position: relative;
   left: 0;
   padding: 20px;
+}
+
+/* === TRANSITIONS === */
+
+.fade-enter-active,
+.fade-leave-active {
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  position: absolute;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.drop-enter-active,
+.drop-leave-active {
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  overflow: hidden;
+  height: 386px;
+}
+
+.drop-enter,
+.drop-leave-to {
+  height: 0;
 }
 
 /* === REGISTER AND LOGIN PAGE === */

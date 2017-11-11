@@ -47,6 +47,8 @@ class RouteController extends Controller
 
    		$location->venue = request('venue');
 
+   		$location->slug = request('slug');
+
    		$location->save();
 
    }
@@ -58,5 +60,21 @@ class RouteController extends Controller
     	$route = $band->routes()->where('slug', $route_slug)->first();
 
    		return $route->locations()->get();
+   	}
+
+   	public function deleteLocation($location_id)
+   	{
+   		$location = Locations::find($location_id);
+
+   		$location->delete();
+   	}
+
+   	public function confirmLocation($location_id, Request $request)
+   	{
+   		$location = Locations::find($location_id);
+
+   		$location->confirmed = true;
+
+   		$location->save();
    	}
 }

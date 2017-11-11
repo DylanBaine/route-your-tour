@@ -15,10 +15,12 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('confirmed')->default(0);
             $table->string('venue');
             $table->string('address')->nullable();
             $table->integer('routes_id')->unsigned();
             $table->string('ticket_link')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

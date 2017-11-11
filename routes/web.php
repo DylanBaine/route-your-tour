@@ -52,6 +52,7 @@ Route::prefix('api')->group(function () {
 	Route::get('/venue/{slug}', 'VenueController@thisVenue');
 	Route::put('/venue/{id}/edit', 'VenueController@edit');
 	Route::delete('/venue/{id}/delete', 'VenueController@delete');
+	Route::get('venues/search={param}', 'VenueController@search');
 
 		/*----API PROMOTER CONTROLLERS----*/
 	Route::get('/users-promoter', 'PromoterController@see');
@@ -75,5 +76,7 @@ Route::prefix('api')->group(function () {
 	Route::post('/{route_id}/add-location', 'RouteController@addLocation');
 	Route::get('/{band_slug}/routes', 'RouteController@index');
 	Route::get('/{band_slug}/{route_slug}/locations', 'RouteController@locations');
+	Route::delete('/{location_id}/delete-location', 'RouteController@deleteLocation');
+	Route::put('/{location_id}/confirm-location', 'RouteController@confirmLocation');
 
 });

@@ -1427,7 +1427,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(14);
-module.exports = __webpack_require__(129);
+module.exports = __webpack_require__(140);
 
 
 /***/ }),
@@ -1470,19 +1470,19 @@ var routes = [
 { path: '/band/:slug', component: __webpack_require__(78) }, { path: '/venue/:slug', component: __webpack_require__(83) }, { path: '/booking-agent/', component: __webpack_require__(88) }, { path: '/promoter/', component: __webpack_require__(93) },
 
 /*---ADD A TOUR TO A BAND---*/
-{ path: '/band/:slug/tour', component: __webpack_require__(136) }, { path: '/band/:bandSlug/:routeSlug', component: __webpack_require__(144) }];
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('auth-header', __webpack_require__(100));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('register-form', __webpack_require__(105));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('login-form', __webpack_require__(110));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('application', __webpack_require__(115));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('loader', __webpack_require__(120));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('get-venues', __webpack_require__(124));
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-google-autocomplete', __webpack_require__(133));
+{ path: '/band/:slug/tour', component: __webpack_require__(98) }, { path: '/band/:bandSlug/:routeSlug', component: __webpack_require__(103) }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
   routes: routes
 });
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('auth-header', __webpack_require__(108));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('register-form', __webpack_require__(113));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('login-form', __webpack_require__(118));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('application', __webpack_require__(123));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('loader', __webpack_require__(128));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('get-venues', __webpack_require__(132));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-google-autocomplete', __webpack_require__(137));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
@@ -54152,21 +54152,1205 @@ if (false) {
 }
 
 /***/ }),
-/* 98 */,
-/* 99 */,
-/* 100 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(101)
+  __webpack_require__(99)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(103)
+var __vue_script__ = __webpack_require__(101)
 /* template */
-var __vue_template__ = __webpack_require__(104)
+var __vue_template__ = __webpack_require__(102)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-83aaf8b2"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\pages\\AddRoute.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83aaf8b2", Component.options)
+  } else {
+    hotAPI.reload("data-v-83aaf8b2", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(100);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("84cebd84", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-83aaf8b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddRoute.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-83aaf8b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddRoute.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.height[data-v-83aaf8b2]{\r\n\theight: 50vh;\n}\n.half-w[data-v-83aaf8b2]{\r\n\twidth: 500px;\r\n\tmargin: 0 auto;\r\n\tmax-width: 90vw;\n}\r\n\t\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 101 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			band: '',
+			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+			created: false,
+			title: ''
+		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		axios.get('/api/band/' + this.$route.params.slug).then(function (response) {
+			return _this.band = response.data;
+		});
+	},
+
+	methods: {
+		newRoute: function newRoute() {
+			var _this2 = this;
+
+			axios.post('api/band/add-route', {
+				title: this.title,
+				slug: this.slug,
+				band_id: this.band.id,
+				_token: this.token
+			}).then(function (response) {
+				return window.location.href = '/home#/band/' + _this2.band.slug + '/' + _this2.slug;
+			});
+		}
+
+	},
+	computed: {
+		slug: function slug() {
+			return Slug(this.title);
+		}
+	}
+});
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("v-container", [
+    _c("header", { staticClass: "padded text-xs-center" }, [
+      _c("img", {
+        attrs: {
+          src: "Defaults/logo-black.png",
+          alt: "Route Your Tour",
+          width: "300px"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "flex-center height" }, [
+      _c(
+        "div",
+        { staticClass: "half-w text-xs-center" },
+        [
+          _c("v-text-field", {
+            attrs: { label: "Name this tour" },
+            model: {
+              value: _vm.title,
+              callback: function($$v) {
+                _vm.title = $$v
+              },
+              expression: "title"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "slug grey--text" }, [
+            _c("label", [_vm._v("Your url will be: "), _c("br")]),
+            _vm._v("www.routeyourtour.com/" + _vm._s(_vm.band.slug) + "/"),
+            _c("span", { staticClass: "yellow lighten-3" }, [
+              _vm._v(_vm._s(_vm.slug))
+            ]),
+            _c("input", {
+              attrs: { type: "hidden", name: "slug" },
+              domProps: { value: _vm.slug }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: { flat: "", color: "blue lighten-1" },
+              on: { click: _vm.newRoute }
+            },
+            [_vm._v("\n\t\t\t\tNext Step\n\t\t\t")]
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-83aaf8b2", module.exports)
+  }
+}
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(104)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(106)
+/* template */
+var __vue_template__ = __webpack_require__(107)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-98481272"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\pages\\AddLocation.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-98481272", Component.options)
+  } else {
+    hotAPI.reload("data-v-98481272", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(105);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("4933bcd4", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98481272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddLocation.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98481272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddLocation.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.swatch[data-v-98481272]{\r\n\twidth: 10px;\r\n\theight: 10px;\r\n\tdisplay: inline-block;\n}\n#location_input[data-v-98481272]{\r\n\twidth: 100%;\r\n\tborder-bottom: solid 2px lightgrey;\n}\n#exit[data-v-98481272]{\r\n\tposition: absolute;\r\n\ttop: 10px;\r\n\tleft: 10px;\n}\n.adder[data-v-98481272]{\r\n\theight: 100vh;\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\toverflow: auto;\r\n\tz-index: 1;\r\n\twidth: 25vw;\r\n\t-webkit-box-shadow: inset -4px -4px 32px rgba(0,0,0,.2);\r\n\t        box-shadow: inset -4px -4px 32px rgba(0,0,0,.2);\n}\n#map[data-v-98481272], #search-area[data-v-98481272]{\r\n\tposition: absolute;\r\n\tright: 0;\r\n\ttop: 0;\r\n\twidth: 75vw;\r\n\theight: 100vh;\r\n\tz-index: 1;\n}\n#search-area[data-v-98481272]{\r\n\tdisplay: -webkit-box;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: flex;\r\n\t-webkit-box-align: center;\r\n\t    -ms-flex-align: center;\r\n\t        align-items: center;\r\n\t-webkit-box-pack: center;\r\n\t    -ms-flex-pack: center;\r\n\t        justify-content: center;\r\n\tz-index: 2;\r\n\tbackground-color: rgba(255, 255, 255, .7);\n}\n.search-header[data-v-98481272]{\r\n\tmin-width: 400px;\r\n\tmax-width: 60%;\r\n\tmargin: 0 auto;\n}\n#search-results[data-v-98481272]{\r\n\toverflow-y: auto;\r\n\toverflow-x: hidden;\r\n\tmax-height: 65vh;\r\n\tmax-width: 99%;\r\n\tmargin: 0 auto;\n}\n#brand[data-v-98481272]{\r\n\tposition: fixed; \r\n\tbottom: 10px;\r\n\tright: 10px;\r\n\topacity:.7;\r\n\tz-index: 99;\n}\nhr[data-v-98481272]{\r\n\tborder: solid 1px white;\n}\n.location[data-v-98481272]:first-of-type{\r\n\tmargin-top: 30px;\r\n\tborder-top: solid 1px black;\n}\n.location[data-v-98481272]{\r\n\tborder-bottom: solid 1px black;\n}\n.card[data-v-98481272]{\r\n\theight: 220px !important;\n}\n.bottom-right[data-v-98481272]{\r\n\tbottom: 0px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 106 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+			address: '',
+			venue: '',
+			ticketLink: '',
+			route: '',
+			band: '',
+			manuallyAdding: false,
+			locations: '',
+			map: '',
+			searching: false,
+			searchResults: '',
+			searchParam: '',
+			modal: false,
+			id: ''
+		};
+	},
+	mounted: function mounted() {
+		var _this = this;
+
+		axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug).then(function (response) {
+			return _this.route = response.data;
+		});
+
+		axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+			return _this.locations = response.data;
+		});
+
+		this.initMap();
+	},
+
+	methods: {
+		addLocation: function addLocation() {
+
+			axios.post('api/', {});
+		},
+		showManually: function showManually() {
+			if (!this.manuallyAdding) {
+				this.manuallyAdding = true;
+			} else {
+				this.manuallyAdding = false;
+			}
+			this.searching = false;
+		},
+
+		initMap: function initMap() {
+			this.map = new google.maps.Map(document.getElementById('map'), {
+				center: { lat: -34.397, lng: 150.644 },
+				zoom: 8
+			});
+		},
+		openSearchBox: function openSearchBox() {
+			if (!this.searching) {
+				this.searching = true;
+			} else {
+				this.searching = false;
+			}
+			this.manuallyAdding = false;
+		},
+		search: function search() {
+			var _this2 = this;
+
+			axios.get('/api/venues/search=' + this.searchParam).then(function (response) {
+				return _this2.searchResults = response.data;
+			});
+		},
+		clearSearch: function clearSearch() {
+
+			this.searchParam = '';
+			this.searchResults = '';
+		},
+		addVenue: function addVenue(address, name, link) {
+			var _this3 = this;
+
+			axios.post('/api/' + this.route.id + '/add-location', {
+				_token: this.token,
+				route_id: this.route.id,
+				venue: name,
+				address: address,
+				slug: link
+			});
+			this.address = '';
+			this.venue = '';
+			this.manuallyAdding = false;
+			document.getElementById('location_input').value = '';
+
+			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+				return _this3.locations = response.data;
+			});
+		},
+		deleteLocation: function deleteLocation(location_id) {
+			var _this4 = this;
+
+			axios.post('/api/' + location_id + '/delete-location', {
+				_token: this.token,
+				_method: 'delete'
+			});
+
+			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+				return _this4.locations = response.data;
+			});
+		},
+		getAddressData: function getAddressData(addressData, placeResultData) {
+			this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
+		},
+		confirmLocation: function confirmLocation(location_id) {
+			var _this5 = this;
+
+			axios.post('/api/' + location_id + '/confirm-location', {
+				_token: this.token,
+				_method: 'put'
+			});
+
+			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+				return _this5.locations = response.data;
+			});
+		}
+
+	},
+	computed: {
+		totalResults: function totalResults() {
+			return this.searchResults.length;
+		}
+	}
+});
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "grid-list-md": "" } },
+    [
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.searching
+          ? _c("div", { attrs: { id: "search-area" } }, [
+              _c(
+                "div",
+                { attrs: { id: "exit" } },
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        title: "Exit the search box.",
+                        fab: "",
+                        flat: ""
+                      },
+                      on: { click: _vm.openSearchBox }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "inner padded" }, [
+                _c(
+                  "header",
+                  { staticClass: "search-header" },
+                  [
+                    _c(
+                      "v-layout",
+                      { attrs: { row: "", wrap: "" } },
+                      [
+                        _c(
+                          "v-flex",
+                          { attrs: { md9: "" } },
+                          [
+                            _c("v-text-field", {
+                              attrs: {
+                                label: "Search by city, genre, or venue name."
+                              },
+                              on: {
+                                keydown: function($event) {
+                                  if (
+                                    !("button" in $event) &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "enter",
+                                      13,
+                                      $event.key
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  _vm.search($event)
+                                }
+                              },
+                              model: {
+                                value: _vm.searchParam,
+                                callback: function($$v) {
+                                  _vm.searchParam = $$v
+                                },
+                                expression: "searchParam"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-flex",
+                          { attrs: { md1: "" } },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  color: "red darken-2",
+                                  title: "Clear Search",
+                                  small: "",
+                                  fab: "",
+                                  flat: ""
+                                },
+                                on: { click: _vm.clearSearch }
+                              },
+                              [_c("v-icon", [_vm._v("close")])],
+                              1
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-flex",
+                          { attrs: { md2: "" } },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "primary", raised: "" },
+                                on: { click: _vm.search }
+                              },
+                              [_vm._v("Search")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm.totalResults
+                  ? _c(
+                      "section",
+                      [
+                        _c("header", { staticClass: "padded" }, [
+                          _c("h4", [
+                            _vm._v(" " + _vm._s(_vm.totalResults) + " Results")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-layout",
+                          {
+                            attrs: { row: "", wrap: "", id: "search-results" }
+                          },
+                          _vm._l(_vm.searchResults, function(searchResult) {
+                            return _c(
+                              "v-flex",
+                              {
+                                key: searchResult.id,
+                                attrs: { xs6: "", md4: "", xl3: "" }
+                              },
+                              [
+                                _c(
+                                  "v-card",
+                                  {
+                                    staticClass:
+                                      "blue darken-2 padded text-xs-center card white--text flex-center text-xs-center relative",
+                                    attrs: { "data-ripple": "true" }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "text-xs-center margin-auto"
+                                      },
+                                      [
+                                        _c("h6", [
+                                          _vm._v(_vm._s(searchResult.name))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("br"),
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t\t" +
+                                            _vm._s(searchResult.address) +
+                                            "\n\t\t\t\t\t\t\t\t\t\t"
+                                        ),
+                                        _c("hr"),
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t\t" +
+                                            _vm._s(searchResult.category) +
+                                            "\n\t\t\t\t\t\t\t\t\t"
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "absolute bottom-right" },
+                                      [
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            staticClass:
+                                              "blue darken-4 white--text",
+                                            attrs: {
+                                              small: "",
+                                              href:
+                                                "/venues/" +
+                                                searchResult.slug +
+                                                "/",
+                                              target: "_blank"
+                                            }
+                                          },
+                                          [_vm._v(" see page ")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            staticClass:
+                                              "blue darken-4 white--text",
+                                            attrs: {
+                                              small: "",
+                                              fab: "",
+                                              title: "Add to a tour."
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.addVenue(
+                                                  searchResult.address,
+                                                  searchResult.name,
+                                                  searchResult.slug
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_c("v-icon", [_vm._v("add")])],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          })
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("aside", { staticClass: "adder grey lighten-4" }, [
+        _c(
+          "div",
+          {
+            staticClass: "inner text-xs-center black--text",
+            attrs: { color: "white" }
+          },
+          [
+            _c(
+              "header",
+              { staticClass: "padded text-xs-center" },
+              [
+                _c("h4", [
+                  _vm._v('Adding stops to "' + _vm._s(_vm.route.title) + '."')
+                ]),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "primary" },
+                    on: { click: _vm.openSearchBox }
+                  },
+                  [_vm._v("Search")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "primary" },
+                    on: { click: _vm.showManually }
+                  },
+                  [
+                    !_vm.manuallyAdding
+                      ? _c("span", [_vm._v("Mannually Add")])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.manuallyAdding
+                      ? _c("span", [_vm._v("Cancel")])
+                      : _vm._e()
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "padded" }, [
+                  _c("div", { staticClass: "swatch yellow darken-1" }),
+                  _vm._v(" "),
+                  _c("small", [_vm._v(" = Pending Confimation")]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "swatch green lighten-1" }),
+                  _vm._v(" "),
+                  _c("small", [_vm._v(" = Confirmed")])
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("transition", { attrs: { name: "drop" } }, [
+              _c(
+                "section",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.manuallyAdding,
+                      expression: "manuallyAdding"
+                    }
+                  ],
+                  staticClass: "padded",
+                  attrs: { id: "manually-add" }
+                },
+                [
+                  _c("header", { staticClass: "padded" }, [
+                    _c("h6", [_vm._v("Manually add stops")])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    { staticClass: "text-xs-left" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "blue--text",
+                          attrs: { for: "location_input" }
+                        },
+                        [_vm._v("Address")]
+                      ),
+                      _vm._v(" "),
+                      _c("vue-google-autocomplete", {
+                        attrs: { id: "location_input" },
+                        on: { placechanged: _vm.getAddressData }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-text-field", {
+                    attrs: { label: "Venues Name" },
+                    model: {
+                      value: _vm.venue,
+                      callback: function($$v) {
+                        _vm.venue = $$v
+                      },
+                      expression: "venue"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { flat: "", color: "primary darken-1" },
+                      on: {
+                        click: function($event) {
+                          _vm.addVenue(_vm.address, _vm.venue)
+                        }
+                      }
+                    },
+                    [_vm._v("\n\t\t\t\t\t\tAdd to tour.\n\t\t\t\t\t")]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "section",
+              { attrs: { id: "locations" } },
+              _vm._l(_vm.locations, function(location) {
+                return _c("article", { key: _vm.id, staticClass: "location" }, [
+                  !location.confirmed
+                    ? _c("div", { staticClass: "yellow darken-1 padded" }, [
+                        _c("header", [
+                          _c("h5", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t" +
+                                _vm._s(location.venue) +
+                                "\n\t\t\t\t\t\t\t"
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t" +
+                              _vm._s(location.address) +
+                              "\n\t\t\t\t\t\t"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "relative bottom right",
+                            staticStyle: { top: "-10px" }
+                          },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                staticClass: "red darken-1 white--text",
+                                attrs: {
+                                  fab: "",
+                                  small: "",
+                                  title: "Delete this location."
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteLocation(location.id)
+                                  }
+                                }
+                              },
+                              [_c("v-icon", [_vm._v("delete_forever")])],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                staticClass: "green darken-1 white--text",
+                                attrs: {
+                                  fab: "",
+                                  small: "",
+                                  title: "Confirm this location."
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.confirmLocation(location.id)
+                                  }
+                                }
+                              },
+                              [_c("v-icon", [_vm._v("thumb_up")])],
+                              1
+                            ),
+                            _vm._v(" "),
+                            location.slug
+                              ? _c(
+                                  "v-btn",
+                                  {
+                                    staticClass: "blue darken-1 white--text",
+                                    attrs: {
+                                      fab: "",
+                                      small: "",
+                                      href: "venues/" + location.slug,
+                                      target: "_blank",
+                                      title: "Visit this venues RYT page."
+                                    }
+                                  },
+                                  [_c("v-icon", [_vm._v("link")])],
+                                  1
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  location.confirmed
+                    ? _c("div", { staticClass: "green lighten-1 padded" }, [
+                        _c("header", [
+                          _c("h5", [
+                            _vm._v(
+                              "\n\t\t\t\t\t\t\t\t" +
+                                _vm._s(location.venue) +
+                                "\n\t\t\t\t\t\t\t"
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n\t\t\t\t\t\t\t" +
+                              _vm._s(location.address) +
+                              "\n\t\t\t\t\t\t"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "relative bottom right",
+                            staticStyle: { top: "-10px" }
+                          },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                staticClass: "red darken-1 white--text",
+                                attrs: {
+                                  fab: "",
+                                  small: "",
+                                  title: "Delete this location."
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteLocation(location.id)
+                                  }
+                                }
+                              },
+                              [_c("v-icon", [_vm._v("delete_forever")])],
+                              1
+                            ),
+                            _vm._v(" "),
+                            location.slug
+                              ? _c(
+                                  "v-btn",
+                                  {
+                                    staticClass: "blue darken-1 white--text",
+                                    attrs: {
+                                      fab: "",
+                                      small: "",
+                                      href: "venues/" + location.slug,
+                                      target: "_blank",
+                                      title: "Visit this venues RYT page."
+                                    }
+                                  },
+                                  [_c("v-icon", [_vm._v("link")])],
+                                  1
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e()
+                ])
+              })
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("main", { staticClass: "white", attrs: { id: "map" } }),
+      _vm._v(" "),
+      _c("img", {
+        attrs: {
+          id: "brand",
+          src: "/Defaults/logo-black.png",
+          alt: "RYT",
+          width: "100px"
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-98481272", module.exports)
+  }
+}
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(109)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(111)
+/* template */
+var __vue_template__ = __webpack_require__(112)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -54206,13 +55390,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 101 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(102);
+var content = __webpack_require__(110);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54232,7 +55416,7 @@ if(false) {
 }
 
 /***/ }),
-/* 102 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -54246,7 +55430,7 @@ exports.push([module.i, "\nheader[data-v-52fb60ca]{\r\n\tz-index: 9;\r\n\tpositi
 
 
 /***/ }),
-/* 103 */
+/* 111 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54321,7 +55505,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 104 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54536,19 +55720,19 @@ if (false) {
 }
 
 /***/ }),
-/* 105 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(106)
+  __webpack_require__(114)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(108)
+var __vue_script__ = __webpack_require__(116)
 /* template */
-var __vue_template__ = __webpack_require__(109)
+var __vue_template__ = __webpack_require__(117)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -54588,13 +55772,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 106 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(107);
+var content = __webpack_require__(115);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54614,7 +55798,7 @@ if(false) {
 }
 
 /***/ }),
-/* 107 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -54628,7 +55812,7 @@ exports.push([module.i, "\n.card[data-v-f3182788]{\r\n\tz-index: 999;\r\n\tbackg
 
 
 /***/ }),
-/* 108 */
+/* 116 */
 /***/ (function(module, exports) {
 
 //
@@ -54678,7 +55862,7 @@ exports.push([module.i, "\n.card[data-v-f3182788]{\r\n\tz-index: 999;\r\n\tbackg
 //
 
 /***/ }),
-/* 109 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54770,19 +55954,19 @@ if (false) {
 }
 
 /***/ }),
-/* 110 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(111)
+  __webpack_require__(119)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(113)
+var __vue_script__ = __webpack_require__(121)
 /* template */
-var __vue_template__ = __webpack_require__(114)
+var __vue_template__ = __webpack_require__(122)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -54822,13 +56006,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 111 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(112);
+var content = __webpack_require__(120);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54848,7 +56032,7 @@ if(false) {
 }
 
 /***/ }),
-/* 112 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -54862,7 +56046,7 @@ exports.push([module.i, "\n.card[data-v-ff2b7430]{\r\n\tz-index: 999;\r\n\tbackg
 
 
 /***/ }),
-/* 113 */
+/* 121 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54913,7 +56097,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 114 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54998,19 +56182,19 @@ if (false) {
 }
 
 /***/ }),
-/* 115 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(116)
+  __webpack_require__(124)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(118)
+var __vue_script__ = __webpack_require__(126)
 /* template */
-var __vue_template__ = __webpack_require__(119)
+var __vue_template__ = __webpack_require__(127)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -55050,13 +56234,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 116 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(117);
+var content = __webpack_require__(125);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -55076,7 +56260,7 @@ if(false) {
 }
 
 /***/ }),
-/* 117 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -55090,7 +56274,7 @@ exports.push([module.i, "\n.list_tile{\r\n  background-color: grey;\r\n  cursor:
 
 
 /***/ }),
-/* 118 */
+/* 126 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55331,7 +56515,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 119 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55697,19 +56881,19 @@ if (false) {
 }
 
 /***/ }),
-/* 120 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(121)
+  __webpack_require__(129)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(123)
+var __vue_template__ = __webpack_require__(131)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -55749,13 +56933,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 121 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(122);
+var content = __webpack_require__(130);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -55775,7 +56959,7 @@ if(false) {
 }
 
 /***/ }),
-/* 122 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -55789,7 +56973,7 @@ exports.push([module.i, "\n.cont[data-v-2bbb2bf0]{\n\theight: 100vh;\n\twidth: 1
 
 
 /***/ }),
-/* 123 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -55822,19 +57006,19 @@ if (false) {
 }
 
 /***/ }),
-/* 124 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(125)
+  __webpack_require__(133)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(127)
+var __vue_script__ = __webpack_require__(135)
 /* template */
-var __vue_template__ = __webpack_require__(128)
+var __vue_template__ = __webpack_require__(136)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -55874,13 +57058,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 125 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(126);
+var content = __webpack_require__(134);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -55900,7 +57084,7 @@ if(false) {
 }
 
 /***/ }),
-/* 126 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
@@ -55914,7 +57098,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 127 */
+/* 135 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -55982,7 +57166,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 128 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -56050,24 +57234,15 @@ if (false) {
 }
 
 /***/ }),
-/* 129 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(134)
+var __vue_script__ = __webpack_require__(138)
 /* template */
-var __vue_template__ = __webpack_require__(135)
+var __vue_template__ = __webpack_require__(139)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -56107,7 +57282,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 134 */
+/* 138 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56340,7 +57515,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 135 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -56389,616 +57564,10 @@ if (false) {
 }
 
 /***/ }),
-/* 136 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 140 */
+/***/ (function(module, exports) {
 
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(141)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(139)
-/* template */
-var __vue_template__ = __webpack_require__(143)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-83aaf8b2"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\pages\\AddRoute.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-83aaf8b2", Component.options)
-  } else {
-    hotAPI.reload("data-v-83aaf8b2", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 137 */,
-/* 138 */,
-/* 139 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			band: '',
-			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-			created: false,
-			title: ''
-		};
-	},
-	mounted: function mounted() {
-		var _this = this;
-
-		axios.get('/api/band/' + this.$route.params.slug).then(function (response) {
-			return _this.band = response.data;
-		});
-	},
-
-	methods: {
-		newRoute: function newRoute() {
-			var _this2 = this;
-
-			axios.post('api/band/add-route', {
-				title: this.title,
-				slug: this.slug,
-				band_id: this.band.id,
-				_token: this.token
-			}).then(function (response) {
-				return window.location.href = '/home#/band/' + _this2.band.slug + '/' + _this2.slug;
-			});
-		}
-
-	},
-	computed: {
-		slug: function slug() {
-			return Slug(this.title);
-		}
-	}
-});
-
-/***/ }),
-/* 140 */,
-/* 141 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(142);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("84cebd84", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-83aaf8b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddRoute.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-83aaf8b2\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddRoute.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 142 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.height[data-v-83aaf8b2]{\r\n\theight: 50vh;\n}\n.half-w[data-v-83aaf8b2]{\r\n\twidth: 500px;\r\n\tmargin: 0 auto;\r\n\tmax-width: 90vw;\n}\r\n\t\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 143 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("v-container", [
-    _c("header", { staticClass: "padded text-xs-center" }, [
-      _c("img", {
-        attrs: {
-          src: "Defaults/logo-black.png",
-          alt: "Route Your Tour",
-          width: "300px"
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("section", { staticClass: "flex-center height" }, [
-      _c(
-        "div",
-        { staticClass: "half-w text-xs-center" },
-        [
-          _c("v-text-field", {
-            attrs: { label: "Name this tour" },
-            model: {
-              value: _vm.title,
-              callback: function($$v) {
-                _vm.title = $$v
-              },
-              expression: "title"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "slug grey--text" }, [
-            _c("label", [_vm._v("Your url will be: "), _c("br")]),
-            _vm._v("www.routeyourtour.com/" + _vm._s(_vm.band.slug) + "/"),
-            _c("span", { staticClass: "yellow lighten-3" }, [
-              _vm._v(_vm._s(_vm.slug))
-            ]),
-            _c("input", {
-              attrs: { type: "hidden", name: "slug" },
-              domProps: { value: _vm.slug }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              attrs: { flat: "", color: "blue lighten-1" },
-              on: { click: _vm.newRoute }
-            },
-            [_vm._v("\n\t\t\t\tNext Step\n\t\t\t")]
-          )
-        ],
-        1
-      )
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-83aaf8b2", module.exports)
-  }
-}
-
-/***/ }),
-/* 144 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(145)
-}
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(147)
-/* template */
-var __vue_template__ = __webpack_require__(148)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-98481272"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\pages\\AddLocation.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-98481272", Component.options)
-  } else {
-    hotAPI.reload("data-v-98481272", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 145 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(146);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("4933bcd4", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98481272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddLocation.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-98481272\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./AddLocation.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 146 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.adder[data-v-98481272]{\r\n\theight: 100vh;\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\toverflow: auto;\r\n\tz-index: 1;\r\n\twidth: 25vw;\r\n\tborder-right: solid 1px black;\n}\n#map[data-v-98481272]{\r\n\tposition: absolute;\r\n\tright: 0;\r\n\ttop: 0;\r\n\twidth: 75vw;\r\n\theight: 100vh;\r\n\tz-index: 1;\n}\n#brand[data-v-98481272]{\r\n\tposition: fixed; \r\n\tbottom: 10px;\r\n\tright: 10px;\r\n\topacity:.7;\r\n\tz-index: 99;\n}\nhr[data-v-98481272]{\r\n\tborder: solid 1px white;\n}\n.location[data-v-98481272]:first-of-type{\r\n\tmargin-top: 30px;\r\n\tborder-top: solid 1px black;\n}\n.location[data-v-98481272]{\r\n\tborder-bottom: solid 1px black;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 147 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-			address: '',
-			venue: '',
-			route: '',
-			band: '',
-			search: '',
-			manuallyAdding: false,
-			locations: '',
-			map: ''
-		};
-	},
-	mounted: function mounted() {
-		var _this = this;
-
-		axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug).then(function (response) {
-			return _this.route = response.data;
-		});
-
-		axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
-			return _this.locations = response.data;
-		});
-
-		this.initMap();
-	},
-
-	methods: {
-		addLocation: function addLocation() {
-
-			axios.post('api/', {});
-		},
-		showManually: function showManually() {
-			if (!this.manuallyAdding) {
-				this.manuallyAdding = true;
-			} else {
-				this.manuallyAdding = false;
-			}
-		},
-
-		initMap: function initMap() {
-			this.map = new google.maps.Map(document.getElementById('map'), {
-				center: { lat: -34.397, lng: 150.644 },
-				zoom: 8
-			});
-		}
-
-	},
-	computed: {}
-	/*
-       function initMap() {
- 
- */
-
-});
-
-/***/ }),
-/* 148 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("v-container", [
-    _c("aside", { staticClass: "adder cyan lighten-2" }, [
-      _c(
-        "div",
-        {
-          staticClass: "inner text-xs-center black--text",
-          attrs: { color: "white" }
-        },
-        [
-          _c("header", { staticClass: "padded text-xs-center" }, [
-            _c("h4", [
-              _vm._v('Adding stops to "' + _vm._s(_vm.route.title) + '."')
-            ]),
-            _vm._v(" "),
-            _c("hr")
-          ]),
-          _vm._v(" "),
-          _c("v-btn", { attrs: { href: "/venues" } }, [_vm._v("Search")]),
-          _vm._v(" "),
-          _c("v-btn", { on: { click: _vm.showManually } }, [
-            !_vm.manuallyAdding
-              ? _c("span", [_vm._v("Mannually Add")])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.manuallyAdding ? _c("span", [_vm._v("Cancel")]) : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm.manuallyAdding
-            ? _c(
-                "section",
-                { staticClass: "padded", attrs: { id: "manually-add" } },
-                [
-                  _c("header", { staticClass: "padded" }, [
-                    _c("h6", [_vm._v("Manually add stops")])
-                  ]),
-                  _vm._v(" "),
-                  _c("v-text-field", {
-                    attrs: { label: "Address" },
-                    model: {
-                      value: _vm.address,
-                      callback: function($$v) {
-                        _vm.address = $$v
-                      },
-                      expression: "address"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("v-text-field", {
-                    attrs: { label: "Venues Name" },
-                    model: {
-                      value: _vm.venue_name,
-                      callback: function($$v) {
-                        _vm.venue_name = $$v
-                      },
-                      expression: "venue_name"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("v-text-field", {
-                    attrs: { label: "Tickets Link" },
-                    model: {
-                      value: _vm.ticketLink,
-                      callback: function($$v) {
-                        _vm.ticketLink = $$v
-                      },
-                      expression: "ticketLink"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { flat: "", color: "white darken-1" },
-                      on: { click: _vm.addLocation }
-                    },
-                    [_vm._v("\n\t\t\t\t\t\tAdd to tour.\n\t\t\t\t\t")]
-                  )
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c(
-            "section",
-            { attrs: { id: "locations" } },
-            _vm._l(_vm.locations, function(location) {
-              return _c(
-                "article",
-                { key: location.id, staticClass: "location padded" },
-                [
-                  _c("header", [
-                    _c("h5", [
-                      _vm._v(
-                        "\n\t\t\t\t\t\t\t\t" +
-                          _vm._s(location.venue) +
-                          "\n\t\t\t\t\t\t\t"
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "\n\t\t\t\t\t\t\t" +
-                        _vm._s(location.address) +
-                        "\n\t\t\t\t\t\t"
-                    )
-                  ])
-                ]
-              )
-            })
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("main", { staticClass: "white", attrs: { id: "map" } }),
-    _vm._v(" "),
-    _c("img", {
-      attrs: {
-        id: "brand",
-        src: "/Defaults/logo-black.png",
-        alt: "RYT",
-        width: "100px"
-      }
-    })
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-98481272", module.exports)
-  }
-}
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
