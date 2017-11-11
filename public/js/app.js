@@ -54670,14 +54670,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return _this.route = response.data;
 		});
 
-		axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
-			return _this.locations = response.data;
-		});
+		this.getLocations();
 
 		this.initMap();
 	},
 
 	methods: {
+		getLocations: function getLocations() {
+			var _this2 = this;
+
+			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+				return _this2.locations = response.data;
+			});
+		},
 		addLocation: function addLocation() {
 
 			axios.post('api/', {});
@@ -54706,10 +54711,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.manuallyAdding = false;
 		},
 		search: function search() {
-			var _this2 = this;
+			var _this3 = this;
 
 			axios.get('/api/venues/search=' + this.searchParam).then(function (response) {
-				return _this2.searchResults = response.data;
+				return _this3.searchResults = response.data;
 			});
 		},
 		clearSearch: function clearSearch() {
@@ -54718,40 +54723,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.searchResults = '';
 		},
 		addVenue: function addVenue(address, name, link) {
-			var _this3 = this;
-
 			axios.post('/api/' + this.route.id + '/add-location', {
 				_token: this.token,
 				route_id: this.route.id,
 				venue: name,
 				address: address,
 				slug: link
-			}).then(this.address = '', this.venue = '', this.manuallyAdding = false, document.getElementById('location_input').value = '', axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
-				return _this3.locations = response.data;
-			}));
+			}).then(this.address = '', this.venue = '', this.manuallyAdding = false, document.getElementById('location_input').value = '', this.getLocations());
 		},
 		deleteLocation: function deleteLocation(location_id) {
-			var _this4 = this;
-
 			axios.post('/api/' + location_id + '/delete-location', {
 				_token: this.token,
 				_method: 'delete'
-			}).then(axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
-				return _this4.locations = response.data;
-			}));
+			}).then(this.getLocations());
 		},
 		getAddressData: function getAddressData(addressData, placeResultData) {
 			this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
 		},
 		confirmLocation: function confirmLocation(location_id) {
-			var _this5 = this;
-
 			axios.post('/api/' + location_id + '/confirm-location', {
 				_token: this.token,
 				_method: 'put'
-			}).then(axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
-				return _this5.locations = response.data;
-			}));
+			}).then(this.getLocations());
 		}
 
 	},
