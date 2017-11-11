@@ -54664,11 +54664,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		};
 	},
 	mounted: function mounted() {
-		var _this = this;
 
-		axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug).then(function (response) {
-			return _this.route = response.data;
-		});
+		this.getRoute();
 
 		this.getLocations();
 
@@ -54676,6 +54673,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 
 	methods: {
+		getRoute: function getRoute() {
+			var _this = this;
+
+			axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug).then(function (response) {
+				return _this.route = response.data;
+			});
+		},
 		getLocations: function getLocations() {
 			var _this2 = this;
 
@@ -54729,13 +54733,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				venue: name,
 				address: address,
 				slug: link
-			}).then(this.address = '', this.venue = '', this.manuallyAdding = false, document.getElementById('location_input').value = '', this.getLocations());
+			}).then(this.address = '', this.venue = '', this.manuallyAdding = false, document.getElementById('location_input').value = '', this.getLocations(), this.getRoute());
 		},
 		deleteLocation: function deleteLocation(location_id) {
 			axios.post('/api/' + location_id + '/delete-location', {
 				_token: this.token,
 				_method: 'delete'
-			}).then(this.getLocations());
+			}).then(this.getLocations(), this.getRoute());
 		},
 		getAddressData: function getAddressData(addressData, placeResultData) {
 			this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
@@ -54744,7 +54748,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.post('/api/' + location_id + '/confirm-location', {
 				_token: this.token,
 				_method: 'put'
-			}).then(this.getLocations());
+			}).then(this.getLocations(), this.getRoute());
 		}
 
 	},

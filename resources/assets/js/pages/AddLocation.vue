@@ -173,14 +173,18 @@ export default{
 		}
 	},
 	mounted(){
-		axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug)
-			.then(response => this.route = response.data);
+
+		this.getRoute();
 
 		this.getLocations();
 
 		this.initMap();
 	},
 	methods: {
+		getRoute: function(){
+			axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug)
+				.then(response => this.route = response.data);
+		},
 		getLocations: function(){
 			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
 				.then(response => this.locations = response.data);
@@ -237,8 +241,8 @@ export default{
 				this.venue = '',
 				this.manuallyAdding = false,
 				document.getElementById('location_input').value = '',
-
-				this.getLocations()
+				this.getLocations(),
+				this.getRoute()
 			)
 
 		},
@@ -247,7 +251,10 @@ export default{
               _token: this.token,
               _method: 'delete'
 			})
-			.then(this.getLocations())
+			.then(
+				this.getLocations(),
+				this.getRoute()
+				)
 		},
 	    getAddressData: function (addressData, placeResultData) {
             this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
@@ -257,7 +264,10 @@ export default{
               _token: this.token,
               _method: 'put',
 			})
-			.then(this.getLocations());
+			.then(
+				this.getLocations(),
+				this.getRoute()
+				);
 
 	
         }
