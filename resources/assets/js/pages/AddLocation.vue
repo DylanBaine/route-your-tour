@@ -228,24 +228,27 @@ export default{
               venue: name,
               address: address,
               slug: link
-			});
-			this.address = '';
-			this.venue = '';
-			this.manuallyAdding = false;
-			document.getElementById('location_input').value = '';
+			})
+			.then(
+				this.address = '',
+				this.venue = '',
+				this.manuallyAdding = false,
+				document.getElementById('location_input').value = '',
 
-			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
-				.then(response => this.locations = response.data);
+				axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
+					.then(response => this.locations = response.data)
+			)
 
 		},
 		deleteLocation: function(location_id){
 			axios.post('/api/' + location_id + '/delete-location', {
               _token: this.token,
               _method: 'delete'
-			});	
-
-			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
-				.then(response => this.locations = response.data);					
+			})
+			.then(
+				axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
+					.then(response => this.locations = response.data)
+				)						
 		},
 	    getAddressData: function (addressData, placeResultData) {
             this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
@@ -254,10 +257,13 @@ export default{
 			axios.post('/api/' + location_id + '/confirm-location', {
               _token: this.token,
               _method: 'put',
-			});
+			})
+			.then(
+				axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
+					.then(response => this.locations = response.data)
+					);
 
-			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
-				.then(response => this.locations = response.data);	
+	
         }
 
 	},

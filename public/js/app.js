@@ -54726,15 +54726,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				venue: name,
 				address: address,
 				slug: link
-			});
-			this.address = '';
-			this.venue = '';
-			this.manuallyAdding = false;
-			document.getElementById('location_input').value = '';
-
-			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+			}).then(this.address = '', this.venue = '', this.manuallyAdding = false, document.getElementById('location_input').value = '', axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
 				return _this3.locations = response.data;
-			});
+			}));
 		},
 		deleteLocation: function deleteLocation(location_id) {
 			var _this4 = this;
@@ -54742,11 +54736,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.post('/api/' + location_id + '/delete-location', {
 				_token: this.token,
 				_method: 'delete'
-			});
-
-			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+			}).then(axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
 				return _this4.locations = response.data;
-			});
+			}));
 		},
 		getAddressData: function getAddressData(addressData, placeResultData) {
 			this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
@@ -54757,11 +54749,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			axios.post('/api/' + location_id + '/confirm-location', {
 				_token: this.token,
 				_method: 'put'
-			});
-
-			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
+			}).then(axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations').then(function (response) {
 				return _this5.locations = response.data;
-			});
+			}));
 		}
 
 	},
