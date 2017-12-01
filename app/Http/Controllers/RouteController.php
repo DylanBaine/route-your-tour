@@ -59,8 +59,18 @@ class RouteController extends Controller
 
     	$route = $band->routes()->where('slug', $route_slug)->first();
 
-   		return $route->locations()->get();
+   		return $route->locations()->orderBy('created_at', 'asc')->get();
    	}
+
+   public function locationsAddress($band_slug, $route_slug)
+   {
+      $band = Band::where('slug', $band_slug)->first();
+
+      $route = $band->routes()->where('slug', $route_slug)->first();
+
+      return $route->locations()->pluck('address');
+    }
+
 
    	public function deleteLocation($location_id)
    	{

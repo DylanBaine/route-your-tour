@@ -54489,6 +54489,19 @@ exports.push([module.i, "\n.swatch[data-v-98481272]{\r\n\twidth: 10px;\r\n\theig
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54646,7 +54659,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
-		return {
+		var _ref;
+
+		return _ref = {
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			address: '',
 			venue: '',
@@ -54660,16 +54675,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			searchResults: '',
 			searchParam: '',
 			modal: false,
-			id: ''
-		};
+			id: '',
+			mapAddresses: '',
+			start: '',
+			end: '',
+			optimizeWaypoints: true
+		}, _defineProperty(_ref, 'start', ''), _defineProperty(_ref, 'end', ''), _ref;
 	},
 	mounted: function mounted() {
 
 		this.getRoute();
 
-		this.getLocations();
+		this.$nextTick(function () {
 
-		this.initMap();
+			this.getLocations();
+		});
 	},
 
 	methods: {
@@ -54687,9 +54707,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				return _this2.locations = response.data;
 			});
 		},
-		addLocation: function addLocation() {
+		getAddress: function getAddress() {
+			var _this3 = this;
 
-			axios.post('api/', {});
+			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations-address').then(function (response) {
+				return _this3.mapAddresses = response.data;
+			});
 		},
 		showManually: function showManually() {
 			if (!this.manuallyAdding) {
@@ -54701,9 +54724,71 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 
 		initMap: function initMap() {
-			this.map = new google.maps.Map(document.getElementById('map'), {
-				center: { lat: -34.397, lng: 150.644 },
-				zoom: 8
+
+			var directionsService = new google.maps.DirectionsService();
+			var directionsDisplay = new google.maps.DirectionsRenderer();
+			var geocoder = new google.maps.Geocoder();
+
+			var v = this;
+
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 6,
+				center: { lat: 41.85, lng: -87.65 }
+			});
+			directionsDisplay.setMap(map);
+			if (this.locations.length > 0) this.calcRoute(directionsService, directionsDisplay);
+
+			for (var ii = 0; ii < this.locations.length; ii++) {
+
+				console.log(v.markerSpot[ii]);
+
+				geocoder.geocode({ 'address': v.markerSpot[ii].address }, function (results, status) {
+
+					var iconLocation = results[0].geometry.location;
+
+					var shape = {
+						coords: [1, 1, 1, 20, 18, 20, 18, 1],
+						type: 'poly'
+					};
+					var iconImage = {
+						url: "Defaults/marker.gif"
+					};
+
+					var marker = new google.maps.Marker({
+						position: iconLocation,
+						map: map,
+						icon: iconImage,
+						shape: shape,
+						zIndex: 9999
+					});
+				});
+			}
+		},
+		calcRoute: function calcRoute(directionsService, directionsDisplay) {
+
+			var waypts = [];
+			for (var i = 0; i < this.locations.length; i++) {
+				if (this.locations[i].confirmed) waypts.push({
+					location: this.locations[i].address,
+					stopover: true
+				});
+			}
+
+			console.log(waypts[0].location + ' ' + waypts[waypts.length - 1].location);
+
+			directionsService.route({
+				origin: waypts[0].location,
+				destination: waypts[0].location,
+				waypoints: waypts,
+				optimizeWaypoints: this.optimizeWaypoints,
+				travelMode: 'DRIVING'
+			}, function (response, status) {
+				if (status === 'OK') {
+					directionsDisplay.setDirections(response);
+					var route = response.routes[0];
+				} else {
+					window.alert('Directions request failed due to ' + status);
+				}
 			});
 		},
 		openSearchBox: function openSearchBox() {
@@ -54715,10 +54800,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.manuallyAdding = false;
 		},
 		search: function search() {
-			var _this3 = this;
+			var _this4 = this;
 
 			axios.get('/api/venues/search=' + this.searchParam).then(function (response) {
-				return _this3.searchResults = response.data;
+				return _this4.searchResults = response.data;
 			});
 		},
 		clearSearch: function clearSearch() {
@@ -54733,19 +54818,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				venue: name,
 				address: address,
 				slug: link
+			}).then(function (response) {
+				return console.log(response);
 			});
 			this.address = '';
 			this.venue = '';
 			this.manuallyAdding = false;
 			document.getElementById('location_input').value = '';
-			setTimeout(this.getLocations(), 100);
+
+			this.$nextTick(function () {
+
+				this.searching = false;
+				this.getLocations();
+			});
 		},
 		deleteLocation: function deleteLocation(location_id) {
 			axios.post('/api/' + location_id + '/delete-location', {
 				_token: this.token,
 				_method: 'delete'
 			});
-			setTimeout(this.getLocations(), 100);
+
+			this.$nextTick(function () {
+
+				this.getLocations();
+			});
 		},
 		getAddressData: function getAddressData(addressData, placeResultData) {
 			this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
@@ -54755,13 +54851,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				_token: this.token,
 				_method: 'put'
 			});
-			setTimeout(this.getLocations(), 100);
+
+			this.$nextTick(function () {
+
+				this.getLocations();
+			});
 		}
 
 	},
 	computed: {
 		totalResults: function totalResults() {
 			return this.searchResults.length;
+		},
+		markerSpot: function markerSpot() {
+			return this.locations;
+		}
+	},
+	watch: {
+		locations: function locations() {
+			this.initMap();
+		},
+		optimizeWaypoints: function optimizeWaypoints() {
+			this.initMap();
 		}
 	}
 });
@@ -54778,6 +54889,8 @@ var render = function() {
     "v-container",
     { attrs: { "grid-list-md": "" } },
     [
+      _vm.searching ? _c("loader", [_vm._v("searching")]) : _vm._e(),
+      _vm._v(" "),
       _c("transition", { attrs: { name: "fade" } }, [
         _vm.searching
           ? _c("div", { attrs: { id: "search-area" } }, [
@@ -54936,15 +55049,15 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("br"),
                                         _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t\t" +
+                                          "\n\t\t\t\t\t\t\t\t\t" +
                                             _vm._s(searchResult.address) +
-                                            "\n\t\t\t\t\t\t\t\t\t\t"
+                                            "\n\t\t\t\t\t\t\t\t\t"
                                         ),
                                         _c("hr"),
                                         _vm._v(
-                                          "\n\t\t\t\t\t\t\t\t\t\t" +
+                                          "\n\t\t\t\t\t\t\t\t\t" +
                                             _vm._s(searchResult.category) +
-                                            "\n\t\t\t\t\t\t\t\t\t"
+                                            "\n\t\t\t\t\t\t\t\t"
                                         )
                                       ]
                                     ),
@@ -55064,7 +55177,35 @@ var render = function() {
                   _c("div", { staticClass: "swatch green lighten-1" }),
                   _vm._v(" "),
                   _c("small", [_vm._v(" = Confirmed")])
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "padded" },
+                  [
+                    _c("v-checkbox", {
+                      attrs: {
+                        label: "Optimize locations?",
+                        light: "",
+                        color: "primary"
+                      },
+                      model: {
+                        value: _vm.optimizeWaypoints,
+                        callback: function($$v) {
+                          _vm.optimizeWaypoints = $$v
+                        },
+                        expression: "optimizeWaypoints"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("small", [
+                      _vm._v(
+                        "(If checked, the map will show locations in the most efficient order.)"
+                      )
+                    ])
+                  ],
+                  1
+                )
               ],
               1
             ),
@@ -55142,164 +55283,168 @@ var render = function() {
               "section",
               { attrs: { id: "locations" } },
               _vm._l(_vm.locations, function(location) {
-                return _c("article", { key: _vm.id, staticClass: "location" }, [
-                  !location.confirmed
-                    ? _c("div", { staticClass: "yellow darken-1 padded" }, [
-                        _c("header", [
-                          _c("h5", [
+                return _c(
+                  "article",
+                  { key: location.id, staticClass: "location" },
+                  [
+                    !location.confirmed
+                      ? _c("div", { staticClass: "yellow darken-1 padded" }, [
+                          _c("header", [
+                            _c("h5", [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t" +
+                                  _vm._s(location.venue) +
+                                  "\n\t\t\t\t\t\t\t"
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "address-cont" }, [
                             _vm._v(
-                              "\n\t\t\t\t\t\t\t\t" +
-                                _vm._s(location.venue) +
-                                "\n\t\t\t\t\t\t\t"
+                              "\n\t\t\t\t\t\t\t" +
+                                _vm._s(location.address) +
+                                "\n\t\t\t\t\t\t"
                             )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t" +
-                              _vm._s(location.address) +
-                              "\n\t\t\t\t\t\t"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "relative bottom right",
-                            staticStyle: { top: "-10px" }
-                          },
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                staticClass: "red darken-1 white--text",
-                                attrs: {
-                                  fab: "",
-                                  small: "",
-                                  title: "Delete this location."
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.deleteLocation(location.id)
-                                  }
-                                }
-                              },
-                              [_c("v-icon", [_vm._v("delete_forever")])],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "v-btn",
-                              {
-                                staticClass: "green darken-1 white--text",
-                                attrs: {
-                                  fab: "",
-                                  small: "",
-                                  title: "Confirm this location."
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.confirmLocation(location.id)
-                                  }
-                                }
-                              },
-                              [_c("v-icon", [_vm._v("thumb_up")])],
-                              1
-                            ),
-                            _vm._v(" "),
-                            location.slug
-                              ? _c(
-                                  "v-btn",
-                                  {
-                                    staticClass: "blue darken-1 white--text",
-                                    attrs: {
-                                      fab: "",
-                                      small: "",
-                                      href: "venues/" + location.slug,
-                                      target: "_blank",
-                                      title: "Visit this venues RYT page."
-                                    }
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "relative bottom right",
+                              staticStyle: { top: "-10px" }
+                            },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "red darken-1 white--text",
+                                  attrs: {
+                                    fab: "",
+                                    small: "",
+                                    title: "Delete this location."
                                   },
-                                  [_c("v-icon", [_vm._v("link")])],
-                                  1
-                                )
-                              : _vm._e()
-                          ],
-                          1
-                        )
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  location.confirmed
-                    ? _c("div", { staticClass: "green lighten-1 padded" }, [
-                        _c("header", [
-                          _c("h5", [
+                                  on: {
+                                    click: function($event) {
+                                      _vm.deleteLocation(location.id)
+                                    }
+                                  }
+                                },
+                                [_c("v-icon", [_vm._v("delete_forever")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "green darken-1 white--text",
+                                  attrs: {
+                                    fab: "",
+                                    small: "",
+                                    title: "Confirm this location."
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.confirmLocation(location.id)
+                                    }
+                                  }
+                                },
+                                [_c("v-icon", [_vm._v("thumb_up")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              location.slug
+                                ? _c(
+                                    "v-btn",
+                                    {
+                                      staticClass: "blue darken-1 white--text",
+                                      attrs: {
+                                        fab: "",
+                                        small: "",
+                                        href: "venues/" + location.slug,
+                                        target: "_blank",
+                                        title: "Visit this venues RYT page."
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("link")])],
+                                    1
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    location.confirmed
+                      ? _c("div", { staticClass: "green lighten-1 padded" }, [
+                          _c("header", { staticClass: "text-xs-left" }, [
+                            _c("h5", [
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t" +
+                                  _vm._s(location.venue) +
+                                  "\n\t\t\t\t\t\t\t"
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
                             _vm._v(
-                              "\n\t\t\t\t\t\t\t\t" +
-                                _vm._s(location.venue) +
-                                "\n\t\t\t\t\t\t\t"
+                              "\n\t\t\t\t\t\t\t" +
+                                _vm._s(location.address) +
+                                "\n\t\t\t\t\t\t"
                             )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("p", [
-                          _vm._v(
-                            "\n\t\t\t\t\t\t\t" +
-                              _vm._s(location.address) +
-                              "\n\t\t\t\t\t\t"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "relative bottom right",
-                            staticStyle: { top: "-10px" }
-                          },
-                          [
-                            _c(
-                              "v-btn",
-                              {
-                                staticClass: "red darken-1 white--text",
-                                attrs: {
-                                  fab: "",
-                                  small: "",
-                                  title: "Delete this location."
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.deleteLocation(location.id)
-                                  }
-                                }
-                              },
-                              [_c("v-icon", [_vm._v("delete_forever")])],
-                              1
-                            ),
-                            _vm._v(" "),
-                            location.slug
-                              ? _c(
-                                  "v-btn",
-                                  {
-                                    staticClass: "blue darken-1 white--text",
-                                    attrs: {
-                                      fab: "",
-                                      small: "",
-                                      href: "venues/" + location.slug,
-                                      target: "_blank",
-                                      title: "Visit this venues RYT page."
-                                    }
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "relative bottom right",
+                              staticStyle: { top: "-10px" }
+                            },
+                            [
+                              _c(
+                                "v-btn",
+                                {
+                                  staticClass: "red darken-1 white--text",
+                                  attrs: {
+                                    fab: "",
+                                    small: "",
+                                    title: "Delete this location."
                                   },
-                                  [_c("v-icon", [_vm._v("link")])],
-                                  1
-                                )
-                              : _vm._e()
-                          ],
-                          1
-                        )
-                      ])
-                    : _vm._e()
-                ])
+                                  on: {
+                                    click: function($event) {
+                                      _vm.deleteLocation(location.id)
+                                    }
+                                  }
+                                },
+                                [_c("v-icon", [_vm._v("delete_forever")])],
+                                1
+                              ),
+                              _vm._v(" "),
+                              location.slug
+                                ? _c(
+                                    "v-btn",
+                                    {
+                                      staticClass: "blue darken-1 white--text",
+                                      attrs: {
+                                        fab: "",
+                                        small: "",
+                                        href: "venues/" + location.slug,
+                                        target: "_blank",
+                                        title: "Visit this venues RYT page."
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("link")])],
+                                    1
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                )
               })
             )
           ],
@@ -55307,7 +55452,9 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("main", { staticClass: "white", attrs: { id: "map" } }),
+      _c("main", { staticClass: "white", attrs: { id: "map" } }, [
+        _c("div", { attrs: { id: "directions-panel" } })
+      ]),
       _vm._v(" "),
       _c("img", {
         attrs: {

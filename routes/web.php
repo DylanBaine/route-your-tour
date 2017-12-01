@@ -76,6 +76,7 @@ Route::prefix('api')->group(function () {
 	Route::post('/{route_id}/add-location', 'RouteController@addLocation');
 	Route::get('/{band_slug}/routes', 'RouteController@index');
 	Route::get('/{band_slug}/{route_slug}/locations', 'RouteController@locations');
+	Route::get('/{band_slug}/{route_slug}/locations-address', 'RouteController@locationsAddress');
 	Route::delete('/{location_id}/delete-location', 'RouteController@deleteLocation');
 	Route::put('/{location_id}/confirm-location', 'RouteController@confirmLocation');
 

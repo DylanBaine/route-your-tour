@@ -2,55 +2,59 @@
 
 	<v-container grid-list-md>
 
+		<loader v-if="searching">searching</loader>
+
 		<transition name="fade">
 			<div v-if="searching" id="search-area">
-					<div id="exit">
-						<v-btn @click="openSearchBox" title="Exit the search box." fab flat><v-icon>close</v-icon></v-btn>
-					</div>
-					<div class="inner padded">
-						<header class="search-header">
-							<v-layout row wrap>
-								<v-flex md9>
-									<v-text-field
-										@keydown.enter="search"
-										v-model="searchParam"
-										label="Search by city, genre, or venue name."
-									></v-text-field>
-								</v-flex>
-								<v-flex md1>
-									<v-btn color="red darken-2" title="Clear Search" small fab flat @click="clearSearch"><v-icon>close</v-icon></v-btn>
-								</v-flex>								
-								<v-flex md2>
-									<v-btn color="primary" raised @click="search">Search</v-btn>
-								</v-flex>
-							</v-layout>
-						</header>
-						<section v-if="totalResults">
+				<div id="exit">
+					<v-btn @click="openSearchBox" title="Exit the search box." fab flat><v-icon>close</v-icon></v-btn>
+				</div>
+				<div class="inner padded">
+					<header class="search-header">
+						<v-layout row wrap>
+							<v-flex md9>
+								<v-text-field
+								@keydown.enter="search"
+								v-model="searchParam"
+								label="Search by city, genre, or venue name."
+								></v-text-field>
+							</v-flex>
+							<v-flex md1>
+								<v-btn color="red darken-2" title="Clear Search" small fab flat @click="clearSearch"><v-icon>close</v-icon></v-btn>
+							</v-flex>                               
+							<v-flex md2>
+								<v-btn color="primary" raised @click="search">Search</v-btn>
+							</v-flex>
+						</v-layout>
+					</header>
 
-							<header class="padded">
-								<h4> {{totalResults}} Results</h4>
-							</header>
-							<v-layout row wrap id="search-results">
-								<v-flex xs6 md4 xl3 v-for="searchResult in searchResults" :key="searchResult.id">
-									<v-card class="blue darken-2 padded text-xs-center card white--text flex-center text-xs-center relative" data-ripple="true">
-										<div class="text-xs-center margin-auto">
-											<h6>{{searchResult.name}}</h6>
-											<br>
-											{{searchResult.address}}
-											<hr>
-											{{searchResult.category}}
-										</div>
-										<div class="absolute bottom-right">
-											<v-btn small :href=" '/venues/' + searchResult.slug + '/' " class="blue darken-4 white--text" target="_blank"> see page </v-btn>
-											<v-btn small @click='addVenue(searchResult.address, searchResult.name, searchResult.slug)' fab class="blue darken-4 white--text" title="Add to a tour.">
-												<v-icon>add</v-icon>
-											</v-btn>
-										</div>
-									</v-card>
-								</v-flex>	
-							</v-layout>					
-						</section>
-					</div>
+
+					<section v-if="totalResults">
+
+						<header class="padded">
+							<h4> {{totalResults}} Results</h4>
+						</header>
+						<v-layout row wrap id="search-results">
+							<v-flex xs6 md4 xl3 v-for="searchResult in searchResults" :key="searchResult.id">
+								<v-card class="blue darken-2 padded text-xs-center card white--text flex-center text-xs-center relative" data-ripple="true">
+									<div class="text-xs-center margin-auto">
+										<h6>{{searchResult.name}}</h6>
+										<br>
+										{{searchResult.address}}
+										<hr>
+										{{searchResult.category}}
+									</div>
+									<div class="absolute bottom-right">
+										<v-btn small :href=" '/venues/' + searchResult.slug + '/' " class="blue darken-4 white--text" target="_blank"> see page </v-btn>
+										<v-btn small @click='addVenue(searchResult.address, searchResult.name, searchResult.slug)' fab class="blue darken-4 white--text" title="Add to a tour.">
+											<v-icon>add</v-icon>
+										</v-btn>
+									</div>
+								</v-card>
+							</v-flex>   
+						</v-layout>                 
+					</section>
+				</div>
 			</div>
 		</transition>
 
@@ -74,7 +78,12 @@
 						<div class="swatch green lighten-1"></div> <small> = Confirmed</small>
 
 					</div>
-				</header>		
+
+					<div class="padded">
+						<v-checkbox label="Optimize locations?" v-model="optimizeWaypoints" light color="primary"></v-checkbox>
+						<small>(If checked, the map will show locations in the most efficient order.)</small>
+					</div>
+				</header>     
 
 				<transition name="drop">
 					<section v-show="manuallyAdding" id="manually-add" class="padded">
@@ -86,33 +95,33 @@
 						<p class="text-xs-left">
 							<label class="blue--text" for="location_input">Address</label>
 							<vue-google-autocomplete
-					    		@placechanged="getAddressData"
-								id="location_input"
+							@placechanged="getAddressData"
+							id="location_input"
 							></vue-google-autocomplete>
 						</p>
 
 						<v-text-field
-							v-model="venue"
-							label="Venues Name"
+						v-model="venue"
+						label="Venues Name"
 						></v-text-field>
 
 						<v-btn flat color="primary darken-1" @click="addVenue(address, venue)">
 							Add to tour.
 						</v-btn>
 
-					</section>	
+					</section>  
 				</transition>
 
 				<section id="locations">
 					
-					<article class="location" v-for="location in locations" :key="id">
-						<div v-if="!location.confirmed" class="yellow darken-1 padded">							
+					<article class="location" v-for="location in locations" :key="location.id">
+						<div v-if="!location.confirmed" class="yellow darken-1 padded">                         
 							<header>
 								<h5>
 									{{location.venue}}
 								</h5>
 							</header>
-							<p>
+							<p class="address-cont">
 								{{location.address}}
 							</p>
 							<div class="relative bottom right" style="top:-10px;">
@@ -122,8 +131,8 @@
 							</div>
 						</div>
 
-						<div v-if="location.confirmed" class="green lighten-1 padded">							
-							<header>
+						<div v-if="location.confirmed" class="green lighten-1 padded">                          
+							<header class="text-xs-left">
 								<h5>
 									{{location.venue}}
 								</h5>
@@ -141,10 +150,12 @@
 
 				</section>
 
-			</div>				
+			</div>              
 		</aside>
 
 		<main id="map" class="white">
+
+			<div id="directions-panel"></div>
 			
 		</main>
 		<img id="brand" src="/Defaults/logo-black.png" alt="RYT" width="100px">
@@ -169,35 +180,42 @@ export default{
 			searchResults: '',
 			searchParam: '',
 			modal: false,
-			id: ''
+			id: '',
+			mapAddresses: '',
+			start: '',
+			end: '',
+			optimizeWaypoints: true,
+			start: '',
+			end: ''
 		}
 	},
 	mounted(){
 
 		this.getRoute();
 
-		this.getLocations();
+		this.$nextTick(function(){
 
-		this.initMap();
+			this.getLocations();  
+
+		});
 	},
 	methods: {
 		getRoute: function(){
 			axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug)
-				.then(response => this.route = response.data);
+			.then(response => this.route = response.data);
 		},
 		getLocations: function(){
 			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
-				.then(response => this.locations = response.data);
+			.then(response => this.locations = response.data);
+
 		},
-		addLocation: function(){
-
-			axios.post('api/', {
-			});
-
+		getAddress: function(){
+			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations-address')
+			.then(response => this.mapAddresses = response.data);
 		},
 		showManually: function(){
 			if(!this.manuallyAdding){
-				this.manuallyAdding = true;				
+				this.manuallyAdding = true;             
 			}else{
 				this.manuallyAdding = false;
 			}
@@ -205,10 +223,82 @@ export default{
 		},
 
 		initMap: function(){
-			this.map = new google.maps.Map(document.getElementById('map'), {
-			center: {lat: -34.397, lng: 150.644},
-			zoom: 8
-			})
+
+			var directionsService = new google.maps.DirectionsService;
+			var directionsDisplay = new google.maps.DirectionsRenderer;
+			var geocoder = new google.maps.Geocoder();
+
+			var v = this;
+
+			var map = new google.maps.Map(document.getElementById('map'), {
+			  zoom: 6,
+			  center: {lat: 41.85, lng: -87.65}
+			});
+			directionsDisplay.setMap(map);
+			if(this.locations.length > 0)
+				this.calcRoute(directionsService, directionsDisplay);
+
+			for(var ii = 0; ii < this.locations.length; ii++){
+
+					console.log(v.markerSpot[ii]);
+
+
+				geocoder.geocode( { 'address': v.markerSpot[ii].address}, function(results, status) {
+
+					var iconLocation = results[0].geometry.location;
+
+					var shape = {
+					  coords: [1, 1, 1, 20, 18, 20, 18, 1],
+					  type: 'poly'
+					};
+					var iconImage = {
+						url: "Defaults/marker.gif"
+					};
+
+					var marker = new google.maps.Marker({
+						position: iconLocation,
+						map: map,
+						icon: iconImage,
+						shape: shape,
+						zIndex: 9999
+					})
+
+				});
+
+			}
+
+		},
+		calcRoute: function(directionsService, directionsDisplay){
+
+			var waypts = [];
+			for (var i = 0; i < this.locations.length; i++) {
+				if(this.locations[i].confirmed)
+					waypts.push({
+					  location: this.locations[i].address,
+					  stopover: true
+					});
+
+			}
+
+			console.log(waypts[0].location + ' ' + waypts[waypts.length - 1].location)
+
+			directionsService.route({
+			  origin: waypts[0].location,
+			  destination: waypts[0].location,
+			  waypoints: waypts,
+			  optimizeWaypoints: this.optimizeWaypoints,
+			  travelMode: 'DRIVING'
+			}, function(response, status) {
+			  if (status === 'OK') {
+				directionsDisplay.setDirections(response);
+				var route = response.routes[0];
+			} else {
+				window.alert('Directions request failed due to ' + status);
+			  }
+			});
+
+
+
 		},
 		openSearchBox: function(){
 			if(!this.searching){
@@ -220,7 +310,7 @@ export default{
 		},
 		search : function(){
 			axios.get('/api/venues/search=' + this.searchParam)
-				.then(response => this.searchResults = response.data);
+			.then(response => this.searchResults = response.data);
 		},
 		clearSearch: function(){
 
@@ -230,45 +320,72 @@ export default{
 		},
 		addVenue: function(address, name, link){
 			axios.post('/api/' + this.route.id + '/add-location', {
-              _token: this.token,
-              route_id: this.route.id,
-              venue: name,
-              address: address,
-              slug: link
-			});
+				_token: this.token,
+				route_id: this.route.id,
+				venue: name,
+				address: address,
+				slug: link
+			}).then(response => console.log(response));
 			this.address = '';
 			this.venue = '';
 			this.manuallyAdding = false;
 			document.getElementById('location_input').value = '';
-			setTimeout(this.getLocations(), 100);
 
+			this.$nextTick(function(){
+
+				this.searching = false;
+				this.getLocations();  
+
+			}) 
+			
 		},
 		deleteLocation: function(location_id){
 			axios.post('/api/' + location_id + '/delete-location', {
-              _token: this.token,
-              _method: 'delete'
+				_token: this.token,
+				_method: 'delete'
 			});
-			setTimeout(this.getLocations(), 100);
+
+			this.$nextTick(function(){
+
+				this.getLocations();  
+
+			}) 
 		},
-	    getAddressData: function (addressData, placeResultData) {
-            this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
-        },
-        confirmLocation: function(location_id){
+		getAddressData: function (addressData, placeResultData) {
+			this.address = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
+		},
+		confirmLocation: function(location_id){
 			axios.post('/api/' + location_id + '/confirm-location', {
-              _token: this.token,
-              _method: 'put',
+				_token: this.token,
+				_method: 'put',
 			});
-			setTimeout(this.getLocations(), 100);	
-        }
+
+			this.$nextTick(function(){
+
+				this.getLocations();  
+
+			})  
+		}
 
 	},
 	computed: {
 		totalResults: function(){
 			return this.searchResults.length;
 		},
+		markerSpot: function(){
+			return this.locations;
+		}
+	}, 
+	watch: {
+		locations: function(){
+			this.initMap();
+		},
+		optimizeWaypoints: function(){
+			this.initMap();
+		}
 	}
 }
-	
+
 </script>
 
 <style scoped>
@@ -295,7 +412,7 @@ export default{
 	z-index: 1;
 	width: 25vw;
 	box-shadow: inset -4px -4px 32px rgba(0,0,0,.2);
-}	
+}   
 #map, #search-area{
 	position: absolute;
 	right: 0;
