@@ -11,6 +11,16 @@ use File;
 
 class BandController extends Controller
 {
+    public function allBandsPage(){
+        $bands = Band::orderBy('created_at', 'desc')->paginate(12);
+        return view('bands', compact('bands'));
+    }
+
+    public function guestView($slug){
+        $page = Band::where('slug', $slug)->first();
+        return view('profile', compact('page'));
+    }
+
     public function store(Request $request)
     {
     	$user = User::where('id', Auth::user()->id)->first();

@@ -70,18 +70,27 @@
 						<span v-if="!manuallyAdding">Mannually Add</span>
 						<span v-if="manuallyAdding">Cancel</span>
 					</v-btn>
-					
-					<div class="padded">
-						
-						<div class="swatch yellow darken-1"></div> <small> = Pending Confimation</small>
-						<br>
-						<div class="swatch green lighten-1"></div> <small> = Confirmed</small>
-
-					</div>
 
 					<div class="padded">
 						<v-checkbox label="Optimize locations?" v-model="optimizeWaypoints" light color="primary"></v-checkbox>
 						<small>(If checked, the map will show locations in the most efficient order.)</small>
+					</div>
+
+					<div class="padded">
+						<h6>Give us some more info so we can help you calculate costs.</h6>
+						<v-text-field
+							v-model="currentGasPrice"
+							label="Gas price per gallon?">
+						</v-text-field>
+						<v-text-field
+							v-model="vehicleMPG"
+							label="Your gas mileage.">
+						</v-text-field>
+					</div>
+
+					<div class="padded">
+						<p v-if="distance">Estimated total distance: <b>{{distance}} miles</b></p>
+						<p v-if="gasPrice && vehicleMPG">Estimated gas price: <b>${{gasPrice}}</b>.</p>
 					</div>
 				</header>     
 
@@ -111,6 +120,14 @@
 
 					</section>  
 				</transition>
+
+				<div class="padded">
+					
+					<div class="swatch yellow darken-1"></div> <small> = Pending Confimation</small>
+					<br>
+					<div class="swatch green lighten-1"></div> <small> = Confirmed</small>
+
+				</div>				
 
 				<section id="locations">
 					
@@ -186,7 +203,10 @@ export default{
 			end: '',
 			optimizeWaypoints: true,
 			start: '',
-			end: ''
+			end: '',
+			distance: '',
+			currentGasPrice: '',
+			vehicleMPG: '',
 		}
 	},
 	mounted(){
@@ -224,6 +244,8 @@ export default{
 
 		initMap: function(){
 
+			var totalLength = 0;
+
 			var directionsService = new google.maps.DirectionsService;
 			var directionsDisplay = new google.maps.DirectionsRenderer;
 			var geocoder = new google.maps.Geocoder();
@@ -239,9 +261,6 @@ export default{
 				this.calcRoute(directionsService, directionsDisplay);
 
 			for(var ii = 0; ii < this.locations.length; ii++){
-
-					console.log(v.markerSpot[ii]);
-
 
 				geocoder.geocode( { 'address': v.markerSpot[ii].address}, function(results, status) {
 
@@ -267,6 +286,58 @@ export default{
 
 			}
 
+
+			var distanceService = new google.maps.DistanceMatrixService();
+
+			var distanceDestinations = [];
+
+			for(var d = 0; d < this.locations.length; d++){
+				distanceDestinations.push(this.locations[d].address);
+			}
+
+			distanceService.getDistanceMatrix({
+				origins: [distanceDestinations[0]],
+				destinations: distanceDestinations,
+				travelMode: 'DRIVING',
+				unitSystem: google.maps.UnitSystem.IMPERIAL,
+			}, callback);
+
+			function callback(response, status) {
+			  if (status == 'OK') {
+				var origins = response.originAddresses;
+				var destinations = response.destinationAddresses;
+
+				
+
+				var distanceRes = response.rows[0].elements;
+
+				var rawDistance = [];
+
+				for(var a = 0; a < distanceRes.length - 1; a++){
+					// rawDistance.push();
+					
+					totalLength = distanceRes[a].distance.value + totalLength;
+				}
+
+				console.log(totalLength)
+
+				v.distance = Math.round(totalLength/1609.344, 1);
+
+				console.log(v.distance)
+
+				for (var ii = 0; ii < origins.length; ii++) {
+				  var results = response.rows[ii].elements;
+				  for (var j = 0; j < results.length; j++) {
+					var element = results[j];
+					var distance = element.distance.text;
+					var duration = element.duration.text;
+					var from = origins[ii];
+					var to = destinations[j];
+				  }
+				}
+			  }
+			}		
+
 		},
 		calcRoute: function(directionsService, directionsDisplay){
 
@@ -279,8 +350,6 @@ export default{
 					});
 
 			}
-
-			console.log(waypts[0].location + ' ' + waypts[waypts.length - 1].location)
 
 			directionsService.route({
 			  origin: waypts[0].location,
@@ -296,9 +365,6 @@ export default{
 				window.alert('Directions request failed due to ' + status);
 			  }
 			});
-
-
-
 		},
 		openSearchBox: function(){
 			if(!this.searching){
@@ -325,7 +391,7 @@ export default{
 				venue: name,
 				address: address,
 				slug: link
-			}).then(response => console.log(response));
+			});
 			this.address = '';
 			this.venue = '';
 			this.manuallyAdding = false;
@@ -374,6 +440,9 @@ export default{
 		},
 		markerSpot: function(){
 			return this.locations;
+		},
+		gasPrice: function(){
+			return Math.round((this.distance / this.vehicleMPG) * this.currentGasPrice)
 		}
 	}, 
 	watch: {

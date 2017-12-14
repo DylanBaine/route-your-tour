@@ -3,6 +3,79 @@
 @section('content')
 <header>
 
+	<v-layout row wrap class="padded">
+
+		<v-flex md6 class="padded">
+
+			<header>
+				<h5>Search by Name, City, Country, Etc...</h5>
+			</header>
+
+			<form action="/venues/search">
+				
+				<v-text-field
+					name="param"
+					placeholder="Tulsa, OK"
+				></v-text-field>
+
+				<v-btn color="primary" href="/venues/category/auditorium/">
+					Search
+				</v-btn>
+
+			</form>
+
+		</v-flex>		
+		
+		<v-flex md6 class="padded text-xs-right">
+
+			<header>
+				<h5>Search Category</h5>
+			</header>
+
+			<v-btn color="primary" href="/venues">
+				All
+			</v-btn>
+
+			<v-btn color="primary" href="/venues/category/bar-venue">
+				Bar
+			</v-btn>
+
+			<v-btn color="primary" href="/venues/category/auditorium">
+				Auditorium
+			</v-btn>
+
+			<v-btn color="primary" href="/venues/category/arena">
+				Arena
+			</v-btn>
+
+			<v-btn color="primary" href="/venues/category/festival">
+				Festival
+			</v-btn>
+
+			<v-btn color="primary" href="/venues/category/stadium">
+				Stadium
+			</v-btn>
+
+			<v-btn color="primary" href="/venues/category/amphitheatre">
+				Amphitheatre
+			</v-btn>
+
+			<v-btn color="primary" href="/venues/category/restaurant">
+				Restaurant
+			</v-btn>			
+
+			<v-btn color="primary" href="/venues/category/club">
+				Club
+			</v-btn>
+
+			<v-btn color="primary" href="/venues/category/event-venue">
+				Event Venue
+			</v-btn>
+
+		</v-flex>
+
+	</v-layout>
+
 </header>
 
 <v-container fluid grid-list-xl>
@@ -72,11 +145,13 @@
 					<h4>{{$venue->name}}</h4>
 					<br>
 					<h5>{{$venue->address}}</h5>
+					<hr>
+					<h6>{{$venue->category}}</h6>
 
 				</div>
 
 				<div class="text-xs-right absolute bottom-right">
-					<v-btn fab raised class="blue darken-4 white--text" href="venues/{{$venue->slug}}" title="Visit {{$venue->name}}'s RYT profile.">
+					<v-btn fab raised class="blue darken-4 white--text" href="/venues/{{$venue->slug}}" title="Visit {{$venue->name}}'s RYT profile.">
 						Visit
 					</v-btn>
 					@if(Auth::user())

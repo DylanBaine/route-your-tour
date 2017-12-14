@@ -1571,7 +1571,7 @@ window._ = __webpack_require__(16);
 
 window.axios = __webpack_require__(18);
 
-axios.defaults.baseURL = window.location.protocol + '//' + window.location.host;
+//axios.defaults.baseURL = window.location.protocol +  '//' + window.location.host;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -50817,7 +50817,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			locationRules: [function (v) {
 				return !!v || 'An address is required';
 			}],
-			items: [{ text: 'Amphitheater' }, { text: 'Arena' }, { text: 'Auditorium' }, { text: 'Bar' }, { text: 'Casino' }, { text: 'Church' }, { text: 'Club' }, { text: 'Coffee House' }, { text: 'Event Center' }, { text: 'Music Hall' }, { text: 'Outdoor Festival' }, { text: 'Restaurant' }, { text: 'Stadium' }],
+			items: [{ text: 'Amphitheater' }, { text: 'Arena' }, { text: 'Auditorium' }, { text: 'Bar-Venue' }, { text: 'Casino' }, { text: 'Church' }, { text: 'Club' }, { text: 'Coffee House' }, { text: 'Event Center' }, { text: 'Music Hall' }, { text: 'Outdoor Festival' }, { text: 'Restaurant' }, { text: 'Stadium' }],
 			category: '',
 			country: ''
 		};
@@ -52693,7 +52693,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 			edited: false,
 			errors: false,
 			image: '',
-			items: [{ text: 'Amphitheater' }, { text: 'Arena' }, { text: 'Auditorium' }, { text: 'Bar' }, { text: 'Casino' }, { text: 'Church' }, { text: 'Club' }, { text: 'Coffee House' }, { text: 'Event Center' }, { text: 'Music Hall' }, { text: 'Outdoor Festival' }, { text: 'Restaurant' }, { text: 'Stadium' }]
+			items: [{ text: 'Amphitheater' }, { text: 'Arena' }, { text: 'Auditorium' }, { text: 'Bar Venue' }, { text: 'Casino' }, { text: 'Church' }, { text: 'Club' }, { text: 'Coffee House' }, { text: 'Event Center' }, { text: 'Music Hall' }, { text: 'Outdoor Festival' }, { text: 'Restaurant' }, { text: 'Stadium' }]
 
 		};
 	},
@@ -54656,6 +54656,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -54680,7 +54697,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 			start: '',
 			end: '',
 			optimizeWaypoints: true
-		}, _defineProperty(_ref, 'start', ''), _defineProperty(_ref, 'end', ''), _ref;
+		}, _defineProperty(_ref, 'start', ''), _defineProperty(_ref, 'end', ''), _defineProperty(_ref, 'distance', ''), _defineProperty(_ref, 'currentGasPrice', ''), _defineProperty(_ref, 'vehicleMPG', ''), _ref;
 	},
 	mounted: function mounted() {
 
@@ -54725,6 +54742,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 		initMap: function initMap() {
 
+			var totalLength = 0;
+
 			var directionsService = new google.maps.DirectionsService();
 			var directionsDisplay = new google.maps.DirectionsRenderer();
 			var geocoder = new google.maps.Geocoder();
@@ -54739,8 +54758,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 			if (this.locations.length > 0) this.calcRoute(directionsService, directionsDisplay);
 
 			for (var ii = 0; ii < this.locations.length; ii++) {
-
-				console.log(v.markerSpot[ii]);
 
 				geocoder.geocode({ 'address': v.markerSpot[ii].address }, function (results, status) {
 
@@ -54763,6 +54780,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 					});
 				});
 			}
+
+			var distanceService = new google.maps.DistanceMatrixService();
+
+			var distanceDestinations = [];
+
+			for (var d = 0; d < this.locations.length; d++) {
+				distanceDestinations.push(this.locations[d].address);
+			}
+
+			distanceService.getDistanceMatrix({
+				origins: [distanceDestinations[0]],
+				destinations: distanceDestinations,
+				travelMode: 'DRIVING',
+				unitSystem: google.maps.UnitSystem.IMPERIAL
+			}, callback);
+
+			function callback(response, status) {
+				if (status == 'OK') {
+					var origins = response.originAddresses;
+					var destinations = response.destinationAddresses;
+
+					var distanceRes = response.rows[0].elements;
+
+					var rawDistance = [];
+
+					for (var a = 0; a < distanceRes.length - 1; a++) {
+						// rawDistance.push();
+
+						totalLength = distanceRes[a].distance.value + totalLength;
+					}
+
+					console.log(totalLength);
+
+					v.distance = Math.round(totalLength / 1609.344, 1);
+
+					console.log(v.distance);
+
+					for (var ii = 0; ii < origins.length; ii++) {
+						var results = response.rows[ii].elements;
+						for (var j = 0; j < results.length; j++) {
+							var element = results[j];
+							var distance = element.distance.text;
+							var duration = element.duration.text;
+							var from = origins[ii];
+							var to = destinations[j];
+						}
+					}
+				}
+			}
 		},
 		calcRoute: function calcRoute(directionsService, directionsDisplay) {
 
@@ -54773,8 +54839,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 					stopover: true
 				});
 			}
-
-			console.log(waypts[0].location + ' ' + waypts[waypts.length - 1].location);
 
 			directionsService.route({
 				origin: waypts[0].location,
@@ -54818,8 +54882,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 				venue: name,
 				address: address,
 				slug: link
-			}).then(function (response) {
-				return console.log(response);
 			});
 			this.address = '';
 			this.venue = '';
@@ -54865,6 +54927,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 		},
 		markerSpot: function markerSpot() {
 			return this.locations;
+		},
+		gasPrice: function gasPrice() {
+			return Math.round(this.distance / this.vehicleMPG * this.currentGasPrice);
 		}
 	},
 	watch: {
@@ -55167,18 +55232,6 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "padded" }, [
-                  _c("div", { staticClass: "swatch yellow darken-1" }),
-                  _vm._v(" "),
-                  _c("small", [_vm._v(" = Pending Confimation")]),
-                  _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "swatch green lighten-1" }),
-                  _vm._v(" "),
-                  _c("small", [_vm._v(" = Confirmed")])
-                ]),
-                _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "padded" },
@@ -55205,7 +55258,59 @@ var render = function() {
                     ])
                   ],
                   1
-                )
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "padded" },
+                  [
+                    _c("h6", [
+                      _vm._v(
+                        "Give us some more info so we can help you calculate costs."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("v-text-field", {
+                      attrs: { label: "Gas price per gallon?" },
+                      model: {
+                        value: _vm.currentGasPrice,
+                        callback: function($$v) {
+                          _vm.currentGasPrice = $$v
+                        },
+                        expression: "currentGasPrice"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("v-text-field", {
+                      attrs: { label: "Your gas mileage." },
+                      model: {
+                        value: _vm.vehicleMPG,
+                        callback: function($$v) {
+                          _vm.vehicleMPG = $$v
+                        },
+                        expression: "vehicleMPG"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "padded" }, [
+                  _vm.distance
+                    ? _c("p", [
+                        _vm._v("Estimated total distance: "),
+                        _c("b", [_vm._v(_vm._s(_vm.distance) + " miles")])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.gasPrice && _vm.vehicleMPG
+                    ? _c("p", [
+                        _vm._v("Estimated gas price: "),
+                        _c("b", [_vm._v("$" + _vm._s(_vm.gasPrice))]),
+                        _vm._v(".")
+                      ])
+                    : _vm._e()
+                ])
               ],
               1
             ),
@@ -55277,6 +55382,18 @@ var render = function() {
                 ],
                 1
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "padded" }, [
+              _c("div", { staticClass: "swatch yellow darken-1" }),
+              _vm._v(" "),
+              _c("small", [_vm._v(" = Pending Confimation")]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("div", { staticClass: "swatch green lighten-1" }),
+              _vm._v(" "),
+              _c("small", [_vm._v(" = Confirmed")])
             ]),
             _vm._v(" "),
             _c(

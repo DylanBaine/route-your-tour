@@ -18,6 +18,16 @@ class VenueController extends Controller
     return view('venues', compact('venues'));
   }
 
+  public function countryView($country){
+    $venues = Venue::where('country_slug', $country)->paginate(12);
+    return view('venues', compact('venues'));
+  }
+
+  public function categoryView($category){
+    $venues = Venue::where('category_slug', $category)->paginate(12);
+    return view('venues', compact('venues'));
+  }
+
   public function guestView($slug)
   {
     $page = Venue::where('slug', $slug)->first();

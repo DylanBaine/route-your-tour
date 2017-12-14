@@ -20,7 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/venues', 'VenueController@allVenuesPage');
-Route::get('venues/{slug}', 'VenueController@guestView');
+Route::get('/venues/{slug}', 'VenueController@guestView');
+Route::get('/venues/in/{country}', 'VenueController@countryView');
+Route::get('/venues/category/{category}', 'VenueController@categoryView');
+
+Route::get('/bands', 'BandController@allBandsPage');
+Route::get('bands/{slug}', 'BandController@guestView');
 
 
 route::get('/user', function(){

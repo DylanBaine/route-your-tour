@@ -137,7 +137,7 @@ export default{
 				{text: 'Amphitheater'},
 				{text: 'Arena'},
 				{text: 'Auditorium'},
-				{text: 'Bar'},
+				{text: 'Bar Venue'},
 				{text: 'Casino'},
 				{text: 'Church'},
 				{text: 'Club'},
