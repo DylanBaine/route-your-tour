@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<v-card color="white darken-2" class="blue--text">
+		<v-card class="blue--text">
 			<v-card-title primary-title>
 				<div class="headline text-xs-center">Fill out the form below to become a booking agent on Route Your Tour.</div>
 			</v-card-title> 

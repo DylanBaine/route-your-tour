@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<v-card color="white darken-2" class="blue--text">
+		<v-card class="blue--text">
 			<v-card-title primary-title>
 				<div class="headline text-xs-center">Lets start setting up your Venue profile.</div>
 			</v-card-title> 

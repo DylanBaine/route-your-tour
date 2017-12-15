@@ -29,7 +29,7 @@
 		<v-flex md6 class="padded text-xs-right">
 
 			<header>
-				<h5>Search Category</h5>
+				<h5>See Categories</h5>
 			</header>
 
 			<v-btn color="primary" href="/venues">

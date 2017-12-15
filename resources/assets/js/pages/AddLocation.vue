@@ -7,16 +7,17 @@
 		<transition name="fade">
 			<div v-if="searching" id="search-area">
 				<div id="exit">
-					<v-btn @click="openSearchBox" title="Exit the search box." fab flat><v-icon>close</v-icon></v-btn>
+					<v-btn color="grey" @click="openSearchBox" title="Exit the search box." fab flat><v-icon>close</v-icon></v-btn>
 				</div>
 				<div class="inner padded">
 					<header class="search-header">
 						<v-layout row wrap>
 							<v-flex md9>
 								<v-text-field
-								@keydown.enter="search"
-								v-model="searchParam"
-								label="Search by city, genre, or venue name."
+									light="true"
+									@keydown.enter="search"
+									v-model="searchParam"
+									label="Search by city, genre, or venue name."
 								></v-text-field>
 							</v-flex>
 							<v-flex md1>
@@ -64,11 +65,12 @@
 				<header class="padded text-xs-center">
 					<h4>Adding stops to "{{route.title}}."</h4>
 
-					<v-btn @click="openSearchBox" color="primary">Search</v-btn> 
+					<v-btn @click="openSearchBox" color="primary">
+						{{searching ? 'Cancel' : 'Search'}}
+					</v-btn> 
 
 					<v-btn @click="showManually" color="primary">
-						<span v-if="!manuallyAdding">Mannually Add</span>
-						<span v-if="manuallyAdding">Cancel</span>
+						{{manuallyAdding ? 'Cancel' : 'Manually Add'}}
 					</v-btn>
 
 					<div class="padded">
@@ -76,22 +78,6 @@
 						<small>(If checked, the map will show locations in the most efficient order.)</small>
 					</div>
 
-					<div class="padded">
-						<h6>Give us some more info so we can help you calculate costs.</h6>
-						<v-text-field
-							v-model="currentGasPrice"
-							label="Gas price per gallon?">
-						</v-text-field>
-						<v-text-field
-							v-model="vehicleMPG"
-							label="Your gas mileage.">
-						</v-text-field>
-					</div>
-
-					<div class="padded">
-						<p v-if="distance">Estimated total distance: <b>{{distance}} miles</b></p>
-						<p v-if="gasPrice && vehicleMPG">Estimated gas price: <b>${{gasPrice}}</b>.</p>
-					</div>
 				</header>     
 
 				<transition name="drop">
@@ -110,6 +96,7 @@
 						</p>
 
 						<v-text-field
+						light="true"
 						v-model="venue"
 						label="Venues Name"
 						></v-text-field>
@@ -120,6 +107,28 @@
 
 					</section>  
 				</transition>
+
+				<div class="padded">
+					<h6>Give us some more info so we can help you calculate costs.</h6>
+					<v-text-field
+						light="true"
+						placeholder="2"
+						v-model="currentGasPrice"
+						label="Gas price per gallon?">
+					</v-text-field>
+					<v-text-field
+						light="true"
+						placeholder="12"
+						v-model="vehicleMPG"
+						label="Your gas mileage.">
+					</v-text-field>
+				</div>
+
+				<div class="padded">
+					<p v-if="distance">Estimated total distance: <b>{{distance}} miles</b></p>
+					<p v-if="gasPrice && vehicleMPG">Estimated gas price: <b>${{gasPrice}}</b>.</p>
+				</div>
+
 
 				<div class="padded">
 					

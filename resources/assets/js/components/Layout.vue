@@ -1,6 +1,6 @@
 <template>
 
-  <v-app light v-cloak>
+  <v-app :class="'application--' + user.theme" v-cloak>
     <v-navigation-drawer app temporary enable-resize-watcher clipped v-model="menu">
 
       <v-toolbar flat>
@@ -44,7 +44,7 @@
 
         </v-list-tile>
 
-        <v-list-tile to="/bands">
+        <v-list-tile href="/bands">
 
           <v-list-tile-action>
             <v-icon>music_note</v-icon>

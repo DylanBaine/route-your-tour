@@ -40,6 +40,7 @@ Route::prefix('api')->group(function () {
 	Route::get('/user', function(){
 		return Auth::user();
 	});	
+	Route::put('/user', 'HomeController@editUser');
 
 	Route::put('/change-avatar', 'HomeController@changeAvatar');
 

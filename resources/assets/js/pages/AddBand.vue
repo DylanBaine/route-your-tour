@@ -1,6 +1,6 @@
 <template>
 	<v-container fluid style="padding: 0;">
-		<v-card color="white darken-2" class="blue--text">
+		<v-card class="blue--text">
 			<v-card-title primary-title>
 				<div class="headline text-xs-center">We will need a little info about your band.</div>
 			</v-card-title> 

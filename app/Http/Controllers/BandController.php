@@ -82,6 +82,7 @@ class BandController extends Controller
 
     public function delete($id)
     {
+
         Band::find($id)->delete();
     }
 }

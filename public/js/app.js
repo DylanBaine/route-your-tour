@@ -50296,19 +50296,144 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 56 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			user: {},
+			changed: false,
+			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+			edited: false,
+			items: [{ text: 'dark' }, { text: 'light' }]
+		};
+	},
+	mounted: function mounted() {
+		this.getUser();
+	},
+
+	methods: {
+		getUser: function getUser() {
+			var _this = this;
+
+			axios.get('/api/user').then(function (response) {
+				return _this.user = response.data;
+			});
+		},
+		editUser: function editUser() {
+			var _this2 = this;
+
+			axios.put('/api/user', {
+				name: this.user.name,
+				email: this.user.email,
+				password: this.user.password,
+				theme: this.user.theme
+			}).then(function (response) {
+				return _this2.emitSuccess();
+			}).catch(function (error) {
+				alert(error = ' errors occured');
+			});
+		},
+		verifyEmail: function verifyEmail() {
+			alert('sending email');
+		},
+		emitSuccess: function emitSuccess() {
+			this.edited = true;
+			this.changed = false;
+			this.user.password = '';
+			window.location.href = '/home';
+		}
+	}
+});
 
 /***/ }),
 /* 57 */
@@ -50318,7 +50443,217 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Settings")])
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-alert",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.edited,
+              expression: "edited"
+            }
+          ],
+          attrs: { color: "success", icon: "check_circle" }
+        },
+        [
+          _c("p", [_vm._v("Successfully edited...")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("Going back home.")])
+        ]
+      ),
+      _vm._v(" "),
+      _c("header", [_c("h1", [_vm._v("Settings")])]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "section",
+        { attrs: { id: "forms" } },
+        [
+          _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "" } },
+            [
+              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+                _c(
+                  "div",
+                  { staticClass: "padded" },
+                  [
+                    _c("v-text-field", {
+                      attrs: { label: "Change your name." },
+                      on: {
+                        keydown: function($event) {
+                          _vm.changed = true
+                        }
+                      },
+                      model: {
+                        value: _vm.user.name,
+                        callback: function($$v) {
+                          _vm.$set(_vm.user, "name", $$v)
+                        },
+                        expression: "user.name"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+                _c(
+                  "div",
+                  { staticClass: "padded" },
+                  [
+                    _c("v-text-field", {
+                      attrs: { label: "Change your email." },
+                      on: {
+                        keydown: function($event) {
+                          _vm.changed = true
+                        }
+                      },
+                      model: {
+                        value: _vm.user.email,
+                        callback: function($$v) {
+                          _vm.$set(_vm.user, "email", $$v)
+                        },
+                        expression: "user.email"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "", wrap: "" } },
+            [
+              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+                _c(
+                  "div",
+                  { staticClass: "padded" },
+                  [
+                    _c("v-text-field", {
+                      attrs: { label: "Change your password." },
+                      on: {
+                        keydown: function($event) {
+                          _vm.changed = true
+                        }
+                      },
+                      model: {
+                        value: _vm.user.password,
+                        callback: function($$v) {
+                          _vm.$set(_vm.user, "password", $$v)
+                        },
+                        expression: "user.password"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { staticClass: "flex-center", attrs: { xs12: "", md6: "" } },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      label: "Choose your dashboard theme.",
+                      items: _vm.items,
+                      "item-value": "text"
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.changed = true
+                      }
+                    },
+                    model: {
+                      value: _vm.user.theme,
+                      callback: function($$v) {
+                        _vm.$set(_vm.user, "theme", $$v)
+                      },
+                      expression: "user.theme"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "margin-auto" },
+            [
+              _vm.user.email_verivied
+                ? _c(
+                    "v-chip",
+                    { attrs: { color: "success", "text-color": "white" } },
+                    [_vm._v("\n\t\t\t\t\tYour email is verified.\n\t\t\t\t")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.user.email_verified
+                ? _c(
+                    "div",
+                    { staticClass: "white--text red padded rounded" },
+                    [
+                      _c("header", [
+                        _vm._v(
+                          "\n\t\t\t\t\t\tEmail not verified.\t\n\t\t\t\t\t"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("v-btn", { on: { click: _vm.verifyEmail } }, [
+                        _vm._v("\n\t\t\t\t\t\tResend verification.\n\t\t\t\t\t")
+                      ])
+                    ],
+                    1
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "fixed-bottom right" },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.changed
+                ? _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "primary" },
+                      on: { click: _vm.editUser }
+                    },
+                    [_vm._v("\n\t\t\t\tUpdate Profile\n\t\t\t")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50539,7 +50874,7 @@ var render = function() {
     [
       _c(
         "v-card",
-        { staticClass: "blue--text", attrs: { color: "white darken-2" } },
+        { staticClass: "blue--text" },
         [
           _c("v-card-title", { attrs: { "primary-title": "" } }, [
             _c("div", { staticClass: "headline text-xs-center" }, [
@@ -50865,7 +51200,7 @@ var render = function() {
     [
       _c(
         "v-card",
-        { staticClass: "blue--text", attrs: { color: "white darken-2" } },
+        { staticClass: "blue--text" },
         [
           _c("v-card-title", { attrs: { "primary-title": "" } }, [
             _c("div", { staticClass: "headline text-xs-center" }, [
@@ -51181,7 +51516,7 @@ var render = function() {
     [
       _c(
         "v-card",
-        { staticClass: "blue--text", attrs: { color: "white darken-2" } },
+        { staticClass: "blue--text" },
         [
           _c("v-card-title", { attrs: { "primary-title": "" } }, [
             _c("div", { staticClass: "headline text-xs-center" }, [
@@ -51493,7 +51828,7 @@ var render = function() {
     [
       _c(
         "v-card",
-        { staticClass: "blue--text", attrs: { color: "white darken-2" } },
+        { staticClass: "blue--text" },
         [
           _c("v-card-title", { attrs: { "primary-title": "" } }, [
             _c("div", { staticClass: "headline text-xs-center" }, [
@@ -54673,6 +55008,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -54967,6 +55311,7 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: {
+                        color: "grey",
                         title: "Exit the search box.",
                         fab: "",
                         flat: ""
@@ -54995,6 +55340,7 @@ var render = function() {
                           [
                             _c("v-text-field", {
                               attrs: {
+                                light: "true",
                                 label: "Search by city, genre, or venue name."
                               },
                               on: {
@@ -55212,7 +55558,13 @@ var render = function() {
                     attrs: { color: "primary" },
                     on: { click: _vm.openSearchBox }
                   },
-                  [_vm._v("Search")]
+                  [
+                    _vm._v(
+                      "\n\t\t\t\t\t" +
+                        _vm._s(_vm.searching ? "Cancel" : "Search") +
+                        "\n\t\t\t\t"
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
@@ -55222,13 +55574,11 @@ var render = function() {
                     on: { click: _vm.showManually }
                   },
                   [
-                    !_vm.manuallyAdding
-                      ? _c("span", [_vm._v("Mannually Add")])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.manuallyAdding
-                      ? _c("span", [_vm._v("Cancel")])
-                      : _vm._e()
+                    _vm._v(
+                      "\n\t\t\t\t\t" +
+                        _vm._s(_vm.manuallyAdding ? "Cancel" : "Manually Add") +
+                        "\n\t\t\t\t"
+                    )
                   ]
                 ),
                 _vm._v(" "),
@@ -55258,59 +55608,7 @@ var render = function() {
                     ])
                   ],
                   1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "padded" },
-                  [
-                    _c("h6", [
-                      _vm._v(
-                        "Give us some more info so we can help you calculate costs."
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: { label: "Gas price per gallon?" },
-                      model: {
-                        value: _vm.currentGasPrice,
-                        callback: function($$v) {
-                          _vm.currentGasPrice = $$v
-                        },
-                        expression: "currentGasPrice"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: { label: "Your gas mileage." },
-                      model: {
-                        value: _vm.vehicleMPG,
-                        callback: function($$v) {
-                          _vm.vehicleMPG = $$v
-                        },
-                        expression: "vehicleMPG"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "padded" }, [
-                  _vm.distance
-                    ? _c("p", [
-                        _vm._v("Estimated total distance: "),
-                        _c("b", [_vm._v(_vm._s(_vm.distance) + " miles")])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.gasPrice && _vm.vehicleMPG
-                    ? _c("p", [
-                        _vm._v("Estimated gas price: "),
-                        _c("b", [_vm._v("$" + _vm._s(_vm.gasPrice))]),
-                        _vm._v(".")
-                      ])
-                    : _vm._e()
-                ])
+                )
               ],
               1
             ),
@@ -55357,7 +55655,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("v-text-field", {
-                    attrs: { label: "Venues Name" },
+                    attrs: { light: "true", label: "Venues Name" },
                     model: {
                       value: _vm.venue,
                       callback: function($$v) {
@@ -55382,6 +55680,66 @@ var render = function() {
                 ],
                 1
               )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "padded" },
+              [
+                _c("h6", [
+                  _vm._v(
+                    "Give us some more info so we can help you calculate costs."
+                  )
+                ]),
+                _vm._v(" "),
+                _c("v-text-field", {
+                  attrs: {
+                    light: "true",
+                    placeholder: "2",
+                    label: "Gas price per gallon?"
+                  },
+                  model: {
+                    value: _vm.currentGasPrice,
+                    callback: function($$v) {
+                      _vm.currentGasPrice = $$v
+                    },
+                    expression: "currentGasPrice"
+                  }
+                }),
+                _vm._v(" "),
+                _c("v-text-field", {
+                  attrs: {
+                    light: "true",
+                    placeholder: "12",
+                    label: "Your gas mileage."
+                  },
+                  model: {
+                    value: _vm.vehicleMPG,
+                    callback: function($$v) {
+                      _vm.vehicleMPG = $$v
+                    },
+                    expression: "vehicleMPG"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "padded" }, [
+              _vm.distance
+                ? _c("p", [
+                    _vm._v("Estimated total distance: "),
+                    _c("b", [_vm._v(_vm._s(_vm.distance) + " miles")])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.gasPrice && _vm.vehicleMPG
+                ? _c("p", [
+                    _vm._v("Estimated gas price: "),
+                    _c("b", [_vm._v("$" + _vm._s(_vm.gasPrice))]),
+                    _vm._v(".")
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "padded" }, [
@@ -56782,7 +57140,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-app",
-    { attrs: { light: "" } },
+    { class: "application--" + _vm.user.theme },
     [
       _c(
         "v-navigation-drawer",
@@ -56867,7 +57225,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-list-tile",
-                { attrs: { to: "/bands" } },
+                { attrs: { href: "/bands" } },
                 [
                   _c(
                     "v-list-tile-action",

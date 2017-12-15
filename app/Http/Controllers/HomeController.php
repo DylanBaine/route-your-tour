@@ -52,4 +52,17 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    public function editUser(Request $request){
+        $user = Auth::user();
+
+        $user->name = request('name');
+        if(request('password')){
+            $user->password = bcrypt(request('password'));
+        }
+        $user->email = request('email');
+        $user->theme = request('theme');
+
+        $user->save();
+    }
+
 }
