@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+	@extends('layouts.guest')
 
 @section('content')
 <header>
@@ -13,7 +13,9 @@
 
 						<h4>{{$band->name}}</h4>
 						<br>
-						<h5>{{$band->address}}</h5>
+						@if($band->location != 'null')
+							<h5>{{$band->location}}</h5>
+						@endif
 
 					</div>
 

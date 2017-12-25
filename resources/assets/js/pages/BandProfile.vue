@@ -1,6 +1,8 @@
 <template>
 	<v-container grid-list-md>
 
+		<loader v-if="loading"></loader>
+
 		<v-alert v-show="edited" color="success">
 			<div>Successfully edited.</div>
 			<v-btn @click="edited = false" color="green darken-4 white--text alert-btn">OK</v-btn>
@@ -158,16 +160,22 @@ export default{
 			edited: false,
 			errors: false,
 			routes: '',
-			image: ''
+			image: '',
+			loading: true
 		}
 	},
 	mounted(){
 		axios.get('/api/band/' + this.$route.params.slug)
 			.then(response => this.band = response.data);
 
-		axios.get('api/' + this.$route.params.slug + '/routes')
-			.then(response => this.routes = response.data);
+		this.$nextTick(function(){
+			axios.get('api/' + this.$route.params.slug + '/routes')
+				.then(response => this.routes = response.data);		
+		});
 
+	},
+	updated(){
+		this.loading = false;
 	},
 	methods: {
 		edit: function(){

@@ -49735,7 +49735,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-b5d41cf2]{\n\theight: 220px !important;\n\tpadding: 10px;\n}\n.flexed[data-v-b5d41cf2]{\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n}\n.oh-no[data-v-b5d41cf2]{\n\tpadding: 80px;\n}\n@media (max-width: 599px){\n.card[data-v-b5d41cf2]{\n\t\theight: auto !important;\n}\n}\n", ""]);
+exports.push([module.i, "\n#noBands[data-v-b5d41cf2], #noVenues[data-v-b5d41cf2]{\n\tborder-radius: 10px;\n\twidth: 100%;\n\theight: 300px;\n\tmargin: 20px 0px;\n\tbackground-position: center;\n\tbackground-size: cover;\n}\n#noBands .inner[data-v-b5d41cf2], #noVenues .inner[data-v-b5d41cf2]{\n\tborder-radius: 10px;\n\tpadding: 40px;\n\twidth: 100%;\n\theight: 100%;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n\tbackground-image: linear-gradient(95deg, rgba(0,0,0,.7), rgba(0,0,0,.3));\n}\n#noBands[data-v-b5d41cf2]{\n\tbackground-image: url('/Defaults/bands-banner.jpg');\n}\n#noVenues[data-v-b5d41cf2]{\n\tbackground-image: url('/Defaults/diamond-banner.jpg');\n}\n.card[data-v-b5d41cf2]{\n\theight: 220px !important;\n\tpadding: 10px;\n}\n.flexed[data-v-b5d41cf2]{\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n}\n.oh-no[data-v-b5d41cf2]{\n\tpadding: 80px;\n}\n@media (max-width: 599px){\n.card[data-v-b5d41cf2]{\n\t\theight: auto !important;\n}\n}\n", ""]);
 
 // exports
 
@@ -49865,6 +49865,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -49897,7 +49920,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			bands: [],
 			venues: [],
 			promoter: '',
-			bookingAgent: ''
+			bookingAgent: '',
+			loading: true
 		};
 	},
 	mounted: function mounted() {
@@ -49907,17 +49931,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return _this.bands = response.data;
 		});
 
-		axios.get('/api/users-venues').then(function (response) {
-			return _this.venues = response.data;
-		});
+		this.$nextTick(function () {
+			var _this2 = this;
 
-		axios.get('/api/users-promoter').then(function (response) {
-			return _this.promoter = response.data;
-		});
+			axios.get('/api/users-venues').then(function (response) {
+				return _this2.venues = response.data;
+			});
 
-		axios.get('/api/users-bookingagent').then(function (response) {
-			return _this.bookingAgent = response.data;
+			this.$nextTick(function () {
+				var _this3 = this;
+
+				axios.get('/api/users-promoter').then(function (response) {
+					return _this3.promoter = response.data;
+				});
+
+				this.$nextTick(function () {
+					var _this4 = this;
+
+					axios.get('/api/users-bookingagent').then(function (response) {
+						return _this4.bookingAgent = response.data;
+					});
+				});
+			});
 		});
+	},
+	updated: function updated() {
+		this.loading = false;
 	},
 
 	computed: {
@@ -50038,21 +50077,37 @@ var render = function() {
         "section",
         { staticClass: "padded", attrs: { id: "profiles" } },
         [
-          _c(
-            "header",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.bands.length >= 1,
-                  expression: "bands.length >= 1"
-                }
-              ],
-              staticClass: "padded"
-            },
-            [_c("h3", [_vm._v("Band profiles you run.")])]
-          ),
+          _c("header", { staticClass: "padded" }, [
+            _c("h3", [_vm._v("Band profiles you run.")])
+          ]),
+          _vm._v(" "),
+          _vm.bands.length < 1
+            ? _c("div", { attrs: { id: "noBands" } }, [
+                _c("div", { staticClass: "inner" }, [
+                  _c(
+                    "div",
+                    [
+                      _c("h3", { staticClass: "white--text" }, [
+                        _vm._v("No bands added yet... :(")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { to: "/profiles/add/Band", color: "primary" }
+                        },
+                        [
+                          _c("v-icon", [_vm._v("add")]),
+                          _vm._v("\n\t\t\t\t\t\tADD A BAND PROFILE\n\t\t\t\t\t")
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "v-layout",
@@ -50076,21 +50131,39 @@ var render = function() {
             })
           ),
           _vm._v(" "),
-          _c(
-            "header",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.venues.length > 0,
-                  expression: "venues.length > 0"
-                }
-              ],
-              staticClass: "padded"
-            },
-            [_c("h3", [_vm._v("Venue profiles you run.")])]
-          ),
+          _c("header", { staticClass: "padded" }, [
+            _c("h3", [_vm._v("Venue profiles you run.")])
+          ]),
+          _vm._v(" "),
+          _vm.venues.length < 1
+            ? _c("div", { attrs: { id: "noVenues" } }, [
+                _c("div", { staticClass: "inner" }, [
+                  _c(
+                    "div",
+                    [
+                      _c("h3", { staticClass: "white--text" }, [
+                        _vm._v("No venues added. Feel free to add a venue.")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { to: "/profiles/add/Venue", color: "primary" }
+                        },
+                        [
+                          _c("v-icon", [_vm._v("add")]),
+                          _vm._v(
+                            "\n\t\t\t\t\t\tADD A VENUE PROFILE\n\t\t\t\t\t"
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ])
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "v-layout",
@@ -50296,7 +50369,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50379,13 +50452,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -50394,11 +50460,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			changed: false,
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
-			items: [{ text: 'dark' }, { text: 'light' }]
+			items: [{ text: 'dark' }, { text: 'light' }],
+			loading: true
 		};
 	},
 	mounted: function mounted() {
 		this.getUser();
+	},
+	updated: function updated() {
+		this.loading = false;
 	},
 
 	methods: {
@@ -50423,9 +50493,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				alert(error = ' errors occured');
 			});
 		},
-		verifyEmail: function verifyEmail() {
-			alert('sending email');
-		},
 		emitSuccess: function emitSuccess() {
 			this.edited = true;
 			this.changed = false;
@@ -50446,6 +50513,10 @@ var render = function() {
   return _c(
     "v-container",
     [
+      _vm.loading
+        ? _c("loader", [_vm._v("Loading your settings...")])
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "v-alert",
         {
@@ -50466,7 +50537,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("header", [_c("h1", [_vm._v("Settings")])]),
+      _c("header", { staticClass: "padded" }, [_c("h1", [_vm._v("Settings")])]),
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
@@ -50599,25 +50670,6 @@ var render = function() {
                     "v-chip",
                     { attrs: { color: "success", "text-color": "white" } },
                     [_vm._v("\n\t\t\t\t\tYour email is verified.\n\t\t\t\t")]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              !_vm.user.email_verified
-                ? _c(
-                    "div",
-                    { staticClass: "white--text red padded rounded" },
-                    [
-                      _c("header", [
-                        _vm._v(
-                          "\n\t\t\t\t\t\tEmail not verified.\t\n\t\t\t\t\t"
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("v-btn", { on: { click: _vm.verifyEmail } }, [
-                        _vm._v("\n\t\t\t\t\t\tResend verification.\n\t\t\t\t\t")
-                      ])
-                    ],
-                    1
                   )
                 : _vm._e()
             ],
@@ -52196,6 +52248,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52206,7 +52260,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			edited: false,
 			errors: false,
 			routes: '',
-			image: ''
+			image: '',
+			loading: true
 		};
 	},
 	mounted: function mounted() {
@@ -52216,14 +52271,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return _this.band = response.data;
 		});
 
-		axios.get('api/' + this.$route.params.slug + '/routes').then(function (response) {
-			return _this.routes = response.data;
+		this.$nextTick(function () {
+			var _this2 = this;
+
+			axios.get('api/' + this.$route.params.slug + '/routes').then(function (response) {
+				return _this2.routes = response.data;
+			});
 		});
+	},
+	updated: function updated() {
+		this.loading = false;
 	},
 
 	methods: {
 		edit: function edit() {
-			var _this2 = this;
+			var _this3 = this;
 
 			var data = new FormData();
 			data.append('_token', this.token);
@@ -52240,11 +52302,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			axios.post('/api/band/' + this.band.id + '/edit', data, config).then(function (response) {
 				if (response.statusText = 'OK') {
-					_this2.errors = false;
-					_this2.edited = true;
+					_this3.errors = false;
+					_this3.edited = true;
 				}
 			}).catch(function (errors) {
-				return _this2.errors = true;
+				return _this3.errors = true;
 			});
 		},
 		destroy: function destroy() {
@@ -52300,6 +52362,8 @@ var render = function() {
     "v-container",
     { attrs: { "grid-list-md": "" } },
     [
+      _vm.loading ? _c("loader") : _vm._e(),
+      _vm._v(" "),
       _c(
         "v-alert",
         {
@@ -55017,6 +55081,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -55041,7 +55115,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 			start: '',
 			end: '',
 			optimizeWaypoints: true
-		}, _defineProperty(_ref, 'start', ''), _defineProperty(_ref, 'end', ''), _defineProperty(_ref, 'distance', ''), _defineProperty(_ref, 'currentGasPrice', ''), _defineProperty(_ref, 'vehicleMPG', ''), _ref;
+		}, _defineProperty(_ref, 'start', ''), _defineProperty(_ref, 'end', ''), _defineProperty(_ref, 'distance', ''), _defineProperty(_ref, 'currentGasPrice', 2.75), _defineProperty(_ref, 'vehicleMPG', 12), _defineProperty(_ref, 'loading', true), _defineProperty(_ref, 'searchingRes', false), _defineProperty(_ref, 'promptDelete', false), _ref;
 	},
 	mounted: function mounted() {
 
@@ -55052,8 +55126,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 			this.getLocations();
 		});
 	},
+	updated: function updated() {
+		this.loading = false;
+	},
 
 	methods: {
+		deleteThis: function deleteThis() {
+			axios.post('api/' + this.route.id + '/delete', {
+				_method: 'delete',
+				_token: this.token
+			}).then(window.location.href = '/home');
+		},
 		getRoute: function getRoute() {
 			var _this = this;
 
@@ -55210,8 +55293,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 		search: function search() {
 			var _this4 = this;
 
+			this.searchingRes = true;
+			this.searchResults = '';
 			axios.get('/api/venues/search=' + this.searchParam).then(function (response) {
-				return _this4.searchResults = response.data;
+				if (response.data.length > 0) {
+					_this4.searchResults = response.data;
+					_this4.searchingRes = false;
+				} else {
+					_this4.searchingRes = false;
+				}
 			});
 		},
 		clearSearch: function clearSearch() {
@@ -55223,6 +55313,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 			axios.post('/api/' + this.route.id + '/add-location', {
 				_token: this.token,
 				route_id: this.route.id,
+				band_id: this.route.band_id,
 				venue: name,
 				address: address,
 				slug: link
@@ -55298,7 +55389,49 @@ var render = function() {
     "v-container",
     { attrs: { "grid-list-md": "" } },
     [
-      _vm.searching ? _c("loader", [_vm._v("searching")]) : _vm._e(),
+      _vm.loading ? _c("loader", [_vm._v("Loading your route...")]) : _vm._e(),
+      _vm._v(" "),
+      _vm.searchingRes
+        ? _c("loader", [
+            _vm._v('Searching for "' + _vm._s(_vm.searchParam) + '"')
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.promptDelete
+        ? _c(
+            "v-alert",
+            {
+              staticClass: "text-xs-center",
+              attrs: { value: "true", color: "error", icon: "warning" }
+            },
+            [
+              _vm._v(
+                '\n\t\tAre you sure you want to delete "' +
+                  _vm._s(_vm.route.title) +
+                  '"? \n\t\t'
+              ),
+              _c("v-btn", { on: { click: _vm.deleteThis } }, [
+                _vm._v("Yes, Delete")
+              ])
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        {
+          staticClass: "fixed-bottom left",
+          staticStyle: { "z-index": "999" },
+          attrs: { color: "error" },
+          on: {
+            click: function($event) {
+              _vm.promptDelete = true
+            }
+          }
+        },
+        [_vm._v("\n\t\tDelete this route.\n\t")]
+      ),
       _vm._v(" "),
       _c("transition", { attrs: { name: "fade" } }, [
         _vm.searching
@@ -55696,7 +55829,7 @@ var render = function() {
                   attrs: {
                     light: "true",
                     placeholder: "2",
-                    label: "Gas price per gallon?"
+                    label: "Gas price per gallon? (usd)"
                   },
                   model: {
                     value: _vm.currentGasPrice,
@@ -56221,8 +56354,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "white--text",
-                        attrs: { flat: "" },
-                        on: { click: _vm.showRegister }
+                        attrs: { href: "/register", flat: "" }
                       },
                       [_vm._v("Register")]
                     )
@@ -56245,8 +56377,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "white--text",
-                        attrs: { flat: "" },
-                        on: { click: _vm.showLogin }
+                        attrs: { href: "/login", flat: "" }
                       },
                       [_vm._v("Login")]
                     )
@@ -56700,6 +56831,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	data: function data() {
@@ -56749,7 +56883,11 @@ var render = function() {
                   id: "password-input",
                   type: "password"
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("input", { attrs: { type: "checkbox", name: "remember" } }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "" } }, [_vm._v("Remember me.")])
             ],
             1
           ),
@@ -56884,7 +57022,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.list_tile{\r\n  background-color: grey;\r\n  cursor: pointer;\n}\n#log-out{\r\n  display: none;\n}\n.btn{\r\n  padding: 5px;\r\n  cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.list_tile{\r\n\tbackground-color: grey;\r\n\tcursor: pointer;\n}\n#log-out{\r\n\tdisplay: none;\n}\n.btn{\r\n\tpadding: 5px;\r\n\tcursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -57068,66 +57206,98 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      more: false,
-      user: '',
-      menu: false,
-      avatarPreview: '',
-      image: '',
-      loading: false
-    };
-  },
+	data: function data() {
+		return {
+			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+			more: false,
+			user: {
+				email_verified: true
+			},
+			menu: false,
+			avatarPreview: '',
+			image: '',
+			loading: true,
+			emailSent: false
+		};
+	},
 
-  computed: {
-    avatar: function avatar() {
-      return;
-    }
-  },
-  methods: {
-    showMenu: function showMenu() {
-      this.menu = true;
-    },
-    logout: function logout() {
-      document.getElementById('log-out').submit();
-    },
-    onFileChange: function onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
+	computed: {
+		avatar: function avatar() {
+			return;
+		}
+	},
+	methods: {
+		proceed: function proceed() {
+			document.getElementById('sentAlert').style.display = 'none';
+		},
+		verifyEmail: function verifyEmail() {
+			axios.post('/verify-email', {
+				_token: this.token
+			}).then(this.emailSent = true);
+		},
+		showMenu: function showMenu() {
+			this.menu = true;
+		},
+		logout: function logout() {
+			document.getElementById('log-out').submit();
+		},
+		onFileChange: function onFileChange(e) {
+			var files = e.target.files || e.dataTransfer.files;
+			if (!files.length) return;
+			this.createImage(files[0]);
 
-      var data = new FormData();
-      data.append('avatar', document.getElementById('image').files[0]);
-      data.append('_token', this.token);
-      data.append('_method', 'put');
+			var data = new FormData();
+			data.append('avatar', document.getElementById('image').files[0]);
+			data.append('_token', this.token);
+			data.append('_method', 'put');
 
-      var config = {
-        headers: { 'Content-Type': 'multipart/FormData' }
-      };
+			var config = {
+				headers: { 'Content-Type': 'multipart/FormData' }
+			};
 
-      axios.post('/api/change-avatar', data, config);
-    },
-    createImage: function createImage(file) {
-      var image = new Image();
-      var reader = new FileReader();
-      var vm = this;
+			axios.post('/api/change-avatar', data, config);
+		},
+		createImage: function createImage(file) {
+			var image = new Image();
+			var reader = new FileReader();
+			var vm = this;
 
-      reader.onload = function (e) {
-        vm.image = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  },
-  mounted: function mounted() {
-    var _this = this;
+			reader.onload = function (e) {
+				vm.image = e.target.result;
+			};
+			reader.readAsDataURL(file);
+		}
+	},
+	mounted: function mounted() {
+		var _this = this;
 
-    axios.get('/api/user').then(function (response) {
-      return _this.user = response.data;
-    });
-  }
+		axios.get('/api/user').then(function (response) {
+			return _this.user = response.data;
+		});
+		this.$nextTick(function () {
+			console.log(this.user);
+		});
+	},
+	updated: function updated() {
+		this.loading = false;
+	}
 });
 
 /***/ }),
@@ -57142,6 +57312,8 @@ var render = function() {
     "v-app",
     { class: "application--" + _vm.user.theme },
     [
+      _vm.loading ? _c("loader") : _vm._e(),
+      _vm._v(" "),
       _c(
         "v-navigation-drawer",
         {
@@ -57171,7 +57343,7 @@ var render = function() {
                     "v-list-tile",
                     [
                       _c("v-list-tile-title", { staticClass: "title" }, [
-                        _vm._v("\n            Quck Links\n          ")
+                        _vm._v("\n\t\t\t\t\t\tQuck Links\n\t\t\t\t\t")
                       ])
                     ],
                     1
@@ -57439,45 +57611,98 @@ var render = function() {
       _c(
         "main",
         [
-          _c(
-            "v-content",
-            [
-              _c(
-                "v-container",
-                { staticStyle: { padding: "0" }, attrs: { fluid: "" } },
+          !_vm.loading
+            ? _c(
+                "v-content",
                 [
-                  _c(
-                    "transition",
-                    { attrs: { name: "fade" } },
-                    [
-                      _vm.loading
-                        ? _c("loader", {
-                            on: {
-                              loading: function($event) {
-                                _vm.loading = true
-                              },
-                              notLoading: function($event) {
-                                _vm.loading = false
+                  _vm.emailSent
+                    ? _c(
+                        "v-alert",
+                        {
+                          attrs: {
+                            color: "success",
+                            icon: "checkmark",
+                            value: "true",
+                            id: "sentAlert"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n\t\t\t\tEmail sent... If you don't see it in your inbox, check your spam folder. The email may take a few minutes to send.\n\t\t\t\t"
+                          ),
+                          _c(
+                            "v-btn",
+                            {
+                              on: {
+                                click: function($event) {
+                                  _vm.proceed()
+                                }
                               }
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("router-view")
+                            },
+                            [_vm._v("OK")]
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.user.email_verified
+                    ? _c(
+                        "div",
+                        [
+                          !_vm.emailSent
+                            ? _c(
+                                "v-snackbar",
+                                {
+                                  attrs: {
+                                    value: "true",
+                                    bottom: "true",
+                                    timeout: "10000000"
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      staticClass: "red accent-4 white--text",
+                                      staticStyle: { margin: "0" },
+                                      on: { click: _vm.verifyEmail }
+                                    },
+                                    [
+                                      _c("b", [
+                                        _vm._v("Click to Verify Your Email Now")
+                                      ])
+                                    ]
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "v-container",
+                    { staticStyle: { padding: "0" }, attrs: { fluid: "" } },
+                    [
+                      _c(
+                        "transition",
+                        { attrs: { name: "fade" } },
+                        [_c("router-view")],
+                        1
+                      )
                     ],
                     1
                   )
                 ],
                 1
               )
-            ],
-            1
-          )
+            : _vm._e()
         ],
         1
       ),
-      _vm._v(" "),
-      _c("v-footer", { attrs: { app: "" } }),
       _vm._v(" "),
       _c("form", {
         attrs: { action: "/logout", method: "post", id: "log-out" }
@@ -57583,7 +57808,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "\n.cont[data-v-2bbb2bf0]{\n\theight: 100vh;\n\twidth: 100vw;\n\tleft: 0;\n\ttop: 0;\n\tposition: fixed;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n}\n", ""]);
+exports.push([module.i, "\n.cont[data-v-2bbb2bf0]{\n\theight: 100vh;\n\twidth: 100vw;\n\tleft: 0;\n\ttop: 0;\n\tposition: fixed;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n\tbackground-color: rgba(255, 255, 255, .9);\n\tz-index: 999;\n}\nh5[data-v-2bbb2bf0]{\n\tmin-height: 28px;\n}\n", ""]);
 
 // exports
 
@@ -57596,19 +57821,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "cont" }, [
-    _c(
-      "div",
-      { staticClass: "text-xs-center" },
-      [
-        _c("v-progress-circular", {
-          attrs: { indeterminate: "", size: 70, width: 7, color: "purple" }
-        }),
-        _vm._v(" "),
-        _c("h5", [_vm._t("default")], 2)
-      ],
-      1
-    )
+  return _c("transition", { attrs: { name: "fade" } }, [
+    _c("div", { staticClass: "cont" }, [
+      _c(
+        "div",
+        { staticClass: "text-xs-center" },
+        [
+          _c("v-progress-circular", {
+            attrs: {
+              indeterminate: "",
+              size: "70",
+              width: "7",
+              color: "primary"
+            }
+          }),
+          _vm._v(" "),
+          _c("h5", { staticClass: "black--text" }, [_vm._t("default")], 2)
+        ],
+        1
+      )
+    ])
   ])
 }
 var staticRenderFns = []

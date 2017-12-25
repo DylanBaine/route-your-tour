@@ -32,9 +32,21 @@
 
 		<section id="profiles" class="padded">
 
-			<header v-show="bands.length >= 1" class="padded">
+			<header class="padded">
 				<h3>Band profiles you run.</h3>
 			</header>
+
+			<div v-if="bands.length < 1" id="noBands">
+				<div class="inner">					
+					<div>				
+						<h3 class="white--text">No bands added yet... :(</h3>
+						<v-btn to="/profiles/add/Band" color="primary">
+							<v-icon>add</v-icon>
+							ADD A BAND PROFILE
+						</v-btn>
+					</div>
+				</div>
+			</div>
 			
 			<v-layout row wrap id="bands">
 				<v-flex md4 xs12 v-for="band in bands" :key="band.id" >
@@ -44,9 +56,21 @@
 				</v-flex>
 			</v-layout>
 
-			<header v-show="venues.length > 0" class="padded">
+			<header class="padded">
 				<h3>Venue profiles you run.</h3>
 			</header>
+
+			<div v-if="venues.length < 1" id="noVenues">
+				<div class="inner">
+					<div>				
+						<h3 class="white--text">No venues added. Feel free to add a venue.</h3>
+						<v-btn to="/profiles/add/Venue" color="primary">
+							<v-icon>add</v-icon>
+							ADD A VENUE PROFILE
+						</v-btn>
+					</div>
+				</div>
+			</div>
 			
 			<v-layout row wrap id="venues">
 				<v-flex md4 xs12 v-for="venue in venues" :key="venue.id" >
@@ -79,7 +103,6 @@
 			</v-layout>
 
 		</section>
-
 
 	</v-container>
 </template>
@@ -122,6 +145,7 @@ export default{
 			venues: [],	
 			promoter: '',
 			bookingAgent: '',
+			loading: true
 		}
 
 	},
@@ -129,15 +153,27 @@ export default{
 		axios.get('/api/users-bands')
 			.then(response => this.bands = response.data);
 
-		axios.get('/api/users-venues')
-			.then(response => this.venues = response.data);
+			this.$nextTick(function(){
 
-		axios.get('/api/users-promoter')
-			.then(response => this.promoter = response.data);
+				axios.get('/api/users-venues')
+					.then(response => this.venues = response.data);	
 
-		axios.get('/api/users-bookingagent')
-			.then(response => this.bookingAgent = response.data);
+				this.$nextTick(function(){
 
+					axios.get('/api/users-promoter')
+						.then(response => this.promoter = response.data);
+
+					this.$nextTick(function(){
+
+						axios.get('/api/users-bookingagent')
+							.then(response => this.bookingAgent = response.data);
+
+					})
+				})
+			})
+	},
+	updated(){
+		this.loading = false;
 	},
 	computed: {
 		activeBands: function(){
@@ -163,6 +199,29 @@ export default{
 </script>
 
 <style scoped>
+	#noBands, #noVenues{
+		border-radius: 10px;
+		width: 100%;
+		height: 300px;
+		margin: 20px 0px;
+		background-position: center;
+		background-size: cover;
+	}
+	#noBands .inner, #noVenues .inner{
+		border-radius: 10px;
+		padding: 40px;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		background-image: linear-gradient(95deg, rgba(0,0,0,.7), rgba(0,0,0,.3));	
+	}
+	#noBands{
+		background-image: url('/Defaults/bands-banner.jpg');
+	}
+	#noVenues{
+		background-image: url('/Defaults/diamond-banner.jpg');
+	}
 	.card{
 		height: 220px !important;
 		padding: 10px;

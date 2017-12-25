@@ -2,7 +2,18 @@
 
 	<v-container grid-list-md>
 
-		<loader v-if="searching">searching</loader>
+		<loader v-if="loading">Loading your route...</loader>
+
+		<loader v-if="searchingRes">Searching for "{{searchParam}}"</loader>
+
+		<v-alert v-if="promptDelete" value="true" color="error" icon="warning" class="text-xs-center">
+			Are you sure you want to delete "{{route.title}}"? 
+			<v-btn @click="deleteThis">Yes, Delete</v-btn>
+		</v-alert>
+
+	<v-btn @click="promptDelete = true" style="z-index: 999;" class="fixed-bottom left" color="error">
+			Delete this route.
+		</v-btn>
 
 		<transition name="fade">
 			<div v-if="searching" id="search-area">
@@ -22,13 +33,12 @@
 							</v-flex>
 							<v-flex md1>
 								<v-btn color="red darken-2" title="Clear Search" small fab flat @click="clearSearch"><v-icon>close</v-icon></v-btn>
-							</v-flex>                               
+							</v-flex>
 							<v-flex md2>
 								<v-btn color="primary" raised @click="search">Search</v-btn>
 							</v-flex>
 						</v-layout>
 					</header>
-
 
 					<section v-if="totalResults">
 
@@ -53,7 +63,7 @@
 									</div>
 								</v-card>
 							</v-flex>   
-						</v-layout>                 
+						</v-layout>  
 					</section>
 				</div>
 			</div>
@@ -114,7 +124,7 @@
 						light="true"
 						placeholder="2"
 						v-model="currentGasPrice"
-						label="Gas price per gallon?">
+						label="Gas price per gallon? (usd)">
 					</v-text-field>
 					<v-text-field
 						light="true"
@@ -157,7 +167,7 @@
 							</div>
 						</div>
 
-						<div v-if="location.confirmed" class="green lighten-1 padded">                          
+						<div v-if="location.confirmed" class="green lighten-1 padded">
 							<header class="text-xs-left">
 								<h5>
 									{{location.venue}}
@@ -168,7 +178,7 @@
 							</p>
 							<div class="relative bottom right" style="top:-10px;">
 								<v-btn fab small class="red darken-1 white--text" @click="deleteLocation(location.id)" title="Delete this location."><v-icon>delete_forever</v-icon></v-btn>
-								<v-btn v-if="location.slug"  fab small class="blue darken-1 white--text" :href=" 'venues/' + location.slug " target="_blank" title="Visit this venues RYT page."><v-icon>link</v-icon></v-btn>
+								<v-btn v-if="location.slug"fab small class="blue darken-1 white--text" :href=" 'venues/' + location.slug " target="_blank" title="Visit this venues RYT page."><v-icon>link</v-icon></v-btn>
 							</div>
 						</div>
 
@@ -176,7 +186,7 @@
 
 				</section>
 
-			</div>              
+			</div>
 		</aside>
 
 		<main id="map" class="white">
@@ -214,8 +224,11 @@ export default{
 			start: '',
 			end: '',
 			distance: '',
-			currentGasPrice: '',
-			vehicleMPG: '',
+			currentGasPrice: 2.75,
+			vehicleMPG: 12,
+			loading: true,
+			searchingRes: false,
+			promptDelete: false
 		}
 	},
 	mounted(){
@@ -228,7 +241,16 @@ export default{
 
 		});
 	},
+	updated(){
+		this.loading = false;
+	},
 	methods: {
+		deleteThis: function(){
+			axios.post('api/' + this.route.id + '/delete', {
+				_method: 'delete',
+				_token: this.token
+			}).then(window.location.href = '/home');
+		},
 		getRoute: function(){
 			axios.get('/api/band/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug)
 			.then(response => this.route = response.data);
@@ -384,8 +406,19 @@ export default{
 			this.manuallyAdding = false
 		},
 		search : function(){
+			this.searchingRes = true;
+			this.searchResults = '';
 			axios.get('/api/venues/search=' + this.searchParam)
-			.then(response => this.searchResults = response.data);
+			.then(response => {
+					if(response.data.length > 0){
+						this.searchResults = response.data;
+						this.searchingRes = false;	
+
+					}else{
+						this.searchingRes = false;
+					}
+				}
+				);
 		},
 		clearSearch: function(){
 
@@ -397,6 +430,7 @@ export default{
 			axios.post('/api/' + this.route.id + '/add-location', {
 				_token: this.token,
 				route_id: this.route.id,
+				band_id: this.route.band_id,
 				venue: name,
 				address: address,
 				slug: link

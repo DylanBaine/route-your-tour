@@ -1,11 +1,12 @@
 <template>
 	<v-container>
+		<loader v-if="loading">Loading your settings...</loader>
 		<v-alert v-show="edited" color="success" icon="check_circle">
 			<p>Successfully edited...</p>
 			<p>Going back home.</p>
 		</v-alert>
 
-		<header>
+		<header class="padded">
 			<h1>Settings</h1>
 		</header>
 		<hr>
@@ -55,14 +56,6 @@
 					<v-chip v-if="user.email_verivied" color="success" text-color="white">
 						Your email is verified.
 					</v-chip>
-					<div class="white--text red padded rounded" v-if="!user.email_verified">
-						<header>
-							Email not verified.	
-						</header>						
-						<v-btn @click="verifyEmail">
-							Resend verification.
-						</v-btn>
-					</div>
 				</div>
 
 		</section>
@@ -85,18 +78,21 @@
 				changed: false,
 				token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 				edited: false,
-				items: [{text: 'dark'},{text: 'light'}]
+				items: [{text: 'dark'},{text: 'light'}],
+				loading: true
 			}
 		},
 		mounted(){
 			this.getUser();
+		},
+		updated(){
+			this.loading = false;
 		},
 		methods: {
 			getUser: function(){
 				axios.get('/api/user').then(response => this.user = response.data);
 			},
 			editUser: function(){
-
 				axios.put('/api/user', {
 					name: this.user.name,
 					email: this.user.email,
@@ -106,9 +102,6 @@
 				.catch(error => {
 					alert(error = ' errors occured');
 				});
-			},
-			verifyEmail: function(){
-				alert('sending email')
 			},
 			emitSuccess: function(){
 				this.edited = true;

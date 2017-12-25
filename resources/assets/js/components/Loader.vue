@@ -1,10 +1,12 @@
 <template>
-	<div class="cont">
-		<div class="text-xs-center">
-			<v-progress-circular indeterminate v-bind:size="70" v-bind:width="7" color="purple"></v-progress-circular>	
-			<h5><slot/></h5>
-		</div>	
-	</div>
+	<transition name="fade">
+		<div class="cont">
+			<div class="text-xs-center">
+				<v-progress-circular indeterminate size="70" width=7 color="primary"></v-progress-circular>	
+				<h5 class="black--text"><slot/></h5>
+			</div>	
+		</div>
+	</transition>
 </template>
 
 <style scoped>
@@ -17,5 +19,10 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background-color: rgba(255, 255, 255, .9);
+		z-index: 999;
+	}
+	h5{
+		min-height: 28px;
 	}
 </style>

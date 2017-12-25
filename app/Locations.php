@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Locations extends Model
 {
-    protected $fillable = ['venue', 'address', 'venue_id', 'route_id'];
+    protected $fillable = ['venue', 'address', 'venue_id', 'route_id', 'band_id'];
 
     public function route()
     {
@@ -16,5 +16,10 @@ class Locations extends Model
     public function venue()
     {
     	return $this->belongsTo(Venue::class);
+    }
+
+    public function band()
+    {
+    	return $this->belongsTo(Band::class);
     }
 }

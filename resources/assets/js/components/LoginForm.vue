@@ -20,6 +20,9 @@
 						type="password"
 		            ></v-text-field>
 
+		            <input type="checkbox" name="remember">
+		            <label for="">Remember me.</label>
+
 		         </div>   
 	        <v-card-actions>
 	          <v-spacer></v-spacer>

@@ -14,7 +14,9 @@
 			<header class="padded text-xs-center">
 				<h3>
 					{{$page->address}} <a href="/venues/in/{{$page->country_slug}}">{{$page->country}}</a>
-					{{$page->location}}
+					@if($page->location != 'null')
+						{{$page->location}}
+					@endif
 				</h3>
 			</header>
 			<v-container class="padded" grid-list-md>
@@ -55,7 +57,7 @@
 									</div>
 									@endif
 
-								@if($page->bio)
+								@if($page->bio != 'null')
 									<h5>Bio</h5>
 									{{$page->bio}}
 								@endif

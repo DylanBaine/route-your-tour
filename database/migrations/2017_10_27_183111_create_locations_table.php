@@ -19,6 +19,7 @@ class CreateLocationsTable extends Migration
             $table->string('venue');
             $table->string('address')->nullable();
             $table->integer('routes_id')->unsigned();
+            $table->integer('band_id')->unsigned();
             $table->string('ticket_link')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
