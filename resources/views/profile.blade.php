@@ -1,5 +1,11 @@
 @extends('layouts.guest')
 
+@section('meta')
+	<meta property="og:image" content="{{url('storage/' . $page->banner)}}">
+	<meta property="og:description" content="{{$page->bio}}">	
+	<meta property="og:url" content="{{url($type . '/' . $page->slug)}}">
+@stop
+
 @section('content')
 
 <v-container fluid class="venue-page">

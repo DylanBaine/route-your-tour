@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Welcome to Route Your Tour</title>
-</head>
-<body>
+@component('mail::message')
 
-	Welcome to Route Your Tour! Please confirm your email by clicking <a href="http://localhost:8000/verifying/{{$userToken}}-{{$sendTo}}">here.</a>
-	
-</body>
-</html>
+<img src="{{url('Defaults\logo-black.png')}}" alt="">
+
+# Welcome to the club, {{$name}}!
+
+@component('mail::button', ['url' => $url ])
+CLICK HERE TO VERIFY YOUR EMAIL
+@endcomponent
+
+
+@endcomponent

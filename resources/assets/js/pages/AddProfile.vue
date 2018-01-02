@@ -5,6 +5,10 @@
 			<h4 >Welcome to your profiles page.</h4>
 			<h6>This is where all of your pages are listed. You can also add new pages from here.</h6>
 			<small> You have {{activeBands}} bands, and {{activeVenues}} venues  active right now.</small>
+
+			<v-btn to="add-tour" color="primary" class="padded">
+				Route Your Tour Now! <v-icon>add</v-icon>
+			</v-btn>
 		</header>
 
 		<hr>
@@ -184,14 +188,7 @@ export default{
 		},
 		queryLength: function(){
 			return this.venues.length + this.bands.length
-		},
-		loading: function(){	
-			if(this.queryLength < 0){
-				return true
-			}else{
-				return false
-			}
-		}			
+		}		
 	},
 
 }

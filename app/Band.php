@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use File;
 
 class Band extends Model
 {
@@ -36,6 +38,8 @@ class Band extends Model
 		static::deleting(function($band) {
 			$band->routes()->delete();
 			$band->locations()->delete();
+			DB::table('band_user')->where('band_id', $band->id)->delete();
+			File::delete('storage/' . $band->banner);
 		});
 	}
 }

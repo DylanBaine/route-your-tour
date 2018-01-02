@@ -16016,7 +16016,7 @@ table.table tfoot tr {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 90, 0.4);
+  background-color: #1976d2;
   border-radius: 10px;
 }
 

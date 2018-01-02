@@ -2,12 +2,23 @@
 	<transition name="fade">
 		<div class="cont">
 			<div class="text-xs-center">
-				<v-progress-circular indeterminate size="70" width=7 color="primary"></v-progress-circular>	
+				<v-progress-circular indeterminate :size="size" :width="width" color="primary"></v-progress-circular>	
 				<h5 class="black--text"><slot/></h5>
 			</div>	
 		</div>
 	</transition>
 </template>
+
+<script>
+	export default {
+		data(){
+			return {
+				width: 3,
+				size: 70
+			}
+		}
+	}
+</script>
 
 <style scoped>
 	.cont{

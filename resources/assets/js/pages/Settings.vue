@@ -52,12 +52,6 @@
 				</v-flex>
 			</v-layout>
 
-				<div class="margin-auto">
-					<v-chip v-if="user.email_verivied" color="success" text-color="white">
-						Your email is verified.
-					</v-chip>
-				</div>
-
 		</section>
 
 		<div class="fixed-bottom right">
@@ -79,7 +73,10 @@
 				token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 				edited: false,
 				items: [{text: 'dark'},{text: 'light'}],
-				loading: true
+				loading: true,
+				img: '',
+				avatarPreview: '',
+				image: '',
 			}
 		},
 		mounted(){
@@ -103,7 +100,7 @@
 					alert(error = ' errors occured');
 				});
 			},
-			emitSuccess: function(){
+			emitSuccess: function(){	
 				this.edited = true;
 				this.changed = false;
 				this.user.password = '';

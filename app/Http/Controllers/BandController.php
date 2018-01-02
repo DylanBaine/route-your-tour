@@ -12,13 +12,23 @@ use File;
 class BandController extends Controller
 {
     public function allBandsPage(){
-        $bands = Band::orderBy('created_at', 'desc')->paginate(12);
+        $param = \Request::get('search');
+        if($param == NULL){
+            $bands = Band::orderBy('created_at', 'desc')->paginate(12);
+        }elseif($param != NULL){
+            $bands = Band::where('name', 'like', '%'. $param . '%')
+                                    ->orwhere('location', 'like',  '%'. $param . '%')
+                                    ->orwhere('primary_genre', 'like', '%'. $param . '%')
+                                    ->orwhere('sub_genre', 'like', '%'. $param . '%')
+                                    ->orderBy('created_at', 'desc')->paginate(12);
+        }
         return view('bands', compact('bands'));
     }
 
     public function guestView($slug){
         $page = Band::where('slug', $slug)->first();
-        return view('profile', compact('page'));
+        $type = 'bands';
+        return view('profile', compact('page', 'type'));
     }
 
     public function store(Request $request)

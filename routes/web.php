@@ -10,6 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*-- MAIL TEST --*/
+
+Route::get('mail/verify-email', function(){
+	return new App\Mail\ConfirmEmail();
+});
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +44,9 @@ Route::post('/verify-email', 'HomeController@sendEmail');
 Route::get('/verifying/{token}-{email}', 'HomeController@verifyUser');
 
 Route::prefix('api')->group(function () {
+
+		/*---- API FOR SEARCH COMPONENT ----*/
+	Route::get('{model}/search/param={param}', 'SearchController@formComponent');
 
 		/*----GET CURRENT USER THAT IS LOGGED IN----*/
 	Route::get('/user', function(){

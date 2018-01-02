@@ -12,119 +12,132 @@ use Image;
 class VenueController extends Controller
 {
 
-  public function allVenuesPage()
-  {
-    $venues = Venue::orderBy('created_at', 'desc')->paginate(12);
-    return view('venues', compact('venues'));
-  }
+	public function allVenuesPage()
+	{
+			$param = \Request::get('search');
+			if($param == NULL){
+					$venues = Venue::orderBy('created_at', 'desc')->paginate(12);
+			}elseif($param != NULL){
+					$venues = Venue::where('name', 'like', '%'. $param . '%')
+									->orwhere('address', 'like',  '%'. $param . '%')
+									->orwhere('category', 'like',  '%'. $param . '%')
+									->orderBy('created_at', 'desc')->paginate(12);
+			}
+			return view('venues', compact('venues', 'param'));
+	}
 
-  public function countryView($country){
-    $venues = Venue::where('country_slug', $country)->paginate(12);
-    return view('venues', compact('venues'));
-  }
+	public function countryView($country){
+		$param = '';
+		$venues = Venue::where('country_slug', $country)->paginate(12);
+		return view('venues', compact('venues', 'param'));
+	}
 
-  public function categoryView($category){
-    $venues = Venue::where('category_slug', $category)->paginate(12);
-    return view('venues', compact('venues'));
-  }
+	public function categoryView($category){
+			$param = '';
 
-  public function guestView($slug)
-  {
-    $page = Venue::where('slug', $slug)->first();
-    return view('profile', compact('page'));
-  }
+			$venues = Venue::where('category', $category)->orderBy('created_at', 'desc')->paginate(12);
 
-  public function allVenues()
-  {
-    return Venue::orderBy('created_at', 'desc')->get();
-  }
+			return view('venues', compact('venues', 'param'));
+	}
 
-  public function store(Request $request)
-  {
+	public function guestView($slug)
+	{
+		$page = Venue::where('slug', $slug)->first();
+		$type = 'venues';
+		return view('profile', compact('page', 'type'));
+	}
 
-    $user = User::where('id', Auth::user()->id)->first();
+	public function allVenues()
+	{
+		return Venue::orderBy('created_at', 'desc')->get();
+	}
 
-    $venue = new Venue;
+	public function store(Request $request)
+	{
 
-    $venue->name = request('name');
+		$user = User::where('id', Auth::user()->id)->first();
 
-    $venue->address = request('location');
+		$venue = new Venue;
 
-    $venue->slug = request('slug');
+		$venue->name = request('name');
 
-    $venue->category = request('category');
+		$venue->address = request('location');
 
-    $venue->category_slug = str_slug(request('category'));
+		$venue->slug = request('slug');
 
-    $venue->country = request('country');
+		$venue->category = request('category');
 
-    $venue->country_slug = str_slug(request('country'));
+		$venue->category_slug = str_slug(request('category'));
 
-    $venue->save();
+		$venue->country = request('country');
 
-    $user->venues()->attach($venue->id);
-  }
+		$venue->country_slug = str_slug(request('country'));
 
-  public function see()
-  {
+		$venue->save();
 
-    return Auth::user()->venues()->orderBy('created_at', 'desc')->get();
+		$user->venues()->attach($venue->id);
+	}
 
-  }
+	public function see()
+	{
 
-  public function thisVenue($slug)
-  {
-    return Venue::where('slug', $slug)->first();
-  }
+		return Auth::user()->venues()->orderBy('created_at', 'desc')->get();
 
-  public function edit($id, Request $request)
-  {
-    $venue = Venue::find($id);
+	}
 
-    $venue->name = request('name');
+	public function thisVenue($slug)
+	{
+		return Venue::where('slug', $slug)->first();
+	}
 
-    $venue->address = request('address');
+	public function edit($id, Request $request)
+	{
+		$venue = Venue::find($id);
 
-    $venue->country = request('country');
+		$venue->name = request('name');
 
-    $venue->booking_email = request('booking_email');
+		$venue->address = request('address');
 
-    $venue->booking_number = request('booking_number');
+		$venue->country = request('country');
 
-    $venue->website = request('website');
+		$venue->booking_email = request('booking_email');
 
-    $venue->amenities = request('amenities');
+		$venue->booking_number = request('booking_number');
 
-    $venue->category = request('category');
+		$venue->website = request('website');
 
-    $venue->category_slug = str_slug(request('category'));
+		$venue->amenities = request('amenities');
 
-        if($request->hasFile('banner')){
-            
-            File::delete('storage/' . $venue->banner_image);
+		$venue->category = request('category');
 
-            $image = $request->file('banner');
-            $imageUrl = Auth::user()->id . '-' . $venue->slug . '-' . time() . '.jpg';
+		$venue->category_slug = str_slug(request('category'));
 
-            Image::make($image)->save(public_path('storage/' . $imageUrl));
+				if($request->hasFile('banner')){
+						
+						File::delete('storage/' . $venue->banner);
 
-            $venue->banner_image = $imageUrl;
+						$image = $request->file('banner');
+						$imageUrl = Auth::user()->id . '-' . $venue->slug . '-' . time() . '.jpg';
 
-        }    
+						Image::make($image)->save(public_path('storage/' . $imageUrl));
 
-    $venue->save();
-  }
+						$venue->banner = $imageUrl;
 
-  public function delete($id)
-  {
-    Venue::find($id)->delete();
-  }
+				}    
 
-  public function search($param)
-  {
-    return Venue::where('name', 'like', '%'. $param . '%')
-      ->orwhere('address', 'like',  '%'. $param . '%')
-      ->orwhere('category', 'like',  '%'. $param . '%')
-      ->get();
-  }
+		$venue->save();
+	}
+
+	public function delete($id)
+	{
+		Venue::find($id)->delete();
+	}
+
+	public function search($param)
+	{
+		return Venue::where('name', 'like', '%'. $param . '%')
+			->orwhere('address', 'like',  '%'. $param . '%')
+			->orwhere('category', 'like',  '%'. $param . '%')
+			->get();
+	}
 }

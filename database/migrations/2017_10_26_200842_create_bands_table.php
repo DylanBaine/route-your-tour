@@ -21,6 +21,8 @@ class CreateBandsTable extends Migration
             $table->string('soundcloud_url')->nullable();
             $table->text('bio')->nullable();
             $table->integer('number_of_routes_booked')->default(0);
+            $table->string('primary_genre')->nullable();
+            $table->string('sub_genre')->nullable();
             $table->string('banner')->nullable();
             $table->timestamps();
         });

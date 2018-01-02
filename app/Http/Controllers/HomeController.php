@@ -11,6 +11,7 @@ use \App\User;
 
 use Illuminate\Mail\Mailer;
 use Mail;
+use App\Mail\ConfirmEmail;
 
 class HomeController extends Controller
 {
@@ -63,6 +64,10 @@ class HomeController extends Controller
 		if(request('password')){
 			$user->password = bcrypt(request('password'));
 		}
+		if(request('email') != $user->email){
+			$user->email_confirmed_token = str_random(10);		
+			$user->email_verified = 0;
+		}
 		$user->email = request('email');
 		$user->theme = request('theme');
 
@@ -70,18 +75,20 @@ class HomeController extends Controller
 	}
 
 	public function sendEmail(){
-		$user = Auth::user();
+/*		$user = Auth::user();
 		$data = [
 			'sendTo' => $user->email,
 			'name' => $user->name,
 			'userToken' => $user->email_confirmed_token
 		];
 
-		Mail::send('mail.verifyEmail', $data, function($message) use ($data){
+		Mail::send(new ConfirmEmail(), $data, function($message) use ($data){
 			$message->from('noreply@routeyourtour.com');
 			$message->to($data['sendTo']);
 			$message->subject('Welcome to Route Your Tour, ' . $data['name']);
-		});
+		});*/
+
+		Mail::to(Auth::user()->email)->send(new ConfirmEmail());
 	}
 
 	public function verifyUser($email, $token){

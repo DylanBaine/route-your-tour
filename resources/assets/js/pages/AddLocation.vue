@@ -441,8 +441,6 @@ export default{
 			document.getElementById('location_input').value = '';
 
 			this.$nextTick(function(){
-
-				this.searching = false;
 				this.getLocations();  
 
 			}) 

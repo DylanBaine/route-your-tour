@@ -1,32 +1,25 @@
 @extends('layouts.guest')
 
+@section('meta')
+<meta name="description" content="Explore all venues in the Route Your Tour database.">
+@stop
+
 @section('content')
 <header>
 
 	<v-layout row wrap class="padded">
 
-		<v-flex md6 class="padded">
+		<v-flex md6 class="padded text-xs-center text-md-left">
 
 			<header>
 				<h5>Search by Name, City, Country, Etc...</h5>
 			</header>
 
-			<form action="/venues/search">
-				
-				<v-text-field
-					name="param"
-					placeholder="Tulsa, OK"
-				></v-text-field>
-
-				<v-btn color="primary" href="/venues/category/auditorium/">
-					Search
-				</v-btn>
-
-			</form>
+			<search-form url="/venues" searchfor="venue"></search-form>
 
 		</v-flex>		
 		
-		<v-flex md6 class="padded text-xs-right">
+		<v-flex md6 class="padded text-xs-center text-md-right">
 
 			<header>
 				<h5>See Categories</h5>
@@ -75,6 +68,9 @@
 		</v-flex>
 
 	</v-layout>
+	@if($param)
+		<h2 class="text-xs-center">Results for "<em>{{$param}}</em>"</h2>
+	@endif
 
 </header>
 
