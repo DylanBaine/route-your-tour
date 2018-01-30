@@ -4,21 +4,29 @@
 			
 			<v-text-field
 				name="search"
-				placeholder=""
-				@keydown.native="getPreview"
+				placeholder="Start typing..."
+				@keydown="getPreview"
 				v-model="searchParam"
+				:rules="paramRules"
 			></v-text-field>
-			<v-list two-line v-if="searchPreviews" id="searchPreviews">
-				<v-list-tile v-for="searchPreview in searchPreviews" v-bind:key="searchPreview.title" :href="searchfor + 's/' +searchPreview.slug">
-				  <v-list-tile-content>
-					<v-list-tile-title>{{searchPreview.name}}</v-list-tile-title>
-				  	<v-list-tile-sub-title>{{searchPreview.location || searchPreview.address}}</v-list-tile-sub-title>
-				  </v-list-tile-content>
-				  <v-list-tile-action>
-					{{searchPreview.category || searchPreview.primary_genre}}
-				  </v-list-tile-action>
-				</v-list-tile>
-			</v-list>
+
+			<div v-if="loading.showing" class="text-xs-center">
+				{{loading.message}}
+			</div>
+
+			<transition name="drop">
+				<v-list two-line v-if="searchPreviews" id="searchPreviews">
+					<v-list-tile v-for="searchPreview in searchPreviews" v-bind:key="searchPreview.title" :href="'/' + searchfor + 's/' +searchPreview.slug">
+					  <v-list-tile-content>
+						<v-list-tile-title>{{searchPreview.name}}</v-list-tile-title>
+					  	<v-list-tile-sub-title>{{searchPreview.location || searchPreview.address}}</v-list-tile-sub-title>
+					  </v-list-tile-content>
+					  <v-list-tile-action>
+						{{searchPreview.category || searchPreview.primary_genre}}
+					  </v-list-tile-action>
+					</v-list-tile>
+				</v-list>
+			</transition>
 			<v-btn color="primary" type="submit">
 				{{searchPreviews ? 'See Results Page' : 'Search'}}
 			</v-btn>
@@ -34,7 +42,13 @@ export default {
 		return {
 			searchParam: '',
 			searchPreviews: false,
-			loading: true
+			loading: {
+				showing: false,
+				message: 'Looking....'
+			},
+			paramRules: [
+				(v) => v.length > 3 || 'Must have 4 characthers to search with.'
+			]
 		}
 	},
 	props: [
@@ -46,14 +60,35 @@ export default {
 	},
 	methods: {
 		getPreview: function(){
-			if(this.searchParam.length >= 3){
+			if(this.searchReady){
+				this.loading.showing = true;
+				this.loading.message = 'Looking...';				
+				this.searchPreviews = [];
 				axios.get('/api/' + this.searchfor + '/search/param=' + this.searchParam)
 					.then((res) =>{
-						this.searchPreviews = res.data;
+						if(res.data.length > 0){
+							this.searchPreviews = res.data;
+							this.loading.showing = false;
+						}else{
+							this.searchPreviews = false;				
+							this.loading = {
+								showing: true,
+								message: 'No results for "' + this.searchParam + '."'
+							};
+						}
 					});
+			}else{
+				this.loading.showing = false;
+				this.loading.message = false;
+				this.searchPreviews = false;
 			}
 		}
 
+	},
+	computed: {
+		searchReady: function(){
+			return this.searchParam.length > 2 ? true : false;
+		}
 	}
 }
 	

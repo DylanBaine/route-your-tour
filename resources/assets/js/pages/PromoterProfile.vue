@@ -38,12 +38,28 @@
 				Save
 			</v-btn>
 
-			<v-btn color="error" @click="destroy" class="fixed-bottom left">
-				Delete this profile.
-			</v-btn>
+			<div class="fixed-bottom left">
+				<v-menu offset-y v-model="showMenu" absolute full-width>
+					<v-btn fab raised color="primary" slot="activator" title="Toolbar">
+						<v-icon color="white">more_vert</v-icon>
+					</v-btn>
+					<v-list style="background-color: transparent;">
+						<v-list-tile>
+							<v-btn @click="promptDestroy = true" color="error">Delete this Profile.</v-btn>
+						</v-list-tile>
+						<v-list-tile>
+							<v-btn :href="'/promoters/' + promoter.slug" color="success">See public page.</v-btn>
+						</v-list-tile>
+					</v-list>
+				</v-menu>
+			</div>
 
 		</section>
 
+		<v-alert color="error" value="true" v-if="promptDestroy" icon="warning">
+			Are you sure you want to delete this profile and all of its data?
+			<v-btn flat @click="destroy" >Yes</v-btn> <v-btn flat @click="promptDestroy = false" color="white">Nevermind</v-btn>
+		</v-alert>
 	</v-container>
 </template>
 
@@ -54,7 +70,8 @@ export default{
 			promoter: '',
 			token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 			edited: false,
-			errors: false
+			errors: false,
+			promptDestroy: false
 		}
 	},
 	methods: {
@@ -99,19 +116,25 @@ export default{
 </script>
 
 <style scoped>
-	input, textarea{
-		width: 100%;
-		padding: 5px;
-	}
-	input:focus, textarea:focus{
-		background-color: rgba(0,0,0, .05);
-	}
-	label{
-		cursor: pointer;
-	}
-	.alert-btn{
-		position: absolute;
-		right: 10px;
-		top: 0;
-	}
+input, textarea{
+	width: 100%;
+	padding: 5px;
+}
+input:focus, textarea:focus{
+	background-color: rgba(0,0,0, .05);
+}
+label{
+	cursor: pointer;
+}
+.alert-btn{
+	position: absolute;
+	right: 10px;
+	top: 0;
+}
+.list > li {
+	margin: 10px 0;
+}
+.list .list__tile {
+	color: white !important;
+}
 </style>

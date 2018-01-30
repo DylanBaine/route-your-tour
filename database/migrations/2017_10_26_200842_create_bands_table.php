@@ -16,6 +16,7 @@ class CreateBandsTable extends Migration
         Schema::create('bands', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->integer('times_visited')->default(0);
             $table->string('slug')->unique();
             $table->string('location');
             $table->string('soundcloud_url')->nullable();

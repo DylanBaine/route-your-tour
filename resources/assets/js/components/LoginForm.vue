@@ -31,8 +31,12 @@
 					v-model="password"
 				></v-text-field>
 
-				<input type="checkbox" name="remember">
-				<label for="">Remember me.</label>
+				<input type="checkbox" name="remember">	<label for="">Remember me.</label>
+
+				<v-btn flat color="primary" href="/password/reset">
+                    Forgot Your Password?
+                </v-btn>
+				
 
 			 </div>   
 		<v-card-actions>
@@ -59,6 +63,21 @@ export default{
 			passwordRules: [
 				(v) => !!v || "You must enter a password."
 			]
+		}
+	},
+	methods: {
+		login: function(){
+			var data = {
+				client_id: 2,
+				client_secret: '8DvHpGIUCmU04RNGAiX8uQOcKrf90myehZMMfds5',
+				grant_type: 'password',
+				username: this.email,
+				password: this.password 
+			}
+
+			axios.post('/oauth/token', data).then((res)=>{console.log(res)})
+
+
 		}
 	}
 }

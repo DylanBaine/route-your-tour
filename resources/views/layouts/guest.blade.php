@@ -16,7 +16,6 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         @yield('meta')
-        
     </head>
     <body>
         <div id="app" v-cloak>

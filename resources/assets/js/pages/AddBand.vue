@@ -1,8 +1,13 @@
 <template>
-	<v-container fluid style="padding: 0;">
-		<v-card class="blue--text">
+	<v-container fluid style="padding: 0;" class="text-xs-center">
+		<v-alert value="true" v-if="alert.showing" :color="alert.type" :icon="alert.icon">
+			{{alert.message}}
+			<v-btn v-if="alert.link" color="primary" :href="alert.link">Go</v-btn>
+			<v-btn flat @click="alert.showing = false">Cancel</v-btn>
+		</v-alert>
+		<v-card class="blue--text card" width="">
 			<v-card-title primary-title>
-				<div class="headline text-xs-center">We will need a little info about your band.</div>
+				<div class="headline text-xs-center">Add Band</div>
 			</v-card-title> 
 			<form @submit.prevent="saveBand()" id="basic-band-form" v-model="valid">			
 
@@ -13,6 +18,7 @@
 					label="Whats your band called?"
 					v-model="name"
 					:rules="nameRules"
+					required
 					></v-text-field>
 
 					<div class="slug grey--text"><label>Your url will be: </label>www.routeyourtour.com/bands/<span class="yellow lighten-3">{{slug}}</span><input type="hidden" :value="slug" name="slug"></div>
@@ -24,8 +30,13 @@
 					label="Do you have a soundcloud account? (if not, leave blank)"
 					placeholder="https://soundcloud.com/my-cool-band"
 					v-model="soundcloud"
-					:rules="soundcloudRules"
-					></v-text-field>						
+					></v-text-field>
+					
+					<transition name="drop">
+						<iframe v-if="soundcloud" width="97%" height="300" scrolling="no" frameborder="no"
+									:src="'https://w.soundcloud.com/player/?url=' + soundcloud">
+						</iframe>
+					</transition>				
 
 				</div>			
 
@@ -50,9 +61,13 @@ export default {
 				(v) => !!v || 'Name is required.'
 			],
 			soundcloud: '',
-			soundcloudRules: [
-				(v) => /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/.test(v) || 'Must enter a valid url. Make sure it contains "https://"'
-			],
+			alert: {
+				showing: false,
+				message: '',
+				type: '',
+				link: '',
+				icon: ''
+			}
 		}
 	},
 	methods: {
@@ -67,8 +82,15 @@ export default {
 				window.location.href = '/home#/band/' + this.slug
 			)
 			.catch(error => {
-				alert(error + ': please fill in all of the fields.')
-			})
+				this.alert.showing = true;
+				this.alert.message = error.response.data.message;
+				this.alert.type = 'error';
+				this.alert.icon = 'error';
+				this.alert.link = '/signup/premium';
+				if(error.response.data.message == 'You already have one band... To add more, sign up for a Premium Account.'){
+					this.alert.link = '/signup/premium'
+				}
+			});
 		}
 	},
 	computed: {
@@ -91,7 +113,6 @@ export default {
 	      }
 	      
 	    })
-
 	}
 }
 </script>
@@ -99,5 +120,10 @@ export default {
 <style scoped>
 	.slug label{
 		font-weight: bold;
+	}
+	.card{
+		margin: 20px auto;
+		width: 700px;
+		max-width: 100vw;
 	}
 </style>

@@ -9,11 +9,7 @@ use \App\Band;
 use \App\Locations;
 
 class RouteController extends Controller
-{
-	public function __construct(){
-		$this->middleware('auth');
-	}
-	
+{	
 	public function create(Request $request)
 	{
 		$route = new Routes;
@@ -40,6 +36,7 @@ class RouteController extends Controller
 		$route = $band->routes()->where('slug', $route_slug)->first();
 		return $route;
 	}
+	
 	public function addLocation($route_id, Request $request)
 	{
 
@@ -98,5 +95,15 @@ class RouteController extends Controller
 		$route = Routes::find($route_id);
 
 		$route->delete();
+	}
+
+	public function confirmAll($route_id)
+	{
+		$locations = Locations::where('routes_id', $route_id)->where('confirmed', 0)->get();
+
+		foreach($locations as $location){
+			$location->confirmed = 1;
+			$location->save();
+		}
 	}
 }

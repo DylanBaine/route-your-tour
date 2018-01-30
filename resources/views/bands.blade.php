@@ -17,7 +17,7 @@
 				<h5>Search by Name, City, Country, Etc...</h5>
 			</header>
 			
-			<search-form searchurl="bands" searchfor="band"></search-form>
+			<search-form url="/bands" searchfor="band"></search-form>
 
 		</v-flex>
 

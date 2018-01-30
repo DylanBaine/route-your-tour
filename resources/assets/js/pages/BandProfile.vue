@@ -60,6 +60,36 @@
 		</header>
 
 		<hr>
+
+		<section id="tours">
+			<header>
+				<h2>Booked Tours</h2>
+			</header>
+			<v-layout row>
+				<v-flex xs6 md3>
+					<v-card :to=" '/band/' + band.slug + '/tour' " color="success" class="card white--text" data-ripple="true">
+						<div class="text-xs-center">
+							<v-icon color="white">add</v-icon>
+							<br>
+							Add a Route.
+						</div>
+					</v-card>
+				</v-flex>
+
+				<v-flex xs6 md3 v-for="route in routes" :key="route.id">
+					<v-card :to="'/band/' + band.slug + '/' +route.slug" color="primary" class="card white--text" data-ripple="true">
+						<div class="text-xs-center">
+							{{route.title}}
+						</div>
+					</v-card>
+				</v-flex>
+
+			</v-layout>
+		</section>
+
+		<br>
+		<hr>
+
 		<section id="contacts">
 			<header>
 				<h2>Band Info.</h2>
@@ -107,44 +137,30 @@
 
 		</section>
 
-		<hr>
-
-		<section id="tours">
-			<header>
-				<h2>Booked Tours</h2>
-			</header>
-			<v-layout row>
-				<v-flex xs6 md3>
-					<v-card :to=" '/band/' + band.slug + '/tour' " color="success" class="card white--text" data-ripple="true">
-						<div class="text-xs-center">
-							<v-icon color="white">add</v-icon>
-							<br>
-							Add a Route.
-						</div>
-					</v-card>
-				</v-flex>
-
-				<v-flex xs6 md3 v-for="route in routes" :key="route.id">
-					<v-card :to="'/band/' + band.slug + '/' +route.slug" color="primary" class="card white--text" data-ripple="true">
-						<div class="text-xs-center">
-							{{route.title}}
-						</div>
-					</v-card>
-				</v-flex>
-
-			</v-layout>
-		</section>
-
 		<v-btn color="primary" @click="edit" class="fixed-bottom right crazy-btn">
 			Save
 		</v-btn>
-
-		<v-btn color="error" @click="destroy" class="fixed-bottom left">
-			Delete this band.
-		</v-btn>
+		<div class="fixed-bottom left">
+			<v-menu offset-y v-model="showMenu" absolute full-width>
+				<v-btn fab raised color="primary" slot="activator" title="Toolbar">
+					<v-icon color="white">more_vert</v-icon>
+				</v-btn>
+				<v-list style="background-color: transparent;">
+					<v-list-tile>
+						<v-btn @click="promptDestroy = true" color="error">Delete this band.</v-btn>
+					</v-list-tile>
+					<v-list-tile>
+						<v-btn :href="'/bands/' + band.slug" color="success">See public page.</v-btn>
+					</v-list-tile>
+				</v-list>
+			</v-menu>
+		</div>
 
 	</section>
-
+	<v-alert color="error" value="true" v-if="promptDestroy" icon="warning">
+		Are you sure you want to delete this band and all of its data?
+		<v-btn flat @click="destroy" >Yes</v-btn> <v-btn flat @click="promptDestroy = false" color="white">Nevermind</v-btn>
+	</v-alert>
 </v-container>
 </template>
 
@@ -161,7 +177,8 @@ export default{
 			errors: false,
 			routes: '',
 			image: '',
-			loading: true
+			loading: true,
+			promptDestroy: false
 		}
 	},
 	mounted(){
@@ -248,6 +265,10 @@ export default{
 </script>
 
 <style scoped>
+textarea{
+	resize: none;
+	overflow: hidden;
+}
 input, textarea{
 	width: 100%;
 	padding: 5px;
@@ -279,5 +300,11 @@ label{
 	position: absolute;
 	right: 5px;
 	bottom: 5px;
+}
+.list > li {
+	margin: 10px 0;
+}
+.list .list__tile {
+	color: white !important;
 }
 </style>

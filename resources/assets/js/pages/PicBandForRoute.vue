@@ -4,12 +4,11 @@
 		<header class="padded text-xs-center">
 			<h2>Choose A Band</h2>
 		</header>
-	
 		<section id="add" class="padded text-xs-center">
-			<v-btn to="profiles/add/band" class="padded">
+			<v-btn color="primary" to="profiles/add/band" class="padded">
 				Add band <v-icon>add</v-icon>
 			</v-btn>
-		</section>
+		</section>		
 
 		<v-layout row wrap id="bands">
 			<v-flex md4 xs12 v-for="band in bands" :key="band.id" >

@@ -21,6 +21,7 @@ const routes = [
 
 /*---ADD PROFILES---*/
 {path: '/profile/add', component: require('./pages/AddProfile.vue')},
+{path: '/profile/add-tour', component: require('./pages/PicBandForRoute.vue')},
 {path: '/profiles/add/band', component: require('./pages/AddBand.vue')},
 {path: '/profiles/add/venue', component: require('./pages/AddVenue.vue')},
 {path: '/profiles/add/promoter', component: require('./pages/AddPromoter.vue')},
@@ -52,6 +53,7 @@ Vue.component('loader', require('./components/Loader.vue'));
 Vue.component('get-venues', require('./components/GetVenues.vue'));
 Vue.component('vue-google-autocomplete', require('./components/AutoFill.vue'));
 Vue.component('search-form', require('./components/SearchForm.vue'));
+Vue.component('pages-nav', require('./components/PagesHeader.vue'));
 
 
 const app = new Vue({

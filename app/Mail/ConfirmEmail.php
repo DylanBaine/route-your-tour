@@ -34,7 +34,7 @@ class ConfirmEmail extends Mailable
                     ->markdown('mail.verifyEmail')
                     ->with([
                         'name' => $this->user->name,
-                        'url' => url('verifying/' . $this->user->email_confirmed_token . '-' . $this->user->email)
+                        'url' => url('verifying/' . $this->user->email_confirmed_token)
                     ]);
     }
 }

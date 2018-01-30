@@ -26,9 +26,7 @@ class Venue extends Model
         parent::boot();
 
         static::deleting(function($venue) {
-            $venue->routes()->delete();
-            $venue->locations()->delete();
-            DB::table('venue_user')->where('venue_id', $venue->id)->delete();
+            DB::table('user_venue')->where('venue_id', $venue->id)->delete();
             File::delete('storage/' . $venue->banner);
             File::delete('storage/' . $venue->profile_image);
         });

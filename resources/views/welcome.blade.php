@@ -19,7 +19,8 @@
         <div id="title">
             <div class="hero-text">
                 <h1 class="white--text">Welcome to Route Your Tour</h1>
-                <h3 class="white--text">The visual route builder for bands.</h3>
+                <h3 class="white--text">The visual route builder for <u>bands</u>.</h3>
+                <h3 class="white--text">The ideal tool for <u>booking agents</u> and <u>promoters</u>.</h3>
             </div>
         </div>
     </div>
@@ -43,7 +44,7 @@
 
 <section id="bands" class="layout row wrap">
     <div class="flex md6 xs12 flex-center">
-        <img src="https://scontent-dft4-1.xx.fbcdn.net/v/t31.0-8/11115712_836957499730117_8681454111825338210_o.jpg?oh=6057f7fbb77cfd533d392cb8dadbcd3e&oe=5AAB6B3B" alt="Route Your Tour Bands" width="100%">
+        <img src="Defaults/bands-banner.jpg" alt="Route Your Tour Bands" width="100%">
     </div>
     <div class="padded flex md6 xs12 flex-center">
         <div>
@@ -70,7 +71,7 @@
 </section>
 
 <div class="text-xs-right relative neg-top" style="margin-right: 30px;">
-    <v-btn large raised href="/register" class="blue darken-1 white--text">Sign up for a free account.</v-btn>
+    <v-btn large raised href="/pricing" class="blue darken-1 white--text">What can you do with RYT?</v-btn>
 </div>
 
 @stop

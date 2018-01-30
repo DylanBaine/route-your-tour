@@ -45,48 +45,6 @@
 
 				</v-list-tile>
 
-				<v-list-tile href="/bands">
-
-					<v-list-tile-action>
-						<v-icon>music_note</v-icon>
-					</v-list-tile-action>
-
-					<v-list-tile-content>
-
-						<v-list-tile-title> See All Bands </v-list-tile-title>
-
-					</v-list-tile-content>
-
-				</v-list-tile>
-
-				<v-list-tile href="/venues">
-
-					<v-list-tile-action>
-						<v-icon>store</v-icon>
-					</v-list-tile-action>
-
-					<v-list-tile-content>
-
-						<v-list-tile-title> See All Venues </v-list-tile-title>
-
-					</v-list-tile-content>
-
-				</v-list-tile>
-
-				<v-list-tile href="/tours">
-
-					<v-list-tile-action>
-						<v-icon>airport_shuttle</v-icon>
-					</v-list-tile-action>
-
-					<v-list-tile-content>
-
-						<v-list-tile-title> Check Out Upcoming Tours </v-list-tile-title>
-
-					</v-list-tile-content>
-
-				</v-list-tile>
-
 				<v-list-tile to="/add-tour">
 
 					<v-list-tile-action>
@@ -115,12 +73,82 @@
 
 					</v-list-tile-content>
 
-				</v-list-tile>
+				</v-list-tile>				
 
-				<v-list-tile @click="logout">
+				<v-list-tile href="/bands">
 
 					<v-list-tile-action>
-						<v-icon>cloud_off</v-icon>
+						<v-icon>music_note</v-icon>
+					</v-list-tile-action>
+
+					<v-list-tile-content>
+
+						<v-list-tile-title> See All Bands </v-list-tile-title>
+
+					</v-list-tile-content>
+
+				</v-list-tile>
+
+				<v-list-tile href="/venues">
+
+					<v-list-tile-action>
+						<v-icon>store</v-icon>
+					</v-list-tile-action>
+
+					<v-list-tile-content>
+
+						<v-list-tile-title> See All Venues </v-list-tile-title>
+
+					</v-list-tile-content>
+
+				</v-list-tile>
+
+				<v-list-tile href="/booking-agents">
+
+					<v-list-tile-action>
+						<v-icon>library_books</v-icon>
+					</v-list-tile-action>
+
+					<v-list-tile-content>
+
+						<v-list-tile-title> See All Booking agents </v-list-tile-title>
+
+					</v-list-tile-content>
+
+				</v-list-tile>
+
+				<v-list-tile href="/promoters">
+
+					<v-list-tile-action>
+						<v-icon>business_center</v-icon>
+					</v-list-tile-action>
+
+					<v-list-tile-content>
+
+						<v-list-tile-title> See All Promoters</v-list-tile-title>
+
+					</v-list-tile-content>
+
+				</v-list-tile>
+
+				<v-list-tile href="/tours">
+
+					<v-list-tile-action>
+						<v-icon>airport_shuttle</v-icon>
+					</v-list-tile-action>
+
+					<v-list-tile-content>
+
+						<v-list-tile-title> Check Out Upcoming Tours </v-list-tile-title>
+
+					</v-list-tile-content>
+
+				</v-list-tile>
+
+				<v-list-tile href="/logout">
+
+					<v-list-tile-action>
+						<v-icon>error</v-icon>
 					</v-list-tile-action>
 
 					<v-list-tile-content>
@@ -130,8 +158,6 @@
 					</v-list-tile-content>
 
 				</v-list-tile>
-
-
 
 			</v-list>
 
@@ -167,7 +193,7 @@
 
 			<v-toolbar-side-icon title="Open the main menu." @click="showMenu"></v-toolbar-side-icon>
 
-			<span class="padded"> </span>  
+			<span class="padded"></span>  
 
 		</v-toolbar>
 		<main>
@@ -195,7 +221,6 @@
 				</v-container>
 			</v-content>
 		</main>
-		<form action="/logout" method="post" id="log-out"></form>
 	</v-app>
 
 </template>
@@ -211,9 +236,9 @@ export default{
 			},
 			menu: false,
 			avatarPreview: '',
-			image: '',
+			image: false,
 			loading: true,
-			emailSent: false
+			emailSent: false,
 		}
 	},
 	computed: {
@@ -226,9 +251,7 @@ export default{
 			document.getElementById('sentAlert').style.display = 'none';
 		},
 		verifyEmail: function(){
-			axios.post('/verify-email', {
-				_token: this.token
-			}).then(this.emailSent = true);
+			axios.post('/api/verify-email').then(this.emailSent = true);
 		},
 		showMenu: function(){
 			this.menu = true;
@@ -244,7 +267,6 @@ export default{
 
 			var data = new FormData();
 			data.append('avatar', document.getElementById('image').files[0]);
-			data.append('_token', this.token);
 			data.append('_method', 'put');
 
 			var config = {
@@ -269,10 +291,10 @@ export default{
 		axios.get('/api/user').then(response => this.user = response.data);
 		this.$nextTick(function(){
 			console.log(this.user)
-		})
+		});
 	},
-	updated(){
-		this.loading = false
+	updated(){	
+		this.loading = false;
 	}
 }
 </script>

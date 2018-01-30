@@ -29,7 +29,11 @@ class BookingAgentController extends Controller
 
 	public function see()
 	{
-		return Auth::user()->bookingAgent->first();
+		if(Auth::user()->bookingAgent){
+			return Auth::user()->bookingAgent->first();
+		}else{
+			return 'No Booking Agent';
+		}
 	}	
 
 	public function thisBookingAgent()

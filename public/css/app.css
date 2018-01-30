@@ -16046,8 +16046,16 @@ a {
   z-index: 2;
 }
 
+.pos-ref {
+  position: relative;
+}
+
 .padded {
   padding: 20px;
+}
+
+.padded-lg {
+  padding: 40px;
 }
 
 .alert {

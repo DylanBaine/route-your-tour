@@ -1,31 +1,20 @@
 <template>
 <header>
-	<div>
-		
+	<div>		
 		<v-tabs dark>
-
 			<v-tabs-bar class="white--text">
 				<v-spacer></v-spacer>
 				<li><v-btn flat class="white--text hidden-sm-and-up"><small>Swipe this to the left to see more pages.</small></v-btn></li>
-				<li><v-btn href="/" flat class="white--text">Front Page</v-btn></li>
-				<li><v-btn href="/bands" flat class="white--text">All Bands</v-btn></li>				
-				<li><v-btn href="/venues" flat class="white--text">All Venues</v-btn></li>
+				<li v-if="!frontPage"><v-btn href="/" flat class="white--text">Front Page</v-btn></li>
 				<li><v-btn v-show="!user" href="/register" flat class="white--text">Register</v-btn></li>
-				<li><v-btn v-show="!user" href="/login" flat class="white--text">Login</v-btn></li>			
+				<li><v-btn v-show="!user" href="/login" flat class="white--text">Login</v-btn></li>
 				<li><v-btn v-show="user" href="/home#" flat class="white--text">Go To Dashboard</v-btn></li>
+				<li v-if="!pricingPage"><v-btn href="/pricing" flat class="white--text">Pricing</v-btn></li>
+
 			</v-tabs-bar>
-
 		</v-tabs>
-		<transition name="fade">
-			<register-form v-show="register" @closeThis="hide">
-			</register-form>
-		</transition>
-		<transition name="fade">
-			<login-form v-show="login" @closeThis="hide">
-			</login-form>
-		</transition>
-
 	</div>
+	<pages-nav></pages-nav>
 </header>
 </template>
 
@@ -35,7 +24,9 @@ export default{
 		return{
 			login: false,
 			register: false,
-			user: ''
+			user: '',
+			frontPage: window.location.pathname == '/' ? true : false,
+			pricingPage: window.location.pathname == '/pricing' ? true : false,
 		}
 	},
 	methods: {
@@ -59,7 +50,7 @@ export default{
 	created () {
 	},
     mounted(){
-      axios.get('/api/user').then(response => this.user = response.data.name);
+      axios.get('/api/user').then(response => this.user = response.data.name);9
     }
 }
 	

@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `venues`;
 CREATE TABLE IF NOT EXISTS `venues` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `times_visited` int(10) DEFAULT 0,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,

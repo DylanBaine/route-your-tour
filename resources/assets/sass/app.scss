@@ -1,4 +1,3 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600|Material+Icons");
 
@@ -42,9 +41,14 @@ a{
 .toolbar__side-icon{
 	z-index: 2;
 }
-
+.pos-ref{
+	position: relative;
+}
 .padded{
 	padding: 20px;
+}
+.padded-lg{
+	padding: 40px;
 }
 .alert{
 	position: fixed;

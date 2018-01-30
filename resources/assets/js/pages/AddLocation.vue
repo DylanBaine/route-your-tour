@@ -2,6 +2,8 @@
 
 	<v-container grid-list-md>
 
+		<loader v-if="updating">Fetching Locations...</loader>
+
 		<loader v-if="loading">Loading your route...</loader>
 
 		<loader v-if="searchingRes">Searching for "{{searchParam}}"</loader>
@@ -18,12 +20,12 @@
 		<transition name="fade">
 			<div v-if="searching" id="search-area">
 				<div id="exit">
-					<v-btn color="grey" @click="openSearchBox" title="Exit the search box." fab flat><v-icon>close</v-icon></v-btn>
+					<v-btn dark color="grey" @click="openSearchBox" title="Exit the search box." fab flat><v-icon>close</v-icon></v-btn>
 				</div>
 				<div class="inner padded">
 					<header class="search-header">
 						<v-layout row wrap>
-							<v-flex md9>
+							<v-flex xs7 md9>
 								<v-text-field
 									light="true"
 									@keydown.enter="search"
@@ -31,10 +33,10 @@
 									label="Search by city, genre, or venue name."
 								></v-text-field>
 							</v-flex>
-							<v-flex md1>
+							<v-flex md1 xs1>
 								<v-btn color="red darken-2" title="Clear Search" small fab flat @click="clearSearch"><v-icon>close</v-icon></v-btn>
 							</v-flex>
-							<v-flex md2>
+							<v-flex md2 xs12>
 								<v-btn color="primary" raised @click="search">Search</v-btn>
 							</v-flex>
 						</v-layout>
@@ -42,11 +44,11 @@
 
 					<section v-if="totalResults">
 
-						<header class="padded">
+						<header class="padded xs-hidden">
 							<h4> {{totalResults}} Results</h4>
 						</header>
 						<v-layout row wrap id="search-results">
-							<v-flex xs6 md4 xl3 v-for="searchResult in searchResults" :key="searchResult.id">
+							<v-flex xs12 md4 xl3 v-for="searchResult in searchResults" :key="searchResult.id">
 								<v-card class="blue darken-2 padded text-xs-center card white--text flex-center text-xs-center relative" data-ripple="true">
 									<div class="text-xs-center margin-auto">
 										<h6>{{searchResult.name}}</h6>
@@ -145,6 +147,9 @@
 					<div class="swatch yellow darken-1"></div> <small> = Pending Confimation</small>
 					<br>
 					<div class="swatch green lighten-1"></div> <small> = Confirmed</small>
+					<br>
+					<br>
+					<v-btn color="success" @click="confirmAll()">Confirm All</v-btn>
 
 				</div>				
 
@@ -210,7 +215,7 @@ export default{
 			route: '',
 			band: '',
 			manuallyAdding: false,
-			locations: '',
+			locations: false,
 			map: '',
 			searching: false,
 			searchResults: '',
@@ -256,9 +261,17 @@ export default{
 			.then(response => this.route = response.data);
 		},
 		getLocations: function(){
+			this.updating = true;
+			this.locations = "";
 			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations')
-			.then(response => this.locations = response.data);
-
+			.then((response) => {
+				if(response.data.length > 0){
+					this.locations = response.data;
+					this.updating = false;
+				}else{
+					this.locations = false;
+				}
+			});
 		},
 		getAddress: function(){
 			axios.get('/api/' + this.$route.params.bandSlug + '/' + this.$route.params.routeSlug + '/locations-address')
@@ -337,9 +350,6 @@ export default{
 			  if (status == 'OK') {
 				var origins = response.originAddresses;
 				var destinations = response.destinationAddresses;
-
-				
-
 				var distanceRes = response.rows[0].elements;
 
 				var rawDistance = [];
@@ -426,6 +436,12 @@ export default{
 			this.searchResults = '';
 
 		},
+		confirmAll: function(){
+			axios.post('/api/' + this.route.id + '/confirm-all')
+			.then(res => this.getLocations())
+
+			
+		},
 		addVenue: function(address, name, link){
 			axios.post('/api/' + this.route.id + '/add-location', {
 				_token: this.token,
@@ -441,8 +457,7 @@ export default{
 			document.getElementById('location_input').value = '';
 
 			this.$nextTick(function(){
-				this.getLocations();  
-
+				this.getLocations();
 			}) 
 			
 		},
@@ -484,6 +499,9 @@ export default{
 		},
 		gasPrice: function(){
 			return Math.round((this.distance / this.vehicleMPG) * this.currentGasPrice)
+		},
+		updating: function(){
+			return this.locations === "" ? true : false ;
 		}
 	}, 
 	watch: {
@@ -522,6 +540,7 @@ export default{
 	z-index: 1;
 	width: 25vw;
 	box-shadow: inset -4px -4px 32px rgba(0,0,0,.2);
+	overflow-x: hidden;
 }   
 #map, #search-area{
 	position: absolute;
@@ -573,4 +592,26 @@ hr{
 .bottom-right{
 	bottom: 0px;
 }
+
+@media screen and (max-width: 730px) {
+	.adder{
+		width: 100%;
+		height: auto;
+		position: static;
+	}
+	#map{
+		width: 100%;
+		height: 100vh;
+		position: static;
+	}
+	#search-area{
+		position: fixed;
+		left: 0;
+		width: 100vw;
+	}
+	.xs-hidden{
+		display: none;
+	}
+}
+
 </style>

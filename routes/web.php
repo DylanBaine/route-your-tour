@@ -1,29 +1,20 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-/*-- MAIL TEST --*/
-
+	/*-- MAIL TEST --*/
 Route::get('mail/verify-email', function(){
 	return new App\Mail\ConfirmEmail();
 });
 
-
-
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
-
-Auth::routes();
-
+Route::get('/pricing', function(){
+	return view('pricing');
+});
+Route::get('/logout', function(){
+	Auth::logout(Auth::user()->id);
+	return redirect('/');
+});
+	
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/venues', 'VenueController@allVenuesPage');
@@ -33,27 +24,51 @@ Route::get('/venues/category/{category}', 'VenueController@categoryView');
 
 Route::get('/bands', 'BandController@allBandsPage');
 Route::get('bands/{slug}', 'BandController@guestView');
+Route::get('bands/genre/{genre}', 'BandController@genreView');
 
+Route::get('promoters', 'PromoterController@guestView');
 
-route::get('/user', function(){
-	return Auth::user();
+Route::get('/verifying/{token}', 'HomeController@verifyUser');
+
+Route::middleware('level:starter')->group(function(){
+	Route::get('/starter', function(){
+		return 'Starter';
+	});
 });
 
-Route::post('/verify-email', 'HomeController@sendEmail');
+Route::middleware('level:premium')->group(function(){
+	Route::get('/premium', function(){
+		return 'premium';
+	});
+});
 
-Route::get('/verifying/{token}-{email}', 'HomeController@verifyUser');
+Route::middleware('level:platinum')->group(function(){
+	Route::get('/platinum', function(){
+		return 'platinum';
+	});
+});
 
-Route::prefix('api')->group(function () {
+Route::prefix('signup')->group(function(){
+	Route::get('premium', function(){
+		return ('premium');
+	});
+});
 
-		/*---- API FOR SEARCH COMPONENT ----*/
+Route::prefix('/api')->group(function(){	
+	Route::get('venues/search={param}', 'VenueController@search');
+
+	Route::post('/verify-email', 'HomeController@sendEmail');
+
+		/*----API FOR SEARCH COMPONENT----*/
 	Route::get('{model}/search/param={param}', 'SearchController@formComponent');
 
 		/*----GET CURRENT USER THAT IS LOGGED IN----*/
 	Route::get('/user', function(){
 		return Auth::user();
 	});	
-	Route::put('/user', 'HomeController@editUser');
 
+		/*----EDIT CURRENT USER THAT IS LOGGEGD IN----*/
+	Route::put('/user', 'HomeController@editUser');
 	Route::put('/change-avatar', 'HomeController@changeAvatar');
 
 		/*----API BAND CONTROLLERS----*/
@@ -70,7 +85,6 @@ Route::prefix('api')->group(function () {
 	Route::get('/venue/{slug}', 'VenueController@thisVenue');
 	Route::put('/venue/{id}/edit', 'VenueController@edit');
 	Route::delete('/venue/{id}/delete', 'VenueController@delete');
-	Route::get('venues/search={param}', 'VenueController@search');
 
 		/*----API PROMOTER CONTROLLERS----*/
 	Route::get('/users-promoter', 'PromoterController@see');
@@ -97,5 +111,8 @@ Route::prefix('api')->group(function () {
 	Route::get('/{band_slug}/{route_slug}/locations-address', 'RouteController@locationsAddress');
 	Route::delete('/{location_id}/delete-location', 'RouteController@deleteLocation');
 	Route::put('/{location_id}/confirm-location', 'RouteController@confirmLocation');
-
+	Route::post('/{route_id}/confirm-all', 'RouteController@confirmAll');
+	
 });
+
+Auth::routes();

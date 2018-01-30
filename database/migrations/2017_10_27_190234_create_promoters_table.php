@@ -15,11 +15,12 @@ class CreatePromotersTable extends Migration
     {
         Schema::create('promoters', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('score')->default(0);
+            $table->integer('visited')->default(0);
             $table->integer('rank')->nullable();
             $table->string('slug')->unique();
             $table->string('name');
             $table->text('experience');
+            $table->string('location')->nullable();
             $table->integer('user_id')->unsigned();
             $table->timestamps();
         });

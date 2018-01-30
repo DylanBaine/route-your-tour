@@ -70,6 +70,7 @@ class HomeController extends Controller
 		}
 		$user->email = request('email');
 		$user->theme = request('theme');
+		$user->newsletter = request('newsletter');
 
 		$user->save();
 	}
@@ -87,14 +88,21 @@ class HomeController extends Controller
 			$message->to($data['sendTo']);
 			$message->subject('Welcome to Route Your Tour, ' . $data['name']);
 		});*/
+		$user = Auth::user();
+
+		$user->email_confirmed_token = str_random(10) . $user->id . str_random(10);
+
+		$user->save();
 
 		Mail::to(Auth::user()->email)->send(new ConfirmEmail());
 	}
 
-	public function verifyUser($email, $token){
-		$user = User::whereRaw('email', $email)->orWhere('email_confirmed_token', $token)->first();
+	public function verifyUser($token){
+		$user = User::where('email_confirmed_token', $token)->first();
 
 		$user->email_verified = 1;
+
+		$user->email_confirmed_token = '';
 
 		$user->save();
 

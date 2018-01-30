@@ -8,6 +8,7 @@ use App\User;
 use Auth;
 use File;
 use Image;
+use Exception;
 
 class VenueController extends Controller
 {
@@ -35,7 +36,7 @@ class VenueController extends Controller
 	public function categoryView($category){
 			$param = '';
 
-			$venues = Venue::where('category', $category)->orderBy('created_at', 'desc')->paginate(12);
+			$venues = Venue::where('category_slug', $category)->orderBy('created_at', 'desc')->paginate(12);
 
 			return view('venues', compact('venues', 'param'));
 	}
@@ -43,6 +44,8 @@ class VenueController extends Controller
 	public function guestView($slug)
 	{
 		$page = Venue::where('slug', $slug)->first();
+		$page->times_visited += 1;
+		$page->save();
 		$type = 'venues';
 		return view('profile', compact('page', 'type'));
 	}
@@ -55,27 +58,56 @@ class VenueController extends Controller
 	public function store(Request $request)
 	{
 
-		$user = User::where('id', Auth::user()->id)->first();
+		$user = Auth::user();
 
-		$venue = new Venue;
+		if($user->premium_level > 1){
 
-		$venue->name = request('name');
+			$venue = new Venue;
 
-		$venue->address = request('location');
+			$venue->name = request('name');
 
-		$venue->slug = request('slug');
+			$venue->address = request('location');
 
-		$venue->category = request('category');
+			$venue->slug = request('slug');
 
-		$venue->category_slug = str_slug(request('category'));
+			$venue->category = request('category');
 
-		$venue->country = request('country');
+			$venue->category_slug = str_slug(request('category'));
 
-		$venue->country_slug = str_slug(request('country'));
+			$venue->country = request('country');
 
-		$venue->save();
+			$venue->country_slug = str_slug(request('country'));
 
-		$user->venues()->attach($venue->id);
+			$venue->save();
+
+			$user->venues()->attach($venue->id);
+
+		}else if($user->premium_level < 2 && $user->venues->count() != 1 ){
+
+			$venue = new Venue;
+
+			$venue->name = request('name');
+
+			$venue->address = request('location');
+
+			$venue->slug = request('slug');
+
+			$venue->category = request('category');
+
+			$venue->category_slug = str_slug(request('category'));
+
+			$venue->country = request('country');
+
+			$venue->country_slug = str_slug(request('country'));
+
+			$venue->save();
+
+			$user->venues()->attach($venue->id);
+		}else{
+
+			throw new Exception("You already have one venue... To add more, sign up for a Premium Account.", 1);
+			
+		}
 	}
 
 	public function see()

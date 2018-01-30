@@ -29,7 +29,11 @@ class PromoterController extends Controller
 
 	public function see()
 	{
-		return Auth::user()->promoter->first();
+		if(Auth::user()->promoter){
+			return Auth::user()->promoter->first();
+		}else{
+			return 'No Promoter';
+		}
 	}
 
 	public function thisPromoter()
@@ -53,5 +57,19 @@ class PromoterController extends Controller
 		$promoter = Promoter::find($id);
 
 		$promoter->delete();
+	}
+
+	public function guestView()
+	{
+		$param = \Request::get('search');
+		if($param == NULL){
+			$promoters = Promoter::orderBy('created_at', 'desc')->paginate(12);
+		}elseif($param != NULL){
+			$promoters = Promoter::where('name', 'like', '%'. $param . '%')
+									->orwhere('experience', 'like',  '%'. $param . '%')
+									->orderBy('created_at', 'desc')->paginate(12);
+		}
+
+		return view('promoters', compact('promoters'));
 	}
 }

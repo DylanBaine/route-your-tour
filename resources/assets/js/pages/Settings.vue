@@ -41,7 +41,7 @@
 							></v-text-field>
 					</div>
 				</v-flex>
-				<v-flex xs12 md6 class="flex-center">
+				<v-flex xs12 md6 class="flex-center padded">
 					<v-select
 						@change="changed = true"
 						label="Choose your dashboard theme."
@@ -50,6 +50,32 @@
 						item-value="text"
 						></v-select>
 				</v-flex>
+				<v-flex xs12 md7>
+					<v-layout row wrap class="padded pos-ref">	
+						<v-flex md6 sm12 class="text-xs-center">
+							<v-avatar v-if="!image" size="200px" slot="activator" title="Choose a profile image.">
+								<img :src="'/storage/'+ user.avatar" alt="Upload Avatar">
+							</v-avatar>
+
+							<v-avatar v-if="image" size="200px" slot="activator" title="Choose a profile image.">
+								<img :src="image" :alt="user.name">
+							</v-avatar>
+						</v-flex>
+
+						<v-flex sm12 md6>
+							<label for="image" class="btn btn-raised white--text blue darken-2 btn--active" id="img-btn" data-ripple="true">Choose an image</label>
+							<input name="avatar" type="file" @change="promptProfilePic" id="image" style="display: none">
+						</v-flex> 
+					</v-layout>
+
+				</v-flex>
+				<v-flex xs1 md1></v-flex>
+				<v-flex xs10 md3 class="flex-center padded-lg">
+					<div>
+						<label>Subscribed to newsletter</label>
+						<v-switch @change="changed=true" color="primary" v-model="user.newsletter"></v-switch>
+					</div>
+				</v-flex> 
 			</v-layout>
 
 		</section>
@@ -75,17 +101,20 @@
 				items: [{text: 'dark'},{text: 'light'}],
 				loading: true,
 				img: '',
-				avatarPreview: '',
-				image: '',
+				avatarPreview: ''
 			}
 		},
 		mounted(){
 			this.getUser();
+			console.log(this.$parent.$parent.$parent.image)
 		},
 		updated(){
 			this.loading = false;
 		},
 		methods: {
+			promptProfilePic: function(){
+				this.$parent.onFileChange();
+			},
 			getUser: function(){
 				axios.get('/api/user').then(response => this.user = response.data);
 			},
@@ -94,7 +123,8 @@
 					name: this.user.name,
 					email: this.user.email,
 					password: this.user.password,
-					theme: this.user.theme
+					theme: this.user.theme,
+					newsletter: this.user.newsletter
 				}).then(response => this.emitSuccess())
 				.catch(error => {
 					alert(error = ' errors occured');
@@ -106,11 +136,20 @@
 				this.user.password = '';
 				window.location.href= '/home'
 			}
+		},
+		computed: {
+			image: function(){
+				return this.$parent.$parent.$parent.image;
+			}
 		}
 	}
 	
 </script>
 
-<style>
-	
+<style scoped>
+	#img-btn{
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+	}
 </style>

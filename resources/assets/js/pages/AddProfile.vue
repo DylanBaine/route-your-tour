@@ -40,9 +40,9 @@
 				<h3>Band profiles you run.</h3>
 			</header>
 
-			<div v-if="bands.length < 1" id="noBands">
+			<div class="light-blue accent-2" v-if="bands.length < 1" id="noBands">
 				<div class="inner">					
-					<div>				
+					<div style="width: 100%;">				
 						<h3 class="white--text">No bands added yet... :(</h3>
 						<v-btn to="/profiles/add/Band" color="primary">
 							<v-icon>add</v-icon>
@@ -64,9 +64,9 @@
 				<h3>Venue profiles you run.</h3>
 			</header>
 
-			<div v-if="venues.length < 1" id="noVenues">
+			<div class="light-blue accent-4" v-if="venues.length < 1" id="noVenues">
 				<div class="inner">
-					<div>				
+					<div style="width: 100%;">				
 						<h3 class="white--text">No venues added. Feel free to add a venue.</h3>
 						<v-btn to="/profiles/add/Venue" color="primary">
 							<v-icon>add</v-icon>
@@ -85,7 +85,7 @@
 			</v-layout>
 
 			<v-layout row wrap id="promoter-booking-agent">				
-				<v-flex md6 v-show="promoter.name">
+				<v-flex md6 v-show="promoter != 'No Promoter'">
 					<header class="padded">
 						<h3>Your Promoter Profile.</h3>
 					</header>
@@ -95,7 +95,7 @@
 					</v-card>
 				</v-flex>
 
-				<v-flex md6 v-show="bookingAgent.name">
+				<v-flex md6 v-show="bookingAgent != 'No Booking Agent'">
 					<header class="padded">
 						<h3>Your Booking Agent Profile.</h3>
 					</header>
@@ -147,8 +147,8 @@ export default{
 			],
 			bands: [],
 			venues: [],	
-			promoter: '',
-			bookingAgent: '',
+			promoter: 'No Promoter',
+			bookingAgent: 'No Booking Agent',
 			loading: true
 		}
 

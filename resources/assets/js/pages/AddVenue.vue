@@ -1,5 +1,10 @@
 <template>
 	<v-container>
+		<v-alert value="true" v-if="alert.showing" :color="alert.type" :icon="alert.icon">
+			{{alert.message}}
+			<v-btn v-if="alert.link" color="primary" :href="alert.link">Go</v-btn>
+			<v-btn flat @click="alert.showing = false">Cancel</v-btn>
+		</v-alert>		
 		<v-card class="blue--text">
 			<v-card-title primary-title>
 				<div class="headline text-xs-center">Lets start setting up your Venue profile.</div>
@@ -63,7 +68,7 @@ export default {
 				{text: 'Amphitheater'},
 				{text: 'Arena'},
 				{text: 'Auditorium'},
-				{text: 'Bar-Venue'},
+				{text: 'Bar Venue'},
 				{text: 'Casino'},
 				{text: 'Church'},
 				{text: 'Club'},
@@ -75,7 +80,14 @@ export default {
 				{text: 'Stadium'}
 			],
 			category: '',
-			country: ''
+			country: '',
+			alert: {
+				showing: false,
+				message: '',
+				type: '',
+				link: '',
+				icon: ''
+			}
 		}
 	},
 	methods: {
@@ -92,8 +104,15 @@ export default {
 				window.location.href = '/home#/venue/' + this.slug
 			)
 			.catch(error => {
-				alert(error + error.message)
-			})
+				this.alert.showing = true;
+				this.alert.message = error.response.data.message;
+				this.alert.type = 'error';
+				this.alert.icon = 'error';
+				this.alert.link = '/signup/premium';
+				if(error.response.data.message == 'You already have one band... To add more, sign up for a Premium Account.'){
+					this.alert.link = '/signup/premium'
+				}
+			});
 		},
 	    getAddressData: function (addressData, placeResultData) {
             this.location = addressData.street_number + ' ' + addressData.route + ' ' + addressData.locality + ', ' + addressData.administrative_area_level_1 + '. ';
