@@ -5,9 +5,9 @@
 <v-container grid-list-xl>
 	<header class="padded">
 		<h1>What you can do.</h1>
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores maiores in odio ullam repellat quis libero distinctio non quae, fugiat eligendi asperiores rerum natus error, voluptates quasi, labore mollitia temporibus.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore officiis dignissimos ipsa incidunt odio architecto dicta recusandae libero ipsum quod minus ipsam molestias sapiente vel, nesciunt rem unde iure et.
-		</p>
+		<h4 class="padded">
+			Route Your Tour is here to make touring in the music industry easier. Sign up for a free account to try it out, or pick the plan that fits your needs.
+		</h4>
 	</header>
 	<v-layout row wrap class="">
 		<v-flex md4>
@@ -56,7 +56,7 @@
 				</div>
 
 				<v-card-actions>
-					<v-btn block class="grey darken-3" dark>Sign Up Now</v-btn>
+					<v-btn href="/register" block class="grey darken-3" dark>Sign Up Now</v-btn>
 				</v-card-actions>
 				
 			</v-card>
@@ -105,12 +105,12 @@
 				<hr>
 				<div class="text-xs-center">
 					<h5>
-						$5/mo
+						<!-- $5/mo -->
 					</h5>
 				</div>
 
 				<v-card-actions>
-					<v-btn block color="success">Sign Up Now</v-btn>
+					<v-btn disabled block color="success">Coming Soon</v-btn>
 				</v-card-actions>
 				
 			</v-card>			
@@ -160,12 +160,12 @@
 				<hr>
 				<div class="text-xs-center">
 					<h5>
-						$15/mo
+						<!-- $15/mo -->
 					</h5>
 				</div>
 
 				<v-card-actions>
-					<v-btn block dark class="amber darken-4">Sign Up Now</v-btn>
+					<v-btn disabled block class="amber darken-4">Coming Soon</v-btn>
 				</v-card-actions>
 				
 			</v-card>			

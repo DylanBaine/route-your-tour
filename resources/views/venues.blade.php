@@ -135,7 +135,7 @@
 	<v-layout row wrap>
 		@foreach($venues as $venue)
 		<v-flex md4 xs12>
-			<v-card  color="blue" class="card text-xs-center flexed white--text padded" data-ripple='true' style="height: 300px; display: flex; align-items: center; justify-content: center; position: relative; overflow: auto;">
+			<v-card class="card blue text-xs-center flexed white--text padded bg-hex" data-ripple='true' style="height: 300px; display: flex; align-items: center; justify-content: center; position: relative; overflow: auto;">
 				<div>
 
 					<h4>{{$venue->name}}</h4>

@@ -3,9 +3,9 @@
 	<div>		
 		<v-tabs dark>
 			<v-tabs-bar class="white--text">
+				<a href="/" class="white--text"><img src="/Defaults/lobo-white.png" alt="RYT" width="50px"></a>
 				<v-spacer></v-spacer>
 				<li><v-btn flat class="white--text hidden-sm-and-up"><small>Swipe this to the left to see more pages.</small></v-btn></li>
-				<li v-if="!frontPage"><v-btn href="/" flat class="white--text">Front Page</v-btn></li>
 				<li><v-btn v-show="!user" href="/register" flat class="white--text">Register</v-btn></li>
 				<li><v-btn v-show="!user" href="/login" flat class="white--text">Login</v-btn></li>
 				<li><v-btn v-show="user" href="/home#" flat class="white--text">Go To Dashboard</v-btn></li>

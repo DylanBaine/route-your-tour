@@ -59,7 +59,7 @@ class PromoterController extends Controller
 		$promoter->delete();
 	}
 
-	public function guestView()
+	public function allPromotersPage()
 	{
 		$param = \Request::get('search');
 		if($param == NULL){
@@ -72,4 +72,11 @@ class PromoterController extends Controller
 
 		return view('promoters', compact('promoters'));
 	}
+
+	public function guestView($slug){
+		$page = Promoter::where('slug', $slug)->first();
+		$type = 'promoter';
+		return view('profile', compact('page', 'type'));
+	}
+
 }

@@ -12,6 +12,7 @@ use \App\User;
 use Illuminate\Mail\Mailer;
 use Mail;
 use App\Mail\ConfirmEmail;
+use App\Mail\Contact;
 
 class HomeController extends Controller
 {
@@ -107,6 +108,14 @@ class HomeController extends Controller
 		$user->save();
 
 		return redirect('/home');
+	}
+
+	public function contactForm(Request $request)
+	{
+
+		Mail::to('dylan.baine@yahoo.com')->send(new Contact($request->name, $request->email, $request->message));
+
+		return redirect()->back();
 	}
 
 }

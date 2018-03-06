@@ -106,4 +106,11 @@ class RouteController extends Controller
 			$location->save();
 		}
 	}
+
+	public function allRoutesPage()
+	{
+		$routes = Routes::orderBy('id', 'DESC')->get();
+
+		return view('tours', compact('routes'));
+	}
 }

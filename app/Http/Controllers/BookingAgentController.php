@@ -58,4 +58,16 @@ class BookingAgentController extends Controller
 
 		$bookingAgent->delete();
 	}
+
+	public function allBookingAgentsPage()
+	{
+		$bookingAgents = BookingAgent::paginate(12);
+		return view('booking-agents', compact('bookingAgents'));
+	}
+
+	public function guestView($slug){
+		$page = BookingAgent::where('slug', $slug)->first();
+		$type = 'bookingAgent';
+		return view('profile', compact('page', 'type'));
+	}
 }

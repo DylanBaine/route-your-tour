@@ -8,7 +8,7 @@ class Routes extends Model
 {
 	protected $fillable = ['title', 'band_id', 'booking_agent_id'];
 
-	public function bands()
+	public function band()
 	{
 		return $this->belongsTo(Band::class);
 	}

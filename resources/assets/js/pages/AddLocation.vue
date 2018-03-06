@@ -323,7 +323,7 @@ export default{
 						map: map,
 						icon: iconImage,
 						shape: shape,
-						zIndex: 9999
+						zIndex: 999
 					})
 
 				});
@@ -354,10 +354,10 @@ export default{
 
 				var rawDistance = [];
 
-				for(var a = 0; a < distanceRes.length - 1; a++){
+				for(var a = 0; a < distanceRes.length; a++){
 					// rawDistance.push();
 					
-					totalLength = distanceRes[a].distance.value + totalLength;
+					totalLength += distanceRes[a].distance.value;
 				}
 
 				console.log(totalLength)
@@ -371,7 +371,7 @@ export default{
 				  for (var j = 0; j < results.length; j++) {
 					var element = results[j];
 					var distance = element.distance.text;
-					var duration = element.duration.text;
+					var duration = element.duration.text;	
 					var from = origins[ii];
 					var to = destinations[j];
 				  }

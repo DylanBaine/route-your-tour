@@ -10,10 +10,15 @@ Route::get('/', function () {
 Route::get('/pricing', function(){
 	return view('pricing');
 });
+Route::get('/contact', function(){
+	return view('contact');
+});
 Route::get('/logout', function(){
 	Auth::logout(Auth::user()->id);
 	return redirect('/');
 });
+
+Route::post('/contact-form', 'HomeController@contactForm');
 	
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -24,9 +29,16 @@ Route::get('/venues/category/{category}', 'VenueController@categoryView');
 
 Route::get('/bands', 'BandController@allBandsPage');
 Route::get('bands/{slug}', 'BandController@guestView');
+Route::get('/bands/{band_slug}/{route_slug}', 'BandController@routes');
 Route::get('bands/genre/{genre}', 'BandController@genreView');
 
-Route::get('promoters', 'PromoterController@guestView');
+Route::get('/promoters', 'PromoterController@allPromotersPage');
+Route::get('/promoters/{slug}', 'PromoterController@guestView');
+
+Route::get('/booking-agents', 'BookingAgentController@allBookingAgentsPage');
+Route::get('/booking-agents/{slug}', 'BookingAgentController@guestView');
+
+Route::get('/tours', 'RouteController@allRoutesPage');
 
 Route::get('/verifying/{token}', 'HomeController@verifyUser');
 
