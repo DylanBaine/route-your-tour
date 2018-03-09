@@ -170,7 +170,7 @@
 
 			<v-menu class="padded">        
 				<v-avatar v-if="!image" size="36px" slot="activator" title="Choose a profile image.">
-					<img :src="'/storage/'+ user.avatar" alt="Upload Avatar">
+					<img v-if="user.avatar" :src="'/storage/'+ user.avatar" alt="Upload Avatar">
 				</v-avatar>
 
 				<v-avatar v-if="image" size="36px" slot="activator" title="Choose a profile image.">
