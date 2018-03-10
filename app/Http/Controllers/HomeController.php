@@ -41,9 +41,11 @@ class HomeController extends Controller
 	{
 	   $user = Auth::user();         
 
-			if($request->hasFile('avatar')){
-				File::delete('storage/'.$user->avatar);
-			}          
+	   		if($user->avatar != 'Defaults/default.png'){
+				if($request->hasFile('avatar')){
+					File::delete('storage/'.$user->avatar);
+				}
+			} 
 
 			$image = $request->file('avatar');
 
