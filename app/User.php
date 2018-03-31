@@ -27,6 +27,26 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function canAddProfile(){
+
+        $user = Auth::user();
+
+        if($user->premium_level > 1){
+
+            return true;
+
+        }else if($user->premium_level < 2 && $user->bands->count() != 1 ){
+
+            return true;
+
+        }else{
+
+            return false;
+            
+        }
+
+    }
+
     public function bands()
     {
         return $this->belongsToMany(Band::class);

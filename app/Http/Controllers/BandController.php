@@ -1,26 +1,34 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Band;
-use App\User;
-use Image;
-use File;
 use Auth;
+use App\Band;
+use App\Http\Repositories\BandRepository;
 use Exception;
+use File;
+use Image;
+use Illuminate\Http\Request;
+use App\User;
 
 class BandController extends Controller
 {
-	public function allBandsPage(){
+	private $band;
+
+	public function __construct(BandRepository $band)
+	{
+		$this->band = $band;
+	}
+
+/*	public function allBandsPage(){
 		$param = \Request::get('search');
 		if($param == NULL){
 			$bands = Band::orderBy('created_at', 'desc')->paginate(12);
 		}elseif($param != NULL){
 			$bands = Band::where('name', 'like', '%'. $param . '%')
-									->orwhere('location', 'like',  '%'. $param . '%')
-									->orwhere('primary_genre', 'like', '%'. $param . '%')
-									->orwhere('sub_genre', 'like', '%'. $param . '%')
-									->orderBy('created_at', 'desc')->paginate(12);
+			->orwhere('location', 'like',  '%'. $param . '%')
+			->orwhere('primary_genre', 'like', '%'. $param . '%')
+			->orwhere('sub_genre', 'like', '%'. $param . '%')
+			->orderBy('created_at', 'desc')->paginate(12);
 		}
 		return view('bands', compact('bands'));
 	}
@@ -31,8 +39,8 @@ class BandController extends Controller
 		$page->save();
 		$type = 'bands';
 		return view('profile', compact('page', 'type'));
-	}
-
+	}*/
+/*
 	public function store(Request $request)
 	{
 		$user = Auth::user();
@@ -73,19 +81,19 @@ class BandController extends Controller
 			throw new Exception("You already have one band... To add more, sign up for a Premium Account.", 1);
 			
 		}
-	}
+	}*/
 
-	public function see()
+/*	public function see()
 	{
-		return Auth::user()->bands()->get() ? Auth::user()->bands()->orderBy('created_at', 'desc')->get() : 'No Bands';
-	}
+		return $this->band->allProfiles();
+	}*/
 
-	public function thisBand($slug)
+/*	public function thisBand($slug)
 	{
-	   return $band = Band::where('slug', $slug)->first();
-	}
+		return $this->band->profileBySlug($slug);
+	}*/
 
-	public function edit($id, Request $request)
+/*	public function edit($id, Request $request)
 	{
 		$band = Band::find($id);
 
@@ -114,18 +122,18 @@ class BandController extends Controller
 
 		$band->save();
 
-	}
+	}*/
 
-	public function routes($band_slug, $route_slug)
+/*	public function routes($band_slug, $route_slug)
 	{
 		$band = Band::where('slug', $band_slug)->first();
 		$route = $band->routes->where('slug', $route_slug)->first();
 
 		return view('band-route', compact('band', 'route'));
-	}
+	}*/
 
-	public function delete($id)
+/*	public function delete($id)
 	{
 		Band::find($id)->delete();
-	}
+	}*/
 }
