@@ -1,4 +1,6 @@
 <?php
+
+Route::get('profiles/{table?}/{slug?}', 'Users\ProfilesController');
 /*-- MAIL TEST --*/
 Route::get('mail/verify-email', function(){
 	return new App\Mail\ConfirmEmail();
@@ -21,7 +23,7 @@ Route::get('/logout', function(){
 Route::post('/contact-form', 'HomeController@contactForm');
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+/*
 include('Venues/web.php');
 
 include('Bands/web.php');
@@ -30,7 +32,7 @@ include('BookingAgents/web.php');
 
 include('Promoters/web.php');
 
-include('Routes/web.php');
+include('Routes/web.php');*/
 
 
 Route::get('/verifying/{token}', 'HomeController@verifyUser');
@@ -77,7 +79,7 @@ Route::prefix('/api')->group(function(){
 	Route::put('/user', 'HomeController@editUser');
 	Route::put('/change-avatar', 'HomeController@changeAvatar');
 
-	include('Bands/api.php');
+/*	include('Bands/api.php');
 
 	include('Venues/api.php');
 
@@ -85,7 +87,7 @@ Route::prefix('/api')->group(function(){
 
 	include('BookingAgents/api.php');
 
-	include('Routes/api.php');
+	include('Routes/api.php');*/
 	
 });
 

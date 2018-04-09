@@ -1,41 +1,41 @@
 <?php 
 
-namespace Http\Bands\Responses;
+namespace App\Http\Bands\Responses;
 
 use Auth;
 use Illuminate\Contracts\Support\Responsable;
 
 class CreateBandResponse implements Responsable {
 
-public function toResponse($request){
+	public function toResponse($request){
 
-$user = Auth::user();
+		$user = Auth::user();
 
-if($user->canAddProfile()){
+		if($user->canAddProfile()){
 
-$this->store($request);
+			$this->store($request);
 
-}else{
-throw new Exception("You already have one band... To add more, sign up for a Premium Account.", 1);
-}
+		}else{
+			throw new Exception("You already have one band... To add more, sign up for a Premium Account.", 1);
+		}
 
-}
+	}
 
-public function store($request){
+	public function store($request){
 
-$band = new Band;
+		$band = new Band;
 
-$band->name = request('name');
+		$band->name = request('name');
 
-$band->soundcloud_url = request('soundcloud_url');
+		$band->soundcloud_url = request('soundcloud_url');
 
-$band->location = 'null';
+		$band->location = 'null';
 
-$band->slug = request('slug');
+		$band->slug = request('slug');
 
-$band->save();
+		$band->save();
 
-$user->bands()->attach($band->id);	
-}
+		$user->bands()->attach($band->id);	
+	}
 
 }

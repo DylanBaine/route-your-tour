@@ -2,8 +2,10 @@
 
 interface ApiInterface {
 
-	public function allProfiles();
+	public function allProfiles($table);
 
-	public function profileBySlug($slug);
+	public function profileBySlug($table, $slug);
+
+	public function allProfileTypes();
 
 }
